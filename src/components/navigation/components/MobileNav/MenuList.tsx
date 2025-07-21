@@ -27,7 +27,7 @@ export default function MenuList({ lists, onItemClick }: MenuListProps) {
               <button
                 key={j}
                 onClick={() => onItemClick?.(item)}
-                className="w-full text-left p-3 rounded-lg hover:bg-gray-50 active:bg-gray-100 transition-colors flex items-center gap-3"
+                className="w-full text-left p-3 rounded-lg bg-gray-300 hover:bg-gray-200 active:bg-gray-100 transition-colors flex items-center gap-3"
               >
                 {item.icon && (
                   <div className="w-8 h-8 rounded-lg bg-gray-100 flex items-center justify-center flex-shrink-0">
