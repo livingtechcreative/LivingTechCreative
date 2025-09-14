@@ -1,5 +1,5 @@
-import { Navigation } from "./navigation"
+import SimpleNavbar from "./simple-navbar"
 
 export default function IntegratedNavbar() {
-  return <Navigation />
+  return <SimpleNavbar />
 }

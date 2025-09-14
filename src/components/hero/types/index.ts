@@ -1,29 +1,15 @@
-export type AnimationVariant = {
-  hidden: {
-    [key: string]: any;
-  };
-  visible: {
-    [key: string]: any;
-    transition?: {
-      duration?: number;
-      ease?: any;
-      delay?: number;
-      [key: string]: any;
-    };
-  };
-};
+import { Variants } from "framer-motion"
+
+export type AnimationVariant = Variants
 
 export interface AnimationVariants {
-  container: any;
-  sleek: AnimationVariant;
-  fast: AnimationVariant;
-  trafficLight: AnimationVariant;
-  and: AnimationVariant;
-  ghostText: AnimationVariant;
-  afterMobile: AnimationVariant;
-  launch: AnimationVariant;
-  launchMobile: AnimationVariant;
-  anime: AnimationVariant;
-  animeMobile: AnimationVariant;
-  subtitle: AnimationVariant;
+  container: AnimationVariant
+  sleek: AnimationVariant
+  fast: AnimationVariant
+  trafficLight: AnimationVariant
+  and: AnimationVariant
+  ghostText: AnimationVariant
+  anime: AnimationVariant
+  animeMobile: AnimationVariant
+  subtitle: AnimationVariant
 }

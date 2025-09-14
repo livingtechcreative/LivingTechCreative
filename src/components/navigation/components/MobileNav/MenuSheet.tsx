@@ -53,11 +53,11 @@ const MainMenu = ({ menu, onSelect }: MainMenuProps) => (
 // Submenu view component
 interface SubMenuViewProps {
   lists: MenuListType[]
-  onBack: () => void
   onItemClick?: (item: MenuItem) => void
+  onBack?: () => void
 }
 
-const SubMenuView = ({ lists, onBack, onItemClick }: SubMenuViewProps) => {
+const SubMenuView = ({ lists, onItemClick, onBack }: SubMenuViewProps) => {
   const renderIcon = (iconName?: string, isSpecialItem = false) => {
     if (!iconName) return null
     const Icon = extendedIconMap[iconName as keyof typeof extendedIconMap]
@@ -139,7 +139,7 @@ const MenuSheet = ({ menu = defaultMenu, onItemClick }: MenuSheetProps) => {
   const calculateSheetHeight = useCallback(() => {
     if (!isOpen) return 'auto'
     
-    const windowHeight = window.innerHeight
+    const windowHeight = typeof window !== 'undefined' ? window.innerHeight : 1000
     
     // Simulate content height based on current view
     let estimatedContentHeight = 0
@@ -395,7 +395,7 @@ const MenuSheet = ({ menu = defaultMenu, onItemClick }: MenuSheetProps) => {
                           opacity: 0, 
                           y: -10,
                           transition: { 
-                            duration: 0.15
+                            duration: 0.1
                           }
                         }}
                       >
@@ -422,7 +422,7 @@ const MenuSheet = ({ menu = defaultMenu, onItemClick }: MenuSheetProps) => {
                           opacity: 0, 
                           y: -10,
                           transition: { 
-                            duration: 0.15
+                            duration: 0.1
                           }
                         }}
                       >

@@ -5,9 +5,10 @@ import { MenuItem, iconMap } from "../../types/menu.types"
 
 interface MenuCardProps {
   data: MenuItem
+  onItemClick?: (item: MenuItem) => void
 }
 
-export const MenuCard = ({ data }: MenuCardProps) => {
+export const MenuCard = ({ data, onItemClick }: MenuCardProps) => {
   if (data.isImage) {
     if (data.isRightPanel) {
       return (
@@ -32,7 +33,10 @@ export const MenuCard = ({ data }: MenuCardProps) => {
               <div className="absolute inset-0 backdrop-blur-0 group-hover:backdrop-blur-sm transition-all duration-500 rounded-lg" />
             </div>
           </div>
-          <div className="relative h-full flex flex-col justify-end p-5 text-white">
+          <div 
+          className="relative h-full flex flex-col justify-end p-5 text-white"
+          onClick={() => onItemClick?.(data)}
+        >
             <div className="flex items-center gap-1.5 mb-1">
               <span className="text-xs font-medium tracking-wider">See</span>
               <ArrowRight className="h-3 w-3" />
@@ -57,7 +61,10 @@ export const MenuCard = ({ data }: MenuCardProps) => {
   const IconComponent = data.icon ? iconMap[data.icon as keyof typeof iconMap] : null
 
   return (
-    <div className="group py-2 px-3 -mx-1 rounded-lg hover:bg-gray-100/80 transition-colors cursor-pointer">
+    <div 
+      className="group py-2 px-3 -mx-1 rounded-lg hover:bg-gray-100/80 transition-colors cursor-pointer"
+      onClick={() => onItemClick?.(data)}
+    >
       <div className="relative overflow-hidden">
         <div className="flex items-center gap-3 group-hover:translate-x-1 transition-transform duration-200">
           {IconComponent && (

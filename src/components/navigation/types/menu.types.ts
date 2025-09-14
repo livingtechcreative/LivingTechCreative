@@ -74,6 +74,8 @@ export const menuData: MenuChannel[] = [
             label: "Our Blog",
             callout: "Insights and updates",
             icon: "edit-alt",
+            url: "/blog",
+            target: "_self",
             isImage: true,
             isRightPanel: true
           }
@@ -176,6 +178,15 @@ export const menuData: MenuChannel[] = [
             label: "Portfolio",
             callout: "See our latest projects",
             icon: "maas-mr",
+            url: "/portofolio",
+            target: "_self",
+          },
+          {
+            label: "Showcase",
+            callout: "Explore our creative work",
+            icon: "maas-ve",
+            url: "/showcase",
+            target: "_self",
           },
           {
             label: "Case Studies",

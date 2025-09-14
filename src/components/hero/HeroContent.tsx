@@ -1,171 +1,190 @@
-import Image from "next/image";
-import { motion } from "framer-motion";
-import { AnimationVariants } from "./types";
+"use client"
+
+import { motion } from "framer-motion"
+import Image from "next/image"
+import type { AnimationVariants } from "./types"
 
 interface HeroContentProps {
-  variants: AnimationVariants;
+  variants?: AnimationVariants
 }
 
+
+
 export const HeroContent = ({ variants }: HeroContentProps) => {
+  const defaultVariants: AnimationVariants = {
+    container: {
+      hidden: { opacity: 0 },
+      visible: { opacity: 1 },
+    },
+    sleek: { hidden: { opacity: 0 }, visible: { opacity: 1 } },
+    fast: { hidden: { opacity: 0 }, visible: { opacity: 1 } },
+    trafficLight: { hidden: { opacity: 0 }, visible: { opacity: 1 } },
+    and: { hidden: { opacity: 0 }, visible: { opacity: 1 } },
+    ghostText: { hidden: { opacity: 0 }, visible: { opacity: 1 } },
+    anime: { hidden: { opacity: 0 }, visible: { opacity: 1 } },
+    animeMobile: { hidden: { opacity: 0 }, visible: { opacity: 1 } },
+    subtitle: { hidden: { opacity: 0 }, visible: { opacity: 1 } },
+  }
+
+  const animationVariants = variants || defaultVariants
+
   return (
     <motion.div
-      className="max-w-5xl mx-auto text-center"
-      variants={variants.container}
+      className="max-w-7xl mx-auto text-center"
+      variants={animationVariants.container}
       initial="hidden"
       animate="visible"
     >
-      <div className="text-3xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight mb-8">
+      {/* Available for work badge */}
+      <motion.div
+        className="flex items-center justify-center mb-8"
+        initial={{ opacity: 0, y: -40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.05, duration: 0.3 }}
+      >
+        <div className="inline-flex items-center px-4 py-1.5 border border-gray-200 rounded-lg bg-white/80 backdrop-blur-sm shadow-sm">
+          <div className="relative flex h-2.5 w-2.5 mr-2">
+            <div className="absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75 animate-ping"></div>
+            <div className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></div>
+          </div>
+          <span className="text-xs font-medium text-gray-700">Available for work</span>
+        </div>
+      </motion.div>
+
+      {/* Heading with blur reveal from left to right */}
+      <motion.div
+        className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-gray-900 leading-tight mb-8"
+        variants={animationVariants.sleek}
+      >
         {/* Mobile Layout */}
         <div className="block sm:hidden">
-          <div className="flex flex-wrap items-end justify-center gap-2">
-            <motion.span variants={variants.sleek} className="inline-block">
-              Sleek,
-            </motion.span>
-            <motion.span variants={variants.fast} className="inline-block">
-              fast
-            </motion.span>
-            <motion.div className="relative -translate-y-2 inline-block" variants={variants.trafficLight}>
-              <video
-                autoPlay
-                loop
-                muted
-                playsInline
-                className="rounded-lg object-cover w-20 h-8"
-              >
-                <source src="/images/sonic-fast.webm" type="video/webm" />
-              </video>
+          <div className="flex flex-nowrap items-center justify-center w-full px-4 overflow-x-hidden">
+            <motion.div className="flex items-center flex-shrink-0" variants={animationVariants.sleek}>
+              <span className="whitespace-nowrap font-bold">Sleek</span>
+              <div className="relative mx-2 translate-y-1 overflow-hidden">
+                <Image
+                  src="/images/man.svg"
+                  alt="Sleek"
+                  width={32}
+                  height={32}
+                  className="object-cover"
+                />
+              </div>
+              <span className="whitespace-nowrap font-bold">, Fast</span>
+              <div className="relative ml-2 translate-y-1 overflow-hidden">
+                <Image
+                  src="/images/eagle.svg"
+                  alt="Fast"
+                  width={32}
+                  height={32}
+                  className="object-cover"
+                />
+              </div>
             </motion.div>
-            <motion.span variants={variants.and} className="inline-block">
-              and
-            </motion.span>
           </div>
-          <div className="flex flex-wrap items-end justify-center gap-2 mt-2">
-            <motion.span variants={variants.ghostText} className="inline-block">
-              doesn't ghost you
+          <div className="flex flex-wrap items-end justify-center gap-2 mt-4">
+            <motion.span className="inline-block font-bold" variants={animationVariants.ghostText}>
+              {"Doesn't Ghost"}
             </motion.span>
-          </div>
-          <div className="flex flex-wrap items-end justify-center gap-2 mt-2">
-            <motion.span variants={variants.ghostText} className="inline-block">
-              after launch
-            </motion.span>
-            <motion.div className="relative -translate-y-2 inline-block" variants={variants.animeMobile}>
-              <video
-                autoPlay
-                loop
-                muted
-                playsInline
-                className="rounded-lg object-cover w-8 h-8"
-              >
-                <source src="/images/anime-launch.webm" type="video/webm" />
-              </video>
+            <motion.div className="relative -translate-y-1 inline-block" variants={animationVariants.animeMobile}>
+              <Image
+                src="/images/ghost.svg"
+                alt="Doesn't Ghost"
+                width={32}
+                height={32}
+                className="object-cover"
+              />
             </motion.div>
-            <motion.span
-              initial={{
-                opacity: 0,
-                scale: 0,
-                y: 20,
+            <motion.span className="inline-block font-bold" variants={animationVariants.ghostText}>
+              You After 
+            </motion.span>
+            <motion.span 
+              className="inline-block font-bold bg-gradient-to-r from-[#2B35AB] via-[#8A38F5] to-[#13CBD4] bg-clip-text text-transparent" 
+              style={{
+                backgroundImage: 'linear-gradient(90deg, #2B35AB 0%, #8A38F5 46%, #13CBD4 90%)'
               }}
-              animate={{
-                opacity: 1,
-                scale: [0, 1.5, 1],
-                y: 0,
-              }}
-              transition={{
-                delay: 6.2,
-                duration: 0.3,
-                ease: [0.16, 1, 0.3, 1],
-                scale: {
-                  times: [0, 0.8, 1],
-                  duration: 0.4,
-                },
-              }}
-              className="inline-block"
+              variants={animationVariants.ghostText}
             >
-              .
+              Launch
             </motion.span>
           </div>
         </div>
 
         {/* Tablet & Desktop Layout */}
         <div className="hidden sm:block">
-          <div className="flex flex-wrap items-end justify-center gap-2 md:gap-3 lg:gap-4">
-            <motion.span variants={variants.sleek} className="inline-block">
-              Sleek,
+          <div className="flex flex-wrap items-end justify-center gap-3 md:gap-4 lg:gap-6">
+            <motion.span className="inline-block font-bold" variants={animationVariants.sleek}>
+              Sleek
             </motion.span>
-            <motion.span variants={variants.fast} className="inline-block">
-              fast
-            </motion.span>
-            <motion.div className="relative -translate-y-2 inline-block" variants={variants.trafficLight}>
-              <video
-                autoPlay
-                loop
-                muted
-                playsInline
-                className="rounded-lg object-cover sm:w-28 sm:h-10 md:w-32 md:h-12 lg:w-40 lg:h-16"
-              >
-                <source src="/images/sonic-fast.webm" type="video/webm" />
-              </video>
+            <motion.div className="relative -translate-y-5 inline-block" variants={animationVariants.sleek}>
+              <Image
+                src="/images/man.svg"
+                alt="Sleek"
+                width={56}
+                height={56}
+                className="object-cover"
+              />
             </motion.div>
-            <motion.span variants={variants.and} className="inline-block">
-              and
+            <motion.span className="inline-block font-bold" variants={animationVariants.and}>
+              , Fast
             </motion.span>
+            <motion.div className="relative -translate-y-5 inline-block" variants={animationVariants.fast}>
+              <Image
+                src="/images/eagle.svg"
+                alt="Fast"
+                width={56}
+                height={56}
+                className="object-cover"
+              />
+            </motion.div>
           </div>
-          <div className="flex flex-wrap items-end justify-center gap-2 md:gap-3 lg:gap-4 mt-2">
-            <motion.span variants={variants.ghostText} className="inline-block">
-              doesn't ghost you after launch
+          <div className="flex flex-nowrap items-center justify-center gap-2 md:gap-3 lg:gap-4 mt-4 whitespace-nowrap">
+            <motion.span className="inline-block font-bold" variants={animationVariants.ghostText}>
+              {"Doesn't Ghost"}
             </motion.span>
-            <motion.div className="relative -translate-y-2 inline-block" variants={variants.anime}>
-              <video
-                autoPlay
-                loop
-                muted
-                playsInline
-                className="rounded-lg object-cover sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-16 lg:h-16"
-              >
-                <source src="/images/anime-launch.webm" type="video/webm" />
-              </video>
+            <motion.div className="relative -translate-y-1 inline-block" variants={animationVariants.anime}>
+              <Image
+                src="/images/ghost.svg"
+                alt="Doesn't Ghost"
+                width={56}
+                height={56}
+                className="object-cover"
+              />
             </motion.div>
-            <motion.span
-              initial={{
-                opacity: 0,
-                scale: 0,
-                y: 20,
+            <motion.span className="inline-block font-bold" variants={animationVariants.ghostText}>
+              You After 
+            </motion.span>
+            <motion.span 
+              className="inline-block font-bold bg-gradient-to-r from-[#2B35AB] via-[#8A38F5] to-[#13CBD4] bg-clip-text text-transparent" 
+              style={{
+                backgroundImage: 'linear-gradient(90deg, #2B35AB 0%, #8A38F5 46%, #13CBD4 90%)'
               }}
-              animate={{
-                opacity: 1,
-                scale: [0, 1.5, 1],
-                y: 0,
-              }}
-              transition={{
-                delay: 5.8,
-                duration: 0.3,
-                ease: [0.16, 1, 0.3, 1],
-                scale: {
-                  times: [0, 0.8, 1],
-                  duration: 0.4,
-                },
-              }}
-              className="inline-block"
+              variants={animationVariants.ghostText}
             >
-              .
+              Launch
             </motion.span>
           </div>
         </div>
-      </div>
+      </motion.div>
 
-      <motion.p
-        className="text-xs sm:text-sm md:text-base lg:text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed px-4 sm:px-0"
-        variants={variants.subtitle}
+      {/* Separate animation for subtitle */}
+      <motion.div
+        className="text-xs sm:text-sm md:text-base lg:text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed px-4 sm:px-0 -mt-2"
+        variants={animationVariants.subtitle}
       >
-        We help creators and businesses turn bold ideas into digital reality with smart technology, reliable systems,
-        and creative support every step of the way
-      </motion.p>
-      
+        <p className="mb-2">
+          Living Tech Creative is a professional digital agency that helps you grow.
+        </p>
+        <p>
+          From strategy to execution, we grow your product without the stress.
+        </p>
+      </motion.div>
+
       {/* CTA Button */}
       <motion.div
         initial={{
           opacity: 0,
-          y: 30,
+          y: 40,
           scale: 0.9,
         }}
         animate={{
@@ -174,18 +193,19 @@ export const HeroContent = ({ variants }: HeroContentProps) => {
           scale: 1,
         }}
         transition={{
-          delay: 6.8,
-          duration: 0.8,
+          delay: 0.3,
+          duration: 0.4,
           ease: [0.25, 0.46, 0.45, 0.94],
         }}
-        className="mt-6 sm:mt-8 md:mt-10 lg:mt-12 px-4 sm:px-0"
+        className="mt-6 sm:mt-8 md:mt-10 lg:mt-12 px-4 sm:px-0 flex items-center justify-center"
       >
+        {/* Book A Meeting Button */}
         <motion.button
           type="button"
-          className="group relative inline-flex items-center justify-center px-5 py-2 sm:px-6 sm:py-2.5 md:px-8 md:py-3 text-sm sm:text-base md:text-lg font-semibold text-white bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden w-full sm:w-auto"
+          className="group relative inline-flex items-center justify-center px-6 py-3 text-sm md:text-base font-semibold text-white bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 rounded-lg shadow-md hover:shadow-lg transition-all duration-300"
           whileHover={{
-            scale: 1.05,
-            boxShadow: "0 20px 40px rgba(0, 0, 0, 0.15)",
+            scale: 1.03,
+            boxShadow: "0 10px 20px rgba(0, 0, 0, 0.1)",
           }}
           whileTap={{
             scale: 0.98,
@@ -196,15 +216,8 @@ export const HeroContent = ({ variants }: HeroContentProps) => {
             damping: 20,
           }}
         >
-          {/* Background gradient animation */}
-          <motion.div
-            className="absolute inset-0 bg-gradient-to-r from-gray-800 via-gray-700 to-gray-800 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-            initial={false}
-          />
-
-          {/* Button content */}
-          <span className="relative z-10 flex items-center gap-3">
-            Book a Call
+          <span className="relative z-10 flex items-center gap-2">
+            Book a meeting
             <motion.svg
               width="20"
               height="20"
@@ -213,7 +226,7 @@ export const HeroContent = ({ variants }: HeroContentProps) => {
               xmlns="http://www.w3.org/2000/svg"
               className="group-hover:translate-x-1 transition-transform duration-300"
               initial={{ x: 0 }}
-              whileHover={{ x: 4 }}
+              whileHover={{ x: 3 }}
             >
               <path
                 d="M7 17L17 7M17 7H7M17 7V17"
@@ -224,20 +237,10 @@ export const HeroContent = ({ variants }: HeroContentProps) => {
               />
             </motion.svg>
           </span>
-
-          {/* Ripple effect on click */}
-          <motion.div
-            className="absolute inset-0 rounded-full bg-white/20"
-            initial={{ scale: 0, opacity: 0 }}
-            whileTap={{
-              scale: 2,
-              opacity: [0, 0.3, 0],
-              transition: { duration: 0.4 },
-            }}
-          />
         </motion.button>
       </motion.div>
 
+      {/* Separate animation for footer text */}
       <motion.p
         initial={{
           opacity: 0,
@@ -248,13 +251,15 @@ export const HeroContent = ({ variants }: HeroContentProps) => {
           y: 0,
         }}
         transition={{
-          delay: 7.4,
-          duration: 0.6,
+          delay: 0.4,
+          duration: 0.3,
+          ease: [0.25, 0.46, 0.45, 0.94],
         }}
         className="mt-4 text-sm text-gray-500"
       >
-        Free 30-minute consultation • No commitment required
+        Free 30-Minute Consultation • No Commitment Required
       </motion.p>
+
     </motion.div>
-  );
-};
+  )
+}

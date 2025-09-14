@@ -2,11 +2,24 @@
 
 import { motion } from "framer-motion"
 import Image from "next/image"
-import { DecodingText } from "@/components/ui/decoding-text"
+import { useRouter } from "next/navigation"
 import { DesktopNav } from "./components/DesktopNav"
 import { MobileNav } from "./components/MobileNav"
+import { LanguageToggle } from "./components/LanguageToggle"
+import { MenuItem } from "./types/menu.types"
 
 export const Navigation = () => {
+  const router = useRouter()
+
+  const handleItemClick = (item: MenuItem) => {
+    if (item.url) {
+      if (item.target === "_blank") {
+        window.open(item.url, "_blank", "noopener,noreferrer")
+      } else {
+        router.push(item.url)
+      }
+    }
+  }
   return (
     <motion.nav
       className="fixed top-0 left-0 right-0 z-50 py-4 px-4 sm:px-8"
@@ -15,37 +28,38 @@ export const Navigation = () => {
       transition={{ duration: 0.5, ease: "easeOut" }}
     >
       <div className="w-full">
-        <div className="flex items-center justify-between w-full max-w-[95vw] mx-auto px-4">
-          {/* Desktop Navigation */}
-          <DesktopNav />
+        {/* Desktop Navigation */}
+        <div className="hidden 2xl:block w-full max-w-[95vw] mx-auto px-4">
+          <DesktopNav onItemClick={handleItemClick} />
+        </div>
 
-          {/* Mobile Navigation - Only show on mobile */}
-          <div className="2xl:hidden flex items-center w-full justify-between">
-            {/* Logo */}
-            <motion.div 
-              className="h-14 flex items-center gap-2 px-4 group cursor-pointer"
-            >
-              <motion.div
-                whileHover={{ rotate: 360 }}
-                transition={{ duration: 0.8 }}
-              >
+        {/* Mobile Navigation - Fixed at bottom (no animation) */}
+        <div className="2xl:hidden fixed bottom-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-sm border-t border-gray-200">
+          <div className="flex items-center justify-between w-full max-w-[95vw] mx-auto px-4 py-2">
+            {/* Logo and Language Toggle */}
+            <div className="flex items-center gap-2">
+              <motion.div className="h-14 flex items-center">
                 <Image
-                  src="/images/livlogo.png"
-                  width={25}
-                  height={25}
+                  src="/images/livtechlogo.svg"
+                  width={120}
+                  height={30}
                   className="h-6 w-auto"
-                  priority
-                  alt="LivingTech Creative Logo"
+                  alt="LivTech Logo"
                 />
               </motion.div>
-              <div className="overflow-hidden">
-                <DecodingText 
-                  text="LivingTech Creative" 
-                  className="text-base font-semibold whitespace-nowrap text-black" 
-                />
-              </div>
-            </motion.div>
-            <MobileNav />
+              <LanguageToggle />
+            </div>
+
+            {/* Navigation and CTA */}
+            <div className="flex items-center gap-2">
+              <MobileNav onItemClick={handleItemClick} />
+              <a 
+                href="#book-call" 
+                className="px-3 py-1.5 text-sm font-medium text-primary-foreground bg-primary rounded-lg hover:bg-primary/90 transition-colors whitespace-nowrap"
+              >
+                Book a Call
+              </a>
+            </div>
           </div>
         </div>
       </div>
