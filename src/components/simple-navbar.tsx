@@ -10,13 +10,11 @@ import Link from "next/link"
 import { X, Menu } from "lucide-react"
 
 const menuItems = [
-  { name: "Home", href: "hero", isPage: false },
   { name: "About", href: "about", isPage: false },
   { name: "Services", href: "services", isPage: false },
   { name: "Portfolio", href: "portfolio", isPage: false },
   { name: "Showcase", href: "/showcase", isPage: true },
   { name: "Blog", href: "/blog", isPage: true },
-  { name: "FAQ", href: "faq", isPage: false },
   { name: "Contact", href: "contact", isPage: false }
 ]
 

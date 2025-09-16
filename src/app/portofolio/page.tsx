@@ -55,109 +55,13 @@ export default function PortfolioPage() {
   }
 
   return (
-    <div className="min-h-screen bg-white relative overflow-hidden">
-      {/* Animated Background Blur Circles */}
-      <div className="fixed inset-0 pointer-events-none">
-        {/* Large Purple Circle */}
-        <motion.div
-          className="absolute top-20 left-10 w-96 h-96 bg-gradient-to-r from-[#8A38F5]/30 to-[#8A38F5]/10 rounded-full blur-3xl"
-          animate={{
-            x: [0, 50, 0],
-            y: [0, -30, 0],
-            scale: [1, 1.1, 1],
-          }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        />
-        
-        {/* Large Cyan Circle */}
-        <motion.div
-          className="absolute top-40 right-20 w-[500px] h-[500px] bg-gradient-to-r from-[#13CBD4]/25 to-[#13CBD4]/5 rounded-full blur-3xl"
-          animate={{
-            x: [0, -40, 0],
-            y: [0, 40, 0],
-            scale: [1, 0.9, 1],
-          }}
-          transition={{
-            duration: 25,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 2
-          }}
-        />
-        
-        {/* Large Blue Circle */}
-        <motion.div
-          className="absolute bottom-20 left-1/4 w-[600px] h-[600px] bg-gradient-to-r from-[#2B35AB]/20 to-[#2B35AB]/5 rounded-full blur-3xl"
-          animate={{
-            x: [0, 60, 0],
-            y: [0, -50, 0],
-            scale: [1, 1.2, 1],
-          }}
-          transition={{
-            duration: 30,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 5
-          }}
-        />
-        
-        {/* Medium Purple-Cyan Blend */}
-        <motion.div
-          className="absolute top-1/2 right-1/3 w-80 h-80 bg-gradient-to-br from-[#8A38F5]/20 via-[#13CBD4]/15 to-[#2B35AB]/10 rounded-full blur-3xl"
-          animate={{
-            x: [0, -30, 0],
-            y: [0, 20, 0],
-            scale: [1, 0.8, 1],
-          }}
-          transition={{
-            duration: 18,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 8
-          }}
-        />
-        
-        {/* Small Floating Circles */}
-        <motion.div
-          className="absolute top-1/3 left-1/2 w-32 h-32 bg-gradient-to-r from-[#8A38F5]/15 to-[#13CBD4]/10 rounded-full blur-2xl"
-          animate={{
-            x: [0, 100, 0],
-            y: [0, -80, 0],
-            scale: [1, 1.5, 1],
-          }}
-          transition={{
-            duration: 15,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 3
-          }}
-        />
-        
-        <motion.div
-          className="absolute bottom-1/3 right-1/4 w-24 h-24 bg-gradient-to-r from-[#13CBD4]/20 to-[#2B35AB]/10 rounded-full blur-2xl"
-          animate={{
-            x: [0, -60, 0],
-            y: [0, 40, 0],
-            scale: [1, 0.7, 1],
-          }}
-          transition={{
-            duration: 12,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 6
-          }}
-        />
-      </div>
+    <div className="min-h-screen bg-white">
 
       <IntegratedNavbar />
       
       {/* Main Content */}
       <main className="pt-32 relative">
-        <div className="max-w-7xl mx-auto px-6 py-12 relative z-10">
+        <div className="max-w-7xl mx-auto px-6 py-12">
           {/* Large Title Section */}
           <motion.div 
             className="text-center mb-16"
