@@ -15,11 +15,14 @@
 
 # next.js
 /.next/
-/out/
+
 
 # production
-/build
 
+/dist
+build/
+dist/
+git addgitgi
 # misc
 .DS_Store
 *.pem
