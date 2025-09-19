@@ -227,7 +227,7 @@ export default function ContactSection() {
 
   return (
     <motion.section 
-      id="contact" 
+      id="contact-section" 
       className="bg-white pt-20 sm:pt-24 md:pt-32 pb-12 sm:pb-16 md:pb-20 px-4 sm:px-6 lg:px-8"
       initial="hidden"
       whileInView="visible"
@@ -286,62 +286,43 @@ export default function ContactSection() {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 md:gap-8 mx-auto">
           {/* Left Column - Benefits */}
-          <motion.div 
-            className="relative bg-black rounded-xl sm:rounded-2xl lg:rounded-3xl p-4 sm:p-6 md:p-8 text-white overflow-hidden min-h-[350px] sm:min-h-[400px] md:min-h-[500px] lg:min-h-[600px]"
-            variants={cardVariants}
+          <div 
+            className="relative rounded-lg overflow-hidden flex-1 w-full flex flex-col p-8 gap-7 text-white"
+            style={{
+              backgroundImage: 'url(/images/contactdesc.png)',
+              backgroundSize: 'cover',
+              backgroundRepeat: 'no-repeat',
+              backgroundPosition: 'top',
+              minHeight: '100%'
+            }}
           >
-            {/* Gradient overlay */}
-            <motion.div 
-              className="absolute inset-0 bg-gradient-to-b from-transparent via-purple-900/50 to-cyan-400/30 pointer-events-none"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 1 }}
-            />
-            <motion.div 
-              className="relative z-10"
-              variants={containerVariants}
-            >
-              <motion.h3 
-                className="text-lg sm:text-xl md:text-2xl font-bold mb-6 sm:mb-8"
-                variants={textVariants}
-              >
-                What Will You Get in Meeting
-              </motion.h3>
-              <motion.div 
-                className="space-y-4 sm:space-y-6"
-                variants={containerVariants}
-              >
-                {benefits.map((benefit, index) => (
-                  <motion.div 
-                    key={index} 
-                    className="flex gap-3 sm:gap-4"
-                    variants={benefitVariants}
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.1 }}
-                  >
-                    <motion.div 
-                      className="flex-shrink-0 mt-0.5 sm:mt-1"
-                      whileHover={{ scale: 1.1 }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white flex items-center justify-center">
-                        <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-gradient-to-r from-[#2B35AB] via-[#8A38F5] to-[#13CBD4] flex items-center justify-center">
-                          {benefit.icon}
-                        </div>
-                      </div>
-                    </motion.div>
-                    <div>
-                      <h4 className="font-semibold mb-1 sm:mb-2 text-sm sm:text-base">{benefit.title}</h4>
-                      <p className="text-gray-300 text-xs sm:text-sm leading-relaxed">{benefit.description}</p>
+            <div className="relative">
+              <h3 className="text-3xl font-bold leading-tight">
+                <p className="m-0">What Will You Get</p>
+                <p className="m-0">in Meeting</p>
+              </h3>
+            </div>
+            
+            <div className="flex flex-col gap-3">
+              {benefits.map((benefit, index) => (
+                <div key={index} className="flex items-start gap-4">
+                  <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center flex-shrink-0">
+                    <div className="w-6 h-6 rounded-full bg-gradient-to-r from-[#2B35AB] via-[#8A38F5] to-[#13CBD4] flex items-center justify-center">
+                      {benefit.icon}
                     </div>
-                  </motion.div>
-                ))}
-              </motion.div>
-            </motion.div>
-          </motion.div>
+                  </div>
+                  <div className="flex-1 flex flex-col justify-center py-0 px-3 pb-2 gap-2.5 rounded-r-lg">
+                    <div className="font-medium text-base leading-tight">
+                      {benefit.title}
+                    </div>
+                    <div className="text-sm leading-tight opacity-90">
+                      {benefit.description}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
 
           {/* Right Column - Form */}
           <motion.div 

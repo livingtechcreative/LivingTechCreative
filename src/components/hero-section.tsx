@@ -11,7 +11,7 @@ export default function HeroSection() {
       {/* Background Images */}
       <div className="absolute inset-0 z-0">
         {/* Left Background Image */}
-        <div className="absolute left-1/4 top-1/2 transform -translate-y-1/2 -translate-x-1/2">
+        <div className="absolute left-1/4 top-1/2 transform -translate-y-1/2 -translate-x-1/2 hidden sm:block">
           <Image 
             src="/images/kiri.png" 
             alt="Left background" 
@@ -23,7 +23,7 @@ export default function HeroSection() {
         </div>
         
         {/* Right Background Image */}
-        <div className="absolute right-1/4 top-1/2 transform -translate-y-1/2 translate-x-1/2">
+        <div className="absolute right-1/4 top-1/2 transform -translate-y-1/2 translate-x-1/2 hidden sm:block">
           <Image 
             src="/images/kanan.png" 
             alt="Right background" 
@@ -32,6 +32,31 @@ export default function HeroSection() {
             className="opacity-100"
             priority
           />
+        </div>
+
+        {/* Mobile Background Images - Smaller */}
+        <div className="block sm:hidden">
+          <div className="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-1/4">
+            <Image 
+              src="/images/kiri.png" 
+              alt="Left background" 
+              width={300} 
+              height={350} 
+              className="opacity-60"
+              priority
+            />
+          </div>
+          
+          <div className="absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-1/4">
+            <Image 
+              src="/images/kanan.png" 
+              alt="Right background" 
+              width={300} 
+              height={388} 
+              className="opacity-60"
+              priority
+            />
+          </div>
         </div>
       </div>
 

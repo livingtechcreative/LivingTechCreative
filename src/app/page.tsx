@@ -57,7 +57,7 @@ export default function Home() {
         <div id="services">
           <ServicesSection />
         </div>
-        <div id="portfolio">
+        <div id="portofolio">
           <PortfolioSection />
         </div>
         <BannerSection />

@@ -117,28 +117,65 @@ export default function PortfolioSection() {
   const [portfolios, setPortfolios] = useState<Portfolio[]>([])
   const [loading, setLoading] = useState(true)
 
+  const fetchPortfolios = async () => {
+    try {
+      setLoading(true)
+      const data = await apiService.getPortfolios()
+      // Show all active portfolios, prioritize featured ones first, then show up to 6 projects
+      const activePortfolios = data.filter(portfolio => portfolio.is_active)
+      const featuredFirst = activePortfolios.sort((a, b) => {
+        if (a.is_featured && !b.is_featured) return -1
+        if (!a.is_featured && b.is_featured) return 1
+        return 0
+      })
+      setPortfolios(featuredFirst.slice(0, 6)) // Show up to 6 portfolios
+    } catch (error) {
+      console.error('Failed to fetch portfolios:', error)
+    } finally {
+      setLoading(false)
+    }
+  }
+
   useEffect(() => {
-    const fetchPortfolios = async () => {
-      try {
-        setLoading(true)
-        const data = await apiService.getPortfolios()
-        // Show all active portfolios, prioritize featured ones first, then show up to 6 projects
-        const activePortfolios = data.filter(portfolio => portfolio.is_active)
-        const featuredFirst = activePortfolios.sort((a, b) => {
-          if (a.is_featured && !b.is_featured) return -1
-          if (!a.is_featured && b.is_featured) return 1
-          return 0
-        })
-        setPortfolios(featuredFirst.slice(0, 6)) // Show up to 6 portfolios
-      } catch (error) {
-        console.error('Failed to fetch portfolios:', error)
-      } finally {
-        setLoading(false)
+    fetchPortfolios()
+  }, [])
+
+  // Handle hash navigation - refetch data when component becomes visible
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash
+      if (hash === '#portfolio' || hash === '#portofolio') {
+        // Small delay to ensure component is visible
+        setTimeout(() => {
+          if (portfolios.length === 0 && !loading) {
+            fetchPortfolios()
+          }
+        }, 100)
       }
     }
 
-    fetchPortfolios()
-  }, [])
+    // Listen for hash changes
+    window.addEventListener('hashchange', handleHashChange)
+    
+    // Check initial hash
+    handleHashChange()
+
+    // Also check when component mounts if we're already on the hash
+    if (typeof window !== 'undefined') {
+      const currentHash = window.location.hash
+      if (currentHash === '#portfolio' || currentHash === '#portofolio') {
+        setTimeout(() => {
+          if (portfolios.length === 0 && !loading) {
+            fetchPortfolios()
+          }
+        }, 500)
+      }
+    }
+
+    return () => {
+      window.removeEventListener('hashchange', handleHashChange)
+    }
+  }, [portfolios.length, loading])
 
   const projects = portfolios.map(portfolio => ({
     id: portfolio.id,
@@ -156,7 +193,7 @@ export default function PortfolioSection() {
 
   return (
     <motion.section 
-      id="portfolio" 
+      id="portofolio" 
       className="bg-white py-32 px-4 sm:px-6 lg:px-8"
       initial="hidden"
       whileInView="visible"
@@ -286,86 +323,49 @@ export default function PortfolioSection() {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
               >
-                {/* Project Image - Masonry Style */}
-                <motion.div
-                  className={`group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 ${project.imageHeight}`}
-                  variants={imageVariants}
-                >
-                  <Image
-                    src={project.image || "/placeholder.svg"}
-                    alt={project.title}
-                    fill
-                    className="object-cover group-hover:scale-102 transition-transform duration-300"
-                    unoptimized={project.image?.includes('livingtechcreative.com')}
-                  />
-
-                  {/* Category Badge */}
-                  <motion.div 
-                    className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-medium text-gray-700 border border-gray-200"
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.3, delay: 0.2 }}
+                {/* Project Image - Clickable Card */}
+                <Link href={`/portofolio/${project.slug}`}>
+                  <motion.div
+                    className={`group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer ${project.imageHeight}`}
+                    variants={imageVariants}
                   >
-                    {project.category}
-                  </motion.div>
+                    <Image
+                      src={project.image || "/placeholder.svg"}
+                      alt={project.title}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-300"
+                      unoptimized={project.image?.includes('livingtechcreative.com')}
+                    />
 
-                  {/* Hover Overlay with View Case Study Button */}
-                  <motion.div 
-                    className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center"
-                    initial={{ opacity: 0 }}
-                    whileHover={{ opacity: 1 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <motion.div
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
+                    {/* Category Badge */}
+                    <motion.div 
+                      className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-medium text-gray-700 border border-gray-200"
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.3, delay: 0.2 }}
                     >
-                      <Link 
-                        href={`/portofolio/${project.slug}`}
-                        className="bg-gray-900 text-white px-6 py-3 rounded-lg font-medium hover:bg-gray-800 transition-colors flex items-center gap-2 shadow-lg"
-                      >
-                        View Case Study
-                        <ArrowRight className="w-4 h-4" />
-                      </Link>
+                      {project.category}
+                    </motion.div>
+
+                    {/* Title Overlay - Hidden by default, shown on hover */}
+                    <motion.div 
+                      className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-end justify-start p-6"
+                      initial={{ opacity: 0 }}
+                      whileHover={{ opacity: 1 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <div className="text-white">
+                        <h3 className="text-xl font-bold mb-2">
+                          {project.title}
+                        </h3>
+                        <p className="text-white/80 text-sm leading-relaxed line-clamp-2">
+                          {project.description}
+                        </p>
+                      </div>
                     </motion.div>
                   </motion.div>
-                </motion.div>
-
-                {/* Project Content - Transparent Card */}
-                <motion.div 
-                  className="pt-4 pb-2"
-                  variants={textVariants}
-                >
-                  <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-purple-600 transition-colors">
-                    {project.title}
-                  </h3>
-                  <p className="text-gray-600 text-sm leading-relaxed mb-3">{project.description}</p>
-
-                  {/* Tags */}
-                  <div className="flex flex-wrap gap-2">
-                    {project.tags && project.tags.length > 0 ? (
-                      project.tags.map((tag, tagIndex) => (
-                        <motion.span
-                          key={tagIndex}
-                          className="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded-full font-medium hover:bg-purple-100 hover:text-purple-700 transition-colors cursor-default"
-                          whileHover={{ scale: 1.05 }}
-                          transition={{ duration: 0.2 }}
-                        >
-                          {tag}
-                        </motion.span>
-                      ))
-                    ) : (
-                      <motion.span 
-                        className="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded-full font-medium"
-                        whileHover={{ scale: 1.05 }}
-                        transition={{ duration: 0.2 }}
-                      >
-                        {project.category}
-                      </motion.span>
-                    )}
-                  </div>
-                </motion.div>
+                </Link>
               </motion.div>
             ))}
           </motion.div>

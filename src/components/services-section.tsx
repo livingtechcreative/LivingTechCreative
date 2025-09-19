@@ -89,7 +89,11 @@ const textVariants = {
 }
 
 export default function ServicesSection() {
-  const [isHovered, setIsHovered] = useState(false)
+  const [activeCard, setActiveCard] = useState<number | null>(null)
+
+  const handleCardClick = (index: number) => {
+    setActiveCard(activeCard === index ? null : index)
+  }
   
   const services = [
     {
@@ -208,69 +212,60 @@ export default function ServicesSection() {
 
         {/* Services Grid */}
         <motion.div 
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8"
+          className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8"
           variants={containerVariants}
         >
-          {services.map((service, index) => (
-            <motion.div
-              key={index}
-              className="group bg-transparent rounded-2xl p-8 transition-all duration-300"
-              variants={cardVariants}
-              whileHover="hover"
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-            >
-              {/* Service Icon */}
-              <motion.div 
-                className="mb-6"
-                variants={iconVariants}
+          {services.map((service, index) => {
+            const isActive = activeCard === index
+            return (
+              <motion.div
+                key={index}
+                className="group bg-transparent rounded-2xl p-4 sm:p-6 lg:p-8 transition-all duration-300 cursor-pointer"
+                variants={cardVariants}
+                whileHover="hover"
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                onClick={() => handleCardClick(index)}
               >
-                <div className="w-16 h-16 flex items-center justify-center bg-transparent">
-                  {index === 0 ? (
-                    <div 
-                      className="w-full h-full"
-                      onMouseEnter={() => setIsHovered(true)}
-                      onMouseLeave={() => setIsHovered(false)}
-                    >
-                      {isHovered ? (
-                        <iframe
-                          src="https://cdn.lottielab.com/l/96LDPMggQAps9o.html"
-                          className="w-20 h-20 border-0 scale-125"
-                          title="UI/UX Design Animation"
-                        />
-                      ) : (
-                        <Image
-                          src={service.icon || "/placeholder.svg"}
-                          alt={service.title}
-                          width={64}
-                          height={64}
-                          className="w-full h-full object-contain"
-                        />
-                      )}
-                    </div>
-                  ) : (
-                    <Image
+                {/* Service Icon */}
+                <motion.div 
+                  className="mb-4 sm:mb-6"
+                  variants={iconVariants}
+                >
+                  <div className="w-16 h-16 flex items-center justify-center">
+                    <img
                       src={service.icon || "/placeholder.svg"}
                       alt={service.title}
-                      width={64}
-                      height={64}
                       className="w-full h-full object-contain"
+                      style={{ 
+                        filter: 'drop-shadow(0 0 0 transparent)',
+                        boxShadow: 'none'
+                      }}
                     />
-                  )}
-                </div>
-              </motion.div>
+                  </div>
+                </motion.div>
 
-              {/* Service Content */}
-              <motion.div variants={textVariants}>
-                <h3 className="text-xl font-bold text-gray-900 mb-4 group-hover:text-blue-600 transition-colors">
-                  {service.title}
-                </h3>
-                <p className="text-gray-600 leading-relaxed">{service.description}</p>
+                {/* Service Content */}
+                <motion.div variants={textVariants}>
+                  <h3 className="text-base sm:text-lg lg:text-xl font-bold text-gray-900 mb-2 sm:mb-4 group-hover:text-blue-600 transition-colors">
+                    {service.title}
+                  </h3>
+                  {/* Desktop: Hover behavior, Mobile: Click behavior */}
+                  <div className={`overflow-hidden transition-all duration-300 ${
+                    isActive ? 'max-h-32' : 'max-h-0 sm:group-hover:max-h-32'
+                  }`}>
+                    <p className={`text-gray-600 leading-relaxed transition-opacity duration-300 delay-100 pt-2 text-xs sm:text-sm lg:text-base ${
+                      isActive ? 'opacity-100' : 'opacity-0 sm:group-hover:opacity-100'
+                    }`}>
+                      {service.description}
+                    </p>
+                  </div>
+                </motion.div>
               </motion.div>
-            </motion.div>
-          ))}
+            )
+          })}
         </motion.div>
       </div>
     </motion.section>

@@ -61,23 +61,27 @@ export const HeroContent = ({ variants }: HeroContentProps) => {
           <div className="flex flex-nowrap items-center justify-center w-full px-4 overflow-x-hidden">
             <motion.div className="flex items-center flex-shrink-0" variants={animationVariants.sleek}>
               <span className="whitespace-nowrap font-bold">Sleek</span>
-              <div className="relative mx-2 translate-y-1 overflow-hidden">
+              <div className="relative mx-2 translate-y-1 overflow-hidden hero-icon">
                 <Image
                   src="/images/man.svg"
                   alt="Sleek"
                   width={32}
                   height={32}
-                  className="object-cover"
+                  className="object-contain"
+                  unoptimized={true}
+                  priority={true}
                 />
               </div>
               <span className="whitespace-nowrap font-bold">, Fast</span>
-              <div className="relative ml-2 translate-y-1 overflow-hidden">
+              <div className="relative ml-2 translate-y-1 overflow-hidden hero-icon">
                 <Image
                   src="/images/eagle.svg"
                   alt="Fast"
                   width={32}
                   height={32}
-                  className="object-cover"
+                  className="object-contain"
+                  unoptimized={true}
+                  priority={true}
                 />
               </div>
             </motion.div>
@@ -86,13 +90,15 @@ export const HeroContent = ({ variants }: HeroContentProps) => {
             <motion.span className="inline-block font-bold" variants={animationVariants.ghostText}>
               {"Doesn't Ghost"}
             </motion.span>
-            <motion.div className="relative -translate-y-1 inline-block" variants={animationVariants.animeMobile}>
+            <motion.div className="relative -translate-y-1 inline-block hero-icon" variants={animationVariants.animeMobile}>
               <Image
                 src="/images/ghost.svg"
                 alt="Doesn't Ghost"
                 width={32}
                 height={32}
-                className="object-cover"
+                className="object-contain"
+                unoptimized={true}
+                priority={true}
               />
             </motion.div>
             <motion.span className="inline-block font-bold" variants={animationVariants.ghostText}>
@@ -116,25 +122,29 @@ export const HeroContent = ({ variants }: HeroContentProps) => {
             <motion.span className="inline-block font-bold" variants={animationVariants.sleek}>
               Sleek
             </motion.span>
-            <motion.div className="relative -translate-y-5 inline-block" variants={animationVariants.sleek}>
+            <motion.div className="relative -translate-y-5 inline-block hero-icon" variants={animationVariants.sleek}>
               <Image
                 src="/images/man.svg"
                 alt="Sleek"
                 width={56}
                 height={56}
-                className="object-cover"
+                className="object-contain"
+                unoptimized={true}
+                priority={true}
               />
             </motion.div>
             <motion.span className="inline-block font-bold" variants={animationVariants.and}>
               , Fast
             </motion.span>
-            <motion.div className="relative -translate-y-5 inline-block" variants={animationVariants.fast}>
+            <motion.div className="relative -translate-y-5 inline-block hero-icon" variants={animationVariants.fast}>
               <Image
                 src="/images/eagle.svg"
                 alt="Fast"
                 width={56}
                 height={56}
-                className="object-cover"
+                className="object-contain"
+                unoptimized={true}
+                priority={true}
               />
             </motion.div>
           </div>
@@ -142,13 +152,15 @@ export const HeroContent = ({ variants }: HeroContentProps) => {
             <motion.span className="inline-block font-bold" variants={animationVariants.ghostText}>
               {"Doesn't Ghost"}
             </motion.span>
-            <motion.div className="relative -translate-y-1 inline-block" variants={animationVariants.anime}>
+            <motion.div className="relative -translate-y-1 inline-block hero-icon" variants={animationVariants.anime}>
               <Image
                 src="/images/ghost.svg"
                 alt="Doesn't Ghost"
                 width={56}
                 height={56}
-                className="object-cover"
+                className="object-contain"
+                unoptimized={true}
+                priority={true}
               />
             </motion.div>
             <motion.span className="inline-block font-bold" variants={animationVariants.ghostText}>
@@ -202,6 +214,12 @@ export const HeroContent = ({ variants }: HeroContentProps) => {
         {/* Book A Meeting Button */}
         <motion.button
           type="button"
+          onClick={() => {
+            const contactSection = document.getElementById('contact-section');
+            if (contactSection) {
+              contactSection.scrollIntoView({ behavior: 'smooth' });
+            }
+          }}
           className="group relative inline-flex items-center justify-center px-6 py-3 text-sm md:text-base font-semibold text-white bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 rounded-lg shadow-md hover:shadow-lg transition-all duration-300"
           whileHover={{
             scale: 1.03,

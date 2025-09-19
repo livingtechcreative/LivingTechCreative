@@ -22,6 +22,11 @@ const nextConfig: NextConfig = {
     // Add error handling for missing images
     dangerouslyAllowSVG: true,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+    // Improve SVG rendering quality
+    formats: ['image/webp', 'image/avif'],
+    minimumCacheTTL: 60,
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
   },
   webpack: (config, { dev, isServer }) => {
     // Exclude test files from production build
