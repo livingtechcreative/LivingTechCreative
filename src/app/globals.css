@@ -142,22 +142,18 @@
 svg {
   shape-rendering: geometricPrecision;
   text-rendering: optimizeLegibility;
-  image-rendering: -webkit-optimize-contrast;
-  image-rendering: -moz-crisp-edges;
-  image-rendering: crisp-edges;
 }
 
 /* Specific optimization for hero icons */
 .hero-icon img,
 .hero-icon svg {
-  image-rendering: -webkit-optimize-contrast;
-  image-rendering: -moz-crisp-edges;
-  image-rendering: crisp-edges;
-  image-rendering: pixelated;
+  image-rendering: auto;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   transform: translateZ(0);
   -webkit-transform: translateZ(0);
+  filter: none;
+  -webkit-filter: none;
 }
 
 /* Force hardware acceleration for better rendering */
@@ -165,6 +161,27 @@ svg {
   transform: translateZ(0);
   -webkit-transform: translateZ(0);
   will-change: transform;
+}
+
+/* Mobile specific SVG fixes */
+@media (max-width: 640px) {
+  .hero-icon img,
+  .hero-icon svg {
+    image-rendering: auto;
+    -webkit-image-rendering: auto;
+    filter: contrast(1) brightness(1) saturate(1);
+    -webkit-filter: contrast(1) brightness(1) saturate(1);
+    opacity: 1 !important;
+    color: inherit;
+    fill: currentColor;
+  }
+  
+  /* Ensure SVG paths maintain their color */
+  .hero-icon svg path,
+  .hero-icon svg g {
+    fill: inherit;
+    stroke: inherit;
+  }
 }
 
 /* Line clamp utilities */
@@ -176,3 +193,28 @@ svg {
 }
 
 
+
+/* Additional SVG fixes for mobile deployment */
+@media (max-width: 640px) {
+  /* Prevent browser from applying dark mode filters to SVGs */
+  .hero-icon img[src$=".svg"] {
+    filter: none !important;
+    -webkit-filter: none !important;
+    opacity: 1 !important;
+    color-scheme: light;
+  }
+  
+  /* Force SVG to maintain original colors */
+  .hero-icon {
+    color-scheme: light;
+    forced-color-adjust: none;
+    -webkit-forced-color-adjust: none;
+  }
+}
+
+/* Prevent any global filters from affecting SVGs */
+img[src$=".svg"] {
+  filter: none;
+  -webkit-filter: none;
+  color-scheme: light;
+}

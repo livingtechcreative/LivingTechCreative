@@ -65,11 +65,12 @@ export const HeroContent = ({ variants }: HeroContentProps) => {
                 <Image
                   src="/images/man.svg"
                   alt="Sleek"
-                  width={32}
-                  height={32}
-                  className="object-contain"
+                  width={40}
+                  height={40}
+                  className="object-contain w-8 h-8"
                   unoptimized={true}
                   priority={true}
+                  style={{ filter: 'none', opacity: 1 }}
                 />
               </div>
               <span className="whitespace-nowrap font-bold">, Fast</span>
@@ -77,11 +78,12 @@ export const HeroContent = ({ variants }: HeroContentProps) => {
                 <Image
                   src="/images/eagle.svg"
                   alt="Fast"
-                  width={32}
-                  height={32}
-                  className="object-contain"
+                  width={40}
+                  height={40}
+                  className="object-contain w-8 h-8"
                   unoptimized={true}
                   priority={true}
+                  style={{ filter: 'none', opacity: 1 }}
                 />
               </div>
             </motion.div>
@@ -94,11 +96,12 @@ export const HeroContent = ({ variants }: HeroContentProps) => {
               <Image
                 src="/images/ghost.svg"
                 alt="Doesn't Ghost"
-                width={32}
-                height={32}
-                className="object-contain"
+                width={40}
+                height={40}
+                className="object-contain w-8 h-8"
                 unoptimized={true}
                 priority={true}
+                style={{ filter: 'none', opacity: 1 }}
               />
             </motion.div>
             <motion.span className="inline-block font-bold" variants={animationVariants.ghostText}>
@@ -128,9 +131,10 @@ export const HeroContent = ({ variants }: HeroContentProps) => {
                 alt="Sleek"
                 width={56}
                 height={56}
-                className="object-contain"
+                className="object-contain w-8 h-8 sm:w-12 sm:h-12 md:w-14 md:h-14"
                 unoptimized={true}
                 priority={true}
+                style={{ filter: 'none', opacity: 1 }}
               />
             </motion.div>
             <motion.span className="inline-block font-bold" variants={animationVariants.and}>
@@ -142,9 +146,10 @@ export const HeroContent = ({ variants }: HeroContentProps) => {
                 alt="Fast"
                 width={56}
                 height={56}
-                className="object-contain"
+                className="object-contain w-8 h-8 sm:w-12 sm:h-12 md:w-14 md:h-14"
                 unoptimized={true}
                 priority={true}
+                style={{ filter: 'none', opacity: 1 }}
               />
             </motion.div>
           </div>
@@ -158,9 +163,10 @@ export const HeroContent = ({ variants }: HeroContentProps) => {
                 alt="Doesn't Ghost"
                 width={56}
                 height={56}
-                className="object-contain"
+                className="object-contain w-8 h-8 sm:w-12 sm:h-12 md:w-14 md:h-14"
                 unoptimized={true}
                 priority={true}
+                style={{ filter: 'none', opacity: 1 }}
               />
             </motion.div>
             <motion.span className="inline-block font-bold" variants={animationVariants.ghostText}>
