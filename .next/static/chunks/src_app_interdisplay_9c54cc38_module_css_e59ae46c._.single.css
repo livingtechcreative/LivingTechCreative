@@ -1,0 +1,83 @@
+/* [project]/src/app/interdisplay_9c54cc38.module.css [app-client] (css) */
+@font-face {
+  font-family: interDisplay;
+  src: url("../media/InterDisplay_Regular-s.p.4c87db0f.woff2") format("woff2");
+  font-display: swap;
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: interDisplay;
+  src: url("../media/InterDisplay_Italic-s.p.960a583c.woff2") format("woff2");
+  font-display: swap;
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: interDisplay;
+  src: url("../media/InterDisplay_Medium-s.p.ff5ad5cf.woff2") format("woff2");
+  font-display: swap;
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: interDisplay;
+  src: url("../media/InterDisplay_MediumItalic-s.p.e6afff4f.woff2") format("woff2");
+  font-display: swap;
+  font-weight: 500;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: interDisplay;
+  src: url("../media/InterDisplay_SemiBold-s.p.03b75f38.woff2") format("woff2");
+  font-display: swap;
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: interDisplay;
+  src: url("../media/InterDisplay_SemiBoldItalic-s.p.e555df6b.woff2") format("woff2");
+  font-display: swap;
+  font-weight: 600;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: interDisplay;
+  src: url("../media/InterDisplay_Bold-s.p.268475db.woff2") format("woff2");
+  font-display: swap;
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: interDisplay;
+  src: url("../media/InterDisplay_BoldItalic-s.p.2629553e.woff2") format("woff2");
+  font-display: swap;
+  font-weight: 700;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: interDisplay Fallback;
+  src: local(Arial);
+  ascent-override: 98.56%;
+  descent-override: 24.54%;
+  line-gap-override: 0.0%;
+  size-adjust: 98.29%;
+}
+
+.interdisplay_9c54cc38-module__tkgKYG__className {
+  font-family: interDisplay, interDisplay Fallback;
+}
+
+.interdisplay_9c54cc38-module__tkgKYG__variable {
+  --font-inter-display: "interDisplay", "interDisplay Fallback";
+}
+
+/*# sourceMappingURL=src_app_interdisplay_9c54cc38_module_css_e59ae46c._.single.css.map*/

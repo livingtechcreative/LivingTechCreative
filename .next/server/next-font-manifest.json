@@ -1,1 +1,29 @@
-{"pages":{},"app":{},"appUsingSizeAdjust":false,"pagesUsingSizeAdjust":false}
+{
+  "app": {
+    "[project]/src/app/page": [
+      "static/media/Trap_Regular-s.p.04629e17.otf",
+      "static/media/Trap_Medium-s.p.fa8179fe.otf",
+      "static/media/Trap_SemiBold-s.p.67b8156a.otf",
+      "static/media/Trap_Bold-s.p.c2b4b242.otf",
+      "static/media/Inter_Regular-s.p.caec8b09.woff2",
+      "static/media/Inter_Italic-s.p.2bff1583.woff2",
+      "static/media/Inter_Medium-s.p.7ad67a04.woff2",
+      "static/media/Inter_MediumItalic-s.p.fa0fd40b.woff2",
+      "static/media/Inter_SemiBold-s.p.b1ac6b35.woff2",
+      "static/media/Inter_SemiBoldItalic-s.p.48ae7f9c.woff2",
+      "static/media/Inter_Bold-s.p.7c258520.woff2",
+      "static/media/Inter_BoldItalic-s.p.35a1c015.woff2",
+      "static/media/InterDisplay_Regular-s.p.4c87db0f.woff2",
+      "static/media/InterDisplay_Italic-s.p.960a583c.woff2",
+      "static/media/InterDisplay_Medium-s.p.ff5ad5cf.woff2",
+      "static/media/InterDisplay_MediumItalic-s.p.e6afff4f.woff2",
+      "static/media/InterDisplay_SemiBold-s.p.03b75f38.woff2",
+      "static/media/InterDisplay_SemiBoldItalic-s.p.e555df6b.woff2",
+      "static/media/InterDisplay_Bold-s.p.268475db.woff2",
+      "static/media/InterDisplay_BoldItalic-s.p.2629553e.woff2"
+    ]
+  },
+  "appUsingSizeAdjust": true,
+  "pages": {},
+  "pagesUsingSizeAdjust": false
+}

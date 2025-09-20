@@ -214,7 +214,46 @@ svg {
 
 /* Prevent any global filters from affecting SVGs */
 img[src$=".svg"] {
-  filter: none;
-  -webkit-filter: none;
+  filter: none !important;
+  -webkit-filter: none !important;
   color-scheme: light;
+  image-rendering: auto;
+  -webkit-image-rendering: auto;
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Specific fixes for hero icons */
+.hero-icon img {
+  filter: none !important;
+  -webkit-filter: none !important;
+  opacity: 1 !important;
+  color-scheme: light !important;
+  forced-color-adjust: none !important;
+  -webkit-forced-color-adjust: none !important;
+}/* Force
+ SVG to display correctly on all devices */
+@media screen {
+  .hero-icon img[src$=".svg"] {
+    filter: none !important;
+    -webkit-filter: none !important;
+    opacity: 1 !important;
+    color-scheme: light !important;
+    forced-color-adjust: none !important;
+    -webkit-forced-color-adjust: none !important;
+    image-rendering: auto !important;
+    -webkit-image-rendering: auto !important;
+    background: transparent !important;
+    mix-blend-mode: normal !important;
+  }
+}
+
+/* Prevent any system-level color adjustments */
+@media (prefers-color-scheme: dark) {
+  .hero-icon img[src$=".svg"] {
+    filter: none !important;
+    -webkit-filter: none !important;
+    opacity: 1 !important;
+  }
 }

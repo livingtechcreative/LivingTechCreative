@@ -1,0 +1,51 @@
+/* [project]/src/app/trap_664ec72f.module.css [app-client] (css) */
+@font-face {
+  font-family: trap;
+  src: url("../media/Trap_Regular-s.p.04629e17.otf") format("opentype");
+  font-display: swap;
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: trap;
+  src: url("../media/Trap_Medium-s.p.fa8179fe.otf") format("opentype");
+  font-display: swap;
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: trap;
+  src: url("../media/Trap_SemiBold-s.p.67b8156a.otf") format("opentype");
+  font-display: swap;
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: trap;
+  src: url("../media/Trap_Bold-s.p.c2b4b242.otf") format("opentype");
+  font-display: swap;
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: trap Fallback;
+  src: local(Arial);
+  ascent-override: 68.39%;
+  descent-override: 22.8%;
+  line-gap-override: 9.12%;
+  size-adjust: 109.67%;
+}
+
+.trap_664ec72f-module__RN0fja__className {
+  font-family: trap, trap Fallback;
+}
+
+.trap_664ec72f-module__RN0fja__variable {
+  --font-trap: "trap", "trap Fallback";
+}
+
+/*# sourceMappingURL=src_app_trap_664ec72f_module_css_e59ae46c._.single.css.map*/
