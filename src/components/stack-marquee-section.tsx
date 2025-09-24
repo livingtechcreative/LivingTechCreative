@@ -1,6 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
+import Image from "next/image"
 import BadgeSubtitle from "./badge-subtitle"
 
 // Animation variants
@@ -191,13 +192,12 @@ export default function StackMarqueeSection() {
                         }}
                       >
                         <div className="relative">
-                          <img
+                          <Image
                             src={tech.iconUrl}
                             alt={tech.name}
+                            width={64}
+                            height={64}
                             className="w-16 h-16 transition-all duration-300 group-hover:drop-shadow-lg object-contain"
-                            style={{
-                              filter: "drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1))"
-                            }}
                           />
                           {/* Subtle glow effect on hover */}
                           <div

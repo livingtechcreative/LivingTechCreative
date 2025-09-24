@@ -8,80 +8,98 @@ import IntegratedNavbar from "@/components/integrated-navbar"
 import Footer from "@/components/footer"
 import { apiService } from "@/lib/api"
 import { normalizeImagePath } from "@/lib/utils"
+import blogPosts from "@/data/blog-posts.json"
 
-// Animation variants
-export async function generateStaticParams() {
+// Local fallback slugs generated at prebuild (used only if API is unavailable during build)
+import blogSlugs from '@/data/blog-slugs.json'
+
+// Generate static params for blog pages – prefer live API during build, fallback to prebuilt JSON
+export async function generateStaticParams(): Promise<{ slug: string }[]> {
   try {
-    const posts = await apiService.getActiveBlogPosts()
-    return posts.map(p => ({ slug: p.slug }))
-  } catch {
-    return []
+    console.log('[build] generateStaticParams(blog/page) called')
+    const base = process.env.NEXT_PUBLIC_API_BASE_URL || 'https://admin.livingtechcreative.com/api'
+    const url = new URL('/blog-posts', base).toString()
+    const res = await fetch(url, { next: { revalidate: 0 } })
+    if (!res.ok) throw new Error(`Failed ${res.status}`)
+    const data = await res.json()
+    const posts = Array.isArray(data?.data) ? data.data : Array.isArray(data) ? data : []
+    const slugs = posts.filter((p: any) => p?.is_active && typeof p.slug === 'string').map((p: any) => p.slug)
+    const mapped = slugs.map((slug: string) => ({ slug }))
+    if (mapped.length === 0) {
+      console.log('[build] generateStaticParams(blog/page) no API slugs, using mock fallback')
+      return [{ slug: 'placeholder' }]
+    }
+    return mapped
+  } catch (e) {
+    console.log('[build] generateStaticParams(blog/page) falling back to local json')
+    const mapped = (blogSlugs as string[]).map((slug) => ({ slug }))
+    if (mapped.length === 0) {
+      console.log('[build] generateStaticParams(blog/page) local json empty, using mock fallback')
+      return [{ slug: 'placeholder' }]
+    }
+    return mapped
   }
 }
 
-export const dynamicParams = false
+// CRITICAL: These settings are required for static export
+export const dynamicParams = false  // MUST be false for static export
+export const dynamic = 'force-static'
 
 export default async function BlogDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
-  const allBlogPosts = await apiService.getActiveBlogPosts()
-  const blogPost = allBlogPosts.find(p => p.slug === slug)
-  const currentIndex = allBlogPosts.findIndex(p => p.slug === slug)
+  
+  try {
+    const allBlogPosts = (blogPosts as any[]).filter((p) => p?.is_active)
+    const blogPost = allBlogPosts.find(p => p.slug === slug)
+    const currentIndex = allBlogPosts.findIndex(p => p.slug === slug)
 
-  if (!blogPost) {
-    notFound()
-  }
-
-  const previous = currentIndex > 0 ? allBlogPosts[currentIndex - 1] : null
-  const next = currentIndex < allBlogPosts.length - 1 ? allBlogPosts[currentIndex + 1] : null
-
-  const handleShare = async () => {
-    if (navigator.share && blogPost) {
-      try {
-        await navigator.share({
-          title: blogPost.title,
-          text: blogPost.excerpt,
-          url: window.location.href,
-        })
-      } catch (error) {
-        console.error('Error sharing:', error)
-      }
-    } else {
-      // Fallback: copy to clipboard
-      navigator.clipboard.writeText(window.location.href)
-      // You could show a toast notification here
+    if (!blogPost) {
+      notFound()
     }
-  }
 
-  const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    })
-  }
+    const previous = currentIndex > 0 ? allBlogPosts[currentIndex - 1] : null
+    const next = currentIndex < allBlogPosts.length - 1 ? allBlogPosts[currentIndex + 1] : null
 
-  const formatReadTime = (minutes: number | null) => {
-    if (!minutes) return "5 min read"
-    return `${minutes} min read`
-  }
+    const handleShare = async () => {
+      if (navigator.share && blogPost) {
+        try {
+          await navigator.share({
+            title: blogPost.title,
+            text: blogPost.excerpt,
+            url: window.location.href,
+          })
+        } catch (error) {
+          console.error('Error sharing:', error)
+        }
+      } else {
+        // Fallback: copy to clipboard
+        navigator.clipboard.writeText(window.location.href)
+        // You could show a toast notification here
+      }
+    }
 
-  if (!blogPost) return null
+    const formatDate = (dateString: string) => {
+      return new Date(dateString).toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      })
+    }
 
-  return (
-      <div
-        className="min-h-screen bg-white"
-      >
+    const formatReadTime = (minutes: number | null) => {
+      if (!minutes) return "5 min read"
+      return `${minutes} min read`
+    }
+
+    return (
+      <div className="min-h-screen bg-white">
         <IntegratedNavbar />
         
         {/* Header Section */}
-        <header 
-          className="pt-24 pb-8 bg-gradient-to-br from-gray-50 to-white"
-        >
+        <header className="pt-24 pb-8 bg-gradient-to-br from-gray-50 to-white">
           <div className="max-w-4xl mx-auto px-4 sm:px-6">
             {/* Navigation */}
-            <div 
-              className="flex items-center justify-between mb-6"
-            >
+            <div className="flex items-center justify-between mb-6">
               <Link
                 href="/blog"
                 className="flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors"
@@ -112,9 +130,7 @@ export default async function BlogDetailPage({ params }: { params: Promise<{ slu
             
             <div className="text-center">
               {/* Meta Information */}
-              <div 
-                className="flex items-center justify-center gap-6 text-sm text-gray-600 mb-6"
-              >
+              <div className="flex items-center justify-center gap-6 text-sm text-gray-600 mb-6">
                 <div className="flex items-center gap-1">
                   <User className="w-4 h-4" />
                   <span>{blogPost.author}</span>
@@ -130,22 +146,19 @@ export default async function BlogDetailPage({ params }: { params: Promise<{ slu
               </div>
 
               {/* Title */}
-              <h1 
-                className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-6 px-4"
-              >
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-6 px-4">
                 {blogPost.title}
               </h1>
 
-              {/* Excerpt */}
-              <p
-                className="text-xl text-gray-600 max-w-3xl mx-auto mb-8"
-              >
+              {/* Excerpt/Description */}
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
                 {blogPost.excerpt}
               </p>
 
-              {/* Share Button */}
-              <div>
+              {/* Action Buttons */}
+              <div className="flex items-center justify-center gap-4">
                 <Button 
+                  onClick={handleShare}
                   variant="outline" 
                   size="sm" 
                   className="gap-2 bg-transparent"
@@ -153,6 +166,8 @@ export default async function BlogDetailPage({ params }: { params: Promise<{ slu
                   <Share2 className="w-4 h-4" />
                   Share
                 </Button>
+                
+                {/* No live/code links for blog posts */}
               </div>
             </div>
           </div>
@@ -160,39 +175,29 @@ export default async function BlogDetailPage({ params }: { params: Promise<{ slu
 
         <main className="max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
           {/* Cover Image */}
-          <section 
-            className="mb-8 sm:mb-12"
-          >
-            <div>
-              <Card className="w-full max-w-4xl mx-auto overflow-hidden">
-                <CardContent className="p-0">
-                  <div
-                    className="w-full h-64 sm:h-80 md:h-96 relative rounded-lg overflow-hidden"
-                  >
-                    <Image
-                      src={normalizeImagePath(blogPost.cover_image)}
-                      alt={blogPost.title}
-                      fill
-                      className="object-cover"
-                      unoptimized={normalizeImagePath(blogPost.cover_image).includes('livingtechcreative.com')}
-                    />
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
+          <section className="mb-8 sm:mb-12">
+            <Card className="w-full max-w-4xl mx-auto overflow-hidden">
+              <CardContent className="p-0">
+                <div className="w-full h-64 sm:h-80 md:h-96 relative rounded-lg overflow-hidden">
+                  <Image
+                    src={normalizeImagePath(blogPost.cover_image)}
+                    alt={blogPost.title}
+                    fill
+                    className="object-cover"
+                    unoptimized={normalizeImagePath(blogPost.cover_image).includes('livingtechcreative.com')}
+                  />
+                </div>
+              </CardContent>
+            </Card>
           </section>
 
           {/* Blog Content */}
           <div className="flex flex-col lg:flex-row gap-8 lg:gap-12">
             {/* Main Content */}
-            <article 
-              className="flex-1"
-            >
+            <article className="flex-1">
               {/* Introduction */}
               {blogPost.introduction && (
-                <section 
-                  className="mb-8"
-                >
+                <section className="mb-8">
                   <div className="bg-gray-50 rounded-2xl p-6 border-l-4 border-purple-500">
                     <h2 className="text-xl font-semibold text-gray-900 mb-3">Introduction</h2>
                     <div 
@@ -204,9 +209,7 @@ export default async function BlogDetailPage({ params }: { params: Promise<{ slu
               )}
 
               {/* Main Content */}
-              <section 
-                className="mb-8"
-              >
+              <section className="mb-8">
                 <div 
                   className="prose prose-lg prose-gray max-w-none prose-headings:text-gray-900 prose-headings:font-bold prose-p:text-gray-700 prose-p:leading-relaxed prose-a:text-purple-600 prose-a:no-underline hover:prose-a:underline prose-strong:text-gray-900 prose-code:bg-gray-100 prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-code:text-sm"
                   dangerouslySetInnerHTML={{ __html: blogPost.content }}
@@ -215,9 +218,7 @@ export default async function BlogDetailPage({ params }: { params: Promise<{ slu
 
               {/* Conclusion */}
               {blogPost.conclution && (
-                <section 
-                  className="mb-8"
-                >
+                <section className="mb-8">
                   <div className="bg-gradient-to-r from-purple-50 to-blue-50 rounded-2xl p-6 border border-purple-100">
                     <h2 className="text-xl font-semibold text-gray-900 mb-3">Conclusion</h2>
                     <div 
@@ -230,13 +231,9 @@ export default async function BlogDetailPage({ params }: { params: Promise<{ slu
             </article>
 
             {/* Sidebar */}
-            <aside 
-              className="lg:w-80"
-            >
+            <aside className="lg:w-80">
               {/* Author Info */}
-              <div 
-                className="bg-white border border-gray-200 rounded-2xl p-6 mb-6 shadow-sm"
-              >
+              <div className="bg-white border border-gray-200 rounded-2xl p-6 mb-6 shadow-sm">
                 <h3 className="font-semibold text-gray-900 mb-3">About the Author</h3>
                 <div className="flex items-center gap-3 mb-4">
                   <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full flex items-center justify-center text-white font-semibold">
@@ -251,9 +248,7 @@ export default async function BlogDetailPage({ params }: { params: Promise<{ slu
 
               {/* Related Posts */}
               {allBlogPosts.length > 1 && (
-                <div 
-                  className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm"
-                >
+                <div className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm">
                   <h3 className="font-semibold text-gray-900 mb-4">Related Posts</h3>
                   <div className="space-y-4">
                     {allBlogPosts
@@ -302,9 +297,7 @@ export default async function BlogDetailPage({ params }: { params: Promise<{ slu
           </div>
 
           {/* Navigation Footer */}
-          <div 
-            className="flex items-center justify-between mt-12 pt-8 border-t border-gray-200"
-          >
+          <div className="flex items-center justify-between mt-12 pt-8 border-t border-gray-200">
             <div>
               {previous && (
                 <Link
@@ -340,5 +333,9 @@ export default async function BlogDetailPage({ params }: { params: Promise<{ slu
 
         <Footer />
       </div>
-  )
+    )
+  } catch (error) {
+    console.error('Error loading blog post:', error)
+    notFound()
+  }
 }

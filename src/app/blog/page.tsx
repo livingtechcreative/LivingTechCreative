@@ -128,7 +128,7 @@ export default function BlogPage() {
           >
             <p className="text-gray-600">
               {searchTerm ? (
-                <>Showing {filteredPosts.length} result{filteredPosts.length !== 1 ? 's' : ''} for "{searchTerm}"</>
+                <>Showing {filteredPosts.length} result{filteredPosts.length !== 1 ? 's' : ''} for &quot;{searchTerm}&quot;</>
               ) : (
                 <>Showing {filteredPosts.length} blog post{filteredPosts.length !== 1 ? 's' : ''}</>
               )}

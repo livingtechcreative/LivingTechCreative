@@ -54,10 +54,9 @@ const MainMenu = ({ menu, onSelect }: MainMenuProps) => (
 interface SubMenuViewProps {
   lists: MenuListType[]
   onItemClick?: (item: MenuItem) => void
-  onBack?: () => void
 }
 
-const SubMenuView = ({ lists, onItemClick, onBack }: SubMenuViewProps) => {
+const SubMenuView = ({ lists, onItemClick }: SubMenuViewProps) => {
   const renderIcon = (iconName?: string, isSpecialItem = false) => {
     if (!iconName) return null
     const Icon = extendedIconMap[iconName as keyof typeof extendedIconMap]
@@ -428,7 +427,6 @@ const MenuSheet = ({ menu = defaultMenu, onItemClick }: MenuSheetProps) => {
                       >
                         <SubMenuView 
                           lists={currentMenu} 
-                          onBack={handleBack}
                           onItemClick={(item) => {
                             onItemClick?.(item);
                             if (!item.url) {

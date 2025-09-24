@@ -208,7 +208,7 @@ export default function ServicesSection() {
             variants={textVariants}
           >
             At Living Tech, we offer a suite of digital services designed to help your brand grow effectively and with
-            intention. We don't just create; we elevate, with the goal of long-term success.
+            intention. We don&apos;t just create; we elevate, with the goal of long-term success.
           </motion.p>
         </motion.div>
 
@@ -237,14 +237,12 @@ export default function ServicesSection() {
                   variants={iconVariants}
                 >
                   <div className="w-16 h-16 flex items-center justify-center">
-                    <img
+                    <Image
                       src={service.icon || "/placeholder.svg"}
                       alt={service.title}
+                      width={64}
+                      height={64}
                       className="w-full h-full object-contain"
-                      style={{ 
-                        filter: 'drop-shadow(0 0 0 transparent)',
-                        boxShadow: 'none'
-                      }}
                     />
                   </div>
                 </motion.div>

@@ -57,8 +57,8 @@ export default function NotFound() {
             Oops! Page Not Found
           </h1>
           <p className="text-lg sm:text-xl text-gray-600 mb-8 max-w-2xl mx-auto leading-relaxed">
-            The page you're looking for seems to have vanished into the digital void. 
-            Don't worry, even the best developers get lost sometimes!
+            The page you&apos;re looking for seems to have vanished into the digital void. 
+            Don&apos;t worry, even the best developers get lost sometimes!
           </p>
         </motion.div>
 
@@ -142,7 +142,7 @@ export default function NotFound() {
           transition={{ duration: 0.6, delay: 0.8 }}
           className="mt-12 text-sm text-gray-500"
         >
-          <p>Lost? Don't worry, we'll help you find your way back to amazing digital experiences!</p>
+          <p>Lost? Don&apos;t worry, we&apos;ll help you find your way back to amazing digital experiences!</p>
         </motion.div>
       </div>
     </div>

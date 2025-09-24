@@ -3,6 +3,7 @@
 import { motion } from "framer-motion"
 import Image from "next/image"
 import { RefreshCw, Home, AlertTriangle } from "lucide-react"
+import Link from "next/link"
 
 export default function GlobalError({
   error,
@@ -111,13 +112,13 @@ export default function GlobalError({
               Try Again
             </motion.button>
 
-            <a
+            <Link
               href="/"
               className="group inline-flex items-center gap-2 px-6 py-3 border-2 border-gray-300 text-gray-700 font-semibold rounded-lg hover:border-gray-400 hover:bg-gray-50 transition-all duration-300"
             >
               <Home className="w-5 h-5" />
               Back to Home
-            </a>
+            </Link>
           </motion.div>
 
           {/* Support Message */}

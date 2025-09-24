@@ -1,11 +1,11 @@
 {
   "/favicon.ico/route": "/favicon.ico",
   "/_not-found/page": "/_not-found",
-  "/portofolio/page": "/portofolio",
-  "/page": "/",
   "/blog/page": "/blog",
+  "/portofolio/page": "/portofolio",
   "/showcase/page": "/showcase",
+  "/page": "/",
+  "/showcase/[id]/page": "/showcase/[id]",
   "/blog/[slug]/page": "/blog/[slug]",
-  "/portofolio/[slug]/page": "/portofolio/[slug]",
-  "/showcase/[id]/page": "/showcase/[id]"
+  "/portofolio/[slug]/page": "/portofolio/[slug]"
 }

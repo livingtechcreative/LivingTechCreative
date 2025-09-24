@@ -2,6 +2,7 @@
   "version": 1,
   "config": {
     "env": {},
+    "webpack": null,
     "eslint": {
       "ignoreDuringBuilds": true
     },
@@ -13,7 +14,7 @@
     "cleanDistDir": true,
     "assetPrefix": "",
     "cacheMaxMemorySize": 52428800,
-    "configOrigin": "next.config.ts",
+    "configOrigin": "next.config.js",
     "useFileSystemPublicRoutes": true,
     "generateEtags": true,
     "pageExtensions": [
@@ -45,33 +46,19 @@
         256,
         384
       ],
-      "path": "/_next/image",
+      "path": "/_next/image/",
       "loader": "default",
       "loaderFile": "",
       "domains": [],
       "disableStaticImages": false,
       "minimumCacheTTL": 60,
       "formats": [
-        "image/webp",
-        "image/avif"
+        "image/webp"
       ],
-      "dangerouslyAllowSVG": true,
-      "contentSecurityPolicy": "default-src 'self'; script-src 'none'; sandbox;",
+      "dangerouslyAllowSVG": false,
+      "contentSecurityPolicy": "script-src 'none'; frame-src 'none'; sandbox;",
       "contentDispositionType": "attachment",
-      "remotePatterns": [
-        {
-          "protocol": "https",
-          "hostname": "livingtech.anshoria.my.id",
-          "port": "",
-          "pathname": "/**"
-        },
-        {
-          "protocol": "https",
-          "hostname": "livingtechcreative.com",
-          "port": "",
-          "pathname": "/**"
-        }
-      ],
+      "remotePatterns": [],
       "unoptimized": true
     },
     "devIndicators": {
@@ -86,7 +73,7 @@
     },
     "basePath": "",
     "sassOptions": {},
-    "trailingSlash": false,
+    "trailingSlash": true,
     "i18n": null,
     "productionBrowserSourceMaps": false,
     "excludeDefaultMomentLocales": true,
@@ -299,14 +286,7 @@
     },
     "htmlLimitedBots": "Mediapartners-Google|Chrome-Lighthouse|Slurp|DuckDuckBot|baiduspider|yandex|sogou|bitlybot|tumblr|vkShare|quora link preview|redditbot|ia_archiver|Bingbot|BingPreview|applebot|facebookexternalhit|facebookcatalog|Twitterbot|LinkedInBot|Slackbot|Discordbot|WhatsApp|SkypeUriPreview|Yeti",
     "bundlePagesRouterDependencies": false,
-    "configFileName": "next.config.ts",
-    "outputFileTracingExcludes": {
-      "*": [
-        "./src/**/__tests__/**",
-        "./src/**/*.test.*",
-        "./src/**/*.spec.*"
-      ]
-    },
+    "configFileName": "next.config.js",
     "turbopack": {
       "root": "C:\\Users\\fahri\\OneDrive\\ドキュメント\\code\\LivingTechCreative"
     }

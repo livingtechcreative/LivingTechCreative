@@ -6,7 +6,6 @@ import { motion, AnimatePresence } from "framer-motion"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Link as ScrollLink } from "react-scroll"
-import Link from "next/link"
 import { X, Menu } from "lucide-react"
 
 const menuItems = [
@@ -72,7 +71,7 @@ export default function SimpleNavbar() {
 
   return (
     <motion.div
-      className="fixed top-0 left-0 right-0 z-50 flex justify-center items-center py-4"
+      className={`fixed top-0 left-0 right-0 z-50 flex justify-center items-center ${isScrolled ? 'py-2' : 'py-4'}`}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.1, ease: "easeOut" }}

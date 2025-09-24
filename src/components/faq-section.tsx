@@ -160,7 +160,7 @@ export default function FAQSection() {
     {
       question: "What are the working hours of Living Tech Creative?",
       answer:
-        "We typically work Monday to Friday, 9 AM to 6 PM. However, we're flexible and can accommodate different time zones for our clients.",
+        "We typically work Monday to Friday, 9 AM to 6 PM. However, we&apos;re flexible and can accommodate different time zones for our clients.",
     },
   ]
 
@@ -235,7 +235,7 @@ export default function FAQSection() {
                 <span>Us Anything,</span>
               </div>
               <div className="flex flex-wrap items-center gap-4">
-                <span>We've</span>
+                <span>We&apos;ve</span>
                 <span className="text-gray-900">
                   Got
                 </span>

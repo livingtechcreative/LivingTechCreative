@@ -21,33 +21,19 @@
       256,
       384
     ],
-    "path": "/_next/image",
+    "path": "/_next/image/",
     "loader": "default",
     "loaderFile": "",
     "domains": [],
     "disableStaticImages": false,
     "minimumCacheTTL": 60,
     "formats": [
-      "image/webp",
-      "image/avif"
+      "image/webp"
     ],
-    "dangerouslyAllowSVG": true,
-    "contentSecurityPolicy": "default-src 'self'; script-src 'none'; sandbox;",
+    "dangerouslyAllowSVG": false,
+    "contentSecurityPolicy": "script-src 'none'; frame-src 'none'; sandbox;",
     "contentDispositionType": "attachment",
-    "remotePatterns": [
-      {
-        "protocol": "https",
-        "hostname": "^(?:^(?:livingtech\\.anshoria\\.my\\.id)$)$",
-        "port": "",
-        "pathname": "^(?:\\/(?!\\.{1,2}(?:\\/|$))(?:(?:(?!(?:^|\\/)\\.{1,2}(?:\\/|$)).)*?))$"
-      },
-      {
-        "protocol": "https",
-        "hostname": "^(?:^(?:livingtechcreative\\.com)$)$",
-        "port": "",
-        "pathname": "^(?:\\/(?!\\.{1,2}(?:\\/|$))(?:(?:(?!(?:^|\\/)\\.{1,2}(?:\\/|$)).)*?))$"
-      }
-    ],
+    "remotePatterns": [],
     "unoptimized": true,
     "sizes": [
       640,

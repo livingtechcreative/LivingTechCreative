@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
+    "prebuild": "node scripts/generate-blog-data.js && node scripts/generate-portfolio-data.js",
     "build": "next build",
+    "export": "npm run build && next export",
     "start": "next start",
     "lint": "next lint",
     "test": "jest",

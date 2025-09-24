@@ -1,59 +1,6 @@
 {
   "version": 4,
   "routes": {
-    "/favicon.ico": {
-      "initialHeaders": {
-        "cache-control": "public, max-age=0, must-revalidate",
-        "content-type": "image/x-icon",
-        "x-next-cache-tags": "_N_T_/layout,_N_T_/favicon.ico/layout,_N_T_/favicon.ico/route,_N_T_/favicon.ico"
-      },
-      "experimentalBypassFor": [
-        {
-          "type": "header",
-          "key": "Next-Action"
-        },
-        {
-          "type": "header",
-          "key": "content-type",
-          "value": "multipart/form-data;.*"
-        }
-      ],
-      "initialRevalidateSeconds": false,
-      "srcRoute": "/favicon.ico",
-      "dataRoute": null,
-      "allowHeader": [
-        "host",
-        "x-matched-path",
-        "x-prerender-revalidate",
-        "x-prerender-revalidate-if-generated",
-        "x-next-revalidated-tags",
-        "x-next-revalidate-tag-token"
-      ]
-    },
-    "/blog": {
-      "experimentalBypassFor": [
-        {
-          "type": "header",
-          "key": "Next-Action"
-        },
-        {
-          "type": "header",
-          "key": "content-type",
-          "value": "multipart/form-data;.*"
-        }
-      ],
-      "initialRevalidateSeconds": false,
-      "srcRoute": "/blog",
-      "dataRoute": "/blog.rsc",
-      "allowHeader": [
-        "host",
-        "x-matched-path",
-        "x-prerender-revalidate",
-        "x-prerender-revalidate-if-generated",
-        "x-next-revalidated-tags",
-        "x-next-revalidate-tag-token"
-      ]
-    },
     "/": {
       "experimentalBypassFor": [
         {
@@ -70,6 +17,35 @@
       "initialExpireSeconds": 31536000,
       "srcRoute": "/",
       "dataRoute": "/index.rsc",
+      "allowHeader": [
+        "host",
+        "x-matched-path",
+        "x-prerender-revalidate",
+        "x-prerender-revalidate-if-generated",
+        "x-next-revalidated-tags",
+        "x-next-revalidate-tag-token"
+      ]
+    },
+    "/favicon.ico": {
+      "initialHeaders": {
+        "cache-control": "public, max-age=0, must-revalidate",
+        "content-type": "image/x-icon",
+        "x-next-cache-tags": "_N_T_/layout,_N_T_/favicon.ico/layout,_N_T_/favicon.ico/route,_N_T_/favicon.ico/"
+      },
+      "experimentalBypassFor": [
+        {
+          "type": "header",
+          "key": "Next-Action"
+        },
+        {
+          "type": "header",
+          "key": "content-type",
+          "value": "multipart/form-data;.*"
+        }
+      ],
+      "initialRevalidateSeconds": false,
+      "srcRoute": "/favicon.ico",
+      "dataRoute": null,
       "allowHeader": [
         "host",
         "x-matched-path",
@@ -103,6 +79,78 @@
         "x-next-revalidate-tag-token"
       ]
     },
+    "/blog": {
+      "experimentalBypassFor": [
+        {
+          "type": "header",
+          "key": "Next-Action"
+        },
+        {
+          "type": "header",
+          "key": "content-type",
+          "value": "multipart/form-data;.*"
+        }
+      ],
+      "initialRevalidateSeconds": false,
+      "srcRoute": "/blog",
+      "dataRoute": "/blog.rsc",
+      "allowHeader": [
+        "host",
+        "x-matched-path",
+        "x-prerender-revalidate",
+        "x-prerender-revalidate-if-generated",
+        "x-next-revalidated-tags",
+        "x-next-revalidate-tag-token"
+      ]
+    },
+    "/portofolio/ecommerce-platform": {
+      "experimentalBypassFor": [
+        {
+          "type": "header",
+          "key": "Next-Action"
+        },
+        {
+          "type": "header",
+          "key": "content-type",
+          "value": "multipart/form-data;.*"
+        }
+      ],
+      "initialRevalidateSeconds": false,
+      "srcRoute": "/portofolio/[slug]",
+      "dataRoute": "/portofolio/ecommerce-platform.rsc",
+      "allowHeader": [
+        "host",
+        "x-matched-path",
+        "x-prerender-revalidate",
+        "x-prerender-revalidate-if-generated",
+        "x-next-revalidated-tags",
+        "x-next-revalidate-tag-token"
+      ]
+    },
+    "/portofolio/mobile-banking-app": {
+      "experimentalBypassFor": [
+        {
+          "type": "header",
+          "key": "Next-Action"
+        },
+        {
+          "type": "header",
+          "key": "content-type",
+          "value": "multipart/form-data;.*"
+        }
+      ],
+      "initialRevalidateSeconds": false,
+      "srcRoute": "/portofolio/[slug]",
+      "dataRoute": "/portofolio/mobile-banking-app.rsc",
+      "allowHeader": [
+        "host",
+        "x-matched-path",
+        "x-prerender-revalidate",
+        "x-prerender-revalidate-if-generated",
+        "x-next-revalidated-tags",
+        "x-next-revalidate-tag-token"
+      ]
+    },
     "/portofolio": {
       "experimentalBypassFor": [
         {
@@ -127,7 +175,7 @@
         "x-next-revalidate-tag-token"
       ]
     },
-    "/portofolio/api-development-for-pfannerstill-conn-and-lockman": {
+    "/blog/placeholder": {
       "experimentalBypassFor": [
         {
           "type": "header",
@@ -139,485 +187,9 @@
           "value": "multipart/form-data;.*"
         }
       ],
-      "initialRevalidateSeconds": 300,
-      "initialExpireSeconds": 31536000,
-      "srcRoute": "/portofolio/[slug]",
-      "dataRoute": "/portofolio/api-development-for-pfannerstill-conn-and-lockman.rsc",
-      "allowHeader": [
-        "host",
-        "x-matched-path",
-        "x-prerender-revalidate",
-        "x-prerender-revalidate-if-generated",
-        "x-next-revalidated-tags",
-        "x-next-revalidate-tag-token"
-      ]
-    },
-    "/portofolio/blog-platform-for-reinger-smith": {
-      "experimentalBypassFor": [
-        {
-          "type": "header",
-          "key": "Next-Action"
-        },
-        {
-          "type": "header",
-          "key": "content-type",
-          "value": "multipart/form-data;.*"
-        }
-      ],
-      "initialRevalidateSeconds": 300,
-      "initialExpireSeconds": 31536000,
-      "srcRoute": "/portofolio/[slug]",
-      "dataRoute": "/portofolio/blog-platform-for-reinger-smith.rsc",
-      "allowHeader": [
-        "host",
-        "x-matched-path",
-        "x-prerender-revalidate",
-        "x-prerender-revalidate-if-generated",
-        "x-next-revalidated-tags",
-        "x-next-revalidate-tag-token"
-      ]
-    },
-    "/portofolio/dashboard-system-for-rutherford-hammes-and-mckenzie": {
-      "experimentalBypassFor": [
-        {
-          "type": "header",
-          "key": "Next-Action"
-        },
-        {
-          "type": "header",
-          "key": "content-type",
-          "value": "multipart/form-data;.*"
-        }
-      ],
-      "initialRevalidateSeconds": 300,
-      "initialExpireSeconds": 31536000,
-      "srcRoute": "/portofolio/[slug]",
-      "dataRoute": "/portofolio/dashboard-system-for-rutherford-hammes-and-mckenzie.rsc",
-      "allowHeader": [
-        "host",
-        "x-matched-path",
-        "x-prerender-revalidate",
-        "x-prerender-revalidate-if-generated",
-        "x-next-revalidated-tags",
-        "x-next-revalidate-tag-token"
-      ]
-    },
-    "/portofolio/e-commerce-platform-for-hudson-lowe": {
-      "experimentalBypassFor": [
-        {
-          "type": "header",
-          "key": "Next-Action"
-        },
-        {
-          "type": "header",
-          "key": "content-type",
-          "value": "multipart/form-data;.*"
-        }
-      ],
-      "initialRevalidateSeconds": 300,
-      "initialExpireSeconds": 31536000,
-      "srcRoute": "/portofolio/[slug]",
-      "dataRoute": "/portofolio/e-commerce-platform-for-hudson-lowe.rsc",
-      "allowHeader": [
-        "host",
-        "x-matched-path",
-        "x-prerender-revalidate",
-        "x-prerender-revalidate-if-generated",
-        "x-next-revalidated-tags",
-        "x-next-revalidate-tag-token"
-      ]
-    },
-    "/portofolio/e-commerce-platform-for-upton-purdy": {
-      "experimentalBypassFor": [
-        {
-          "type": "header",
-          "key": "Next-Action"
-        },
-        {
-          "type": "header",
-          "key": "content-type",
-          "value": "multipart/form-data;.*"
-        }
-      ],
-      "initialRevalidateSeconds": 300,
-      "initialExpireSeconds": 31536000,
-      "srcRoute": "/portofolio/[slug]",
-      "dataRoute": "/portofolio/e-commerce-platform-for-upton-purdy.rsc",
-      "allowHeader": [
-        "host",
-        "x-matched-path",
-        "x-prerender-revalidate",
-        "x-prerender-revalidate-if-generated",
-        "x-next-revalidated-tags",
-        "x-next-revalidate-tag-token"
-      ]
-    },
-    "/portofolio/landing-page-for-dubuque-hilpert-and-hansen": {
-      "experimentalBypassFor": [
-        {
-          "type": "header",
-          "key": "Next-Action"
-        },
-        {
-          "type": "header",
-          "key": "content-type",
-          "value": "multipart/form-data;.*"
-        }
-      ],
-      "initialRevalidateSeconds": 300,
-      "initialExpireSeconds": 31536000,
-      "srcRoute": "/portofolio/[slug]",
-      "dataRoute": "/portofolio/landing-page-for-dubuque-hilpert-and-hansen.rsc",
-      "allowHeader": [
-        "host",
-        "x-matched-path",
-        "x-prerender-revalidate",
-        "x-prerender-revalidate-if-generated",
-        "x-next-revalidated-tags",
-        "x-next-revalidate-tag-token"
-      ]
-    },
-    "/portofolio/landing-page-for-prosacco-harvey": {
-      "experimentalBypassFor": [
-        {
-          "type": "header",
-          "key": "Next-Action"
-        },
-        {
-          "type": "header",
-          "key": "content-type",
-          "value": "multipart/form-data;.*"
-        }
-      ],
-      "initialRevalidateSeconds": 300,
-      "initialExpireSeconds": 31536000,
-      "srcRoute": "/portofolio/[slug]",
-      "dataRoute": "/portofolio/landing-page-for-prosacco-harvey.rsc",
-      "allowHeader": [
-        "host",
-        "x-matched-path",
-        "x-prerender-revalidate",
-        "x-prerender-revalidate-if-generated",
-        "x-next-revalidated-tags",
-        "x-next-revalidate-tag-token"
-      ]
-    },
-    "/portofolio/mobile-application-for-kutch-kunze": {
-      "experimentalBypassFor": [
-        {
-          "type": "header",
-          "key": "Next-Action"
-        },
-        {
-          "type": "header",
-          "key": "content-type",
-          "value": "multipart/form-data;.*"
-        }
-      ],
-      "initialRevalidateSeconds": 300,
-      "initialExpireSeconds": 31536000,
-      "srcRoute": "/portofolio/[slug]",
-      "dataRoute": "/portofolio/mobile-application-for-kutch-kunze.rsc",
-      "allowHeader": [
-        "host",
-        "x-matched-path",
-        "x-prerender-revalidate",
-        "x-prerender-revalidate-if-generated",
-        "x-next-revalidated-tags",
-        "x-next-revalidate-tag-token"
-      ]
-    },
-    "/portofolio/mobile-application-for-lemke-buckridge-and-rath": {
-      "experimentalBypassFor": [
-        {
-          "type": "header",
-          "key": "Next-Action"
-        },
-        {
-          "type": "header",
-          "key": "content-type",
-          "value": "multipart/form-data;.*"
-        }
-      ],
-      "initialRevalidateSeconds": 300,
-      "initialExpireSeconds": 31536000,
-      "srcRoute": "/portofolio/[slug]",
-      "dataRoute": "/portofolio/mobile-application-for-lemke-buckridge-and-rath.rsc",
-      "allowHeader": [
-        "host",
-        "x-matched-path",
-        "x-prerender-revalidate",
-        "x-prerender-revalidate-if-generated",
-        "x-next-revalidated-tags",
-        "x-next-revalidate-tag-token"
-      ]
-    },
-    "/portofolio/mobile-application-for-metz-inc": {
-      "experimentalBypassFor": [
-        {
-          "type": "header",
-          "key": "Next-Action"
-        },
-        {
-          "type": "header",
-          "key": "content-type",
-          "value": "multipart/form-data;.*"
-        }
-      ],
-      "initialRevalidateSeconds": 300,
-      "initialExpireSeconds": 31536000,
-      "srcRoute": "/portofolio/[slug]",
-      "dataRoute": "/portofolio/mobile-application-for-metz-inc.rsc",
-      "allowHeader": [
-        "host",
-        "x-matched-path",
-        "x-prerender-revalidate",
-        "x-prerender-revalidate-if-generated",
-        "x-next-revalidated-tags",
-        "x-next-revalidate-tag-token"
-      ]
-    },
-    "/blog/corporis-odit-incidunt-et-rerum": {
-      "experimentalBypassFor": [
-        {
-          "type": "header",
-          "key": "Next-Action"
-        },
-        {
-          "type": "header",
-          "key": "content-type",
-          "value": "multipart/form-data;.*"
-        }
-      ],
-      "initialRevalidateSeconds": 300,
-      "initialExpireSeconds": 31536000,
+      "initialRevalidateSeconds": false,
       "srcRoute": "/blog/[slug]",
-      "dataRoute": "/blog/corporis-odit-incidunt-et-rerum.rsc",
-      "allowHeader": [
-        "host",
-        "x-matched-path",
-        "x-prerender-revalidate",
-        "x-prerender-revalidate-if-generated",
-        "x-next-revalidated-tags",
-        "x-next-revalidate-tag-token"
-      ]
-    },
-    "/blog/delectus-explicabo-ex-in-quis-iure-rem-voluptatem": {
-      "experimentalBypassFor": [
-        {
-          "type": "header",
-          "key": "Next-Action"
-        },
-        {
-          "type": "header",
-          "key": "content-type",
-          "value": "multipart/form-data;.*"
-        }
-      ],
-      "initialRevalidateSeconds": 300,
-      "initialExpireSeconds": 31536000,
-      "srcRoute": "/blog/[slug]",
-      "dataRoute": "/blog/delectus-explicabo-ex-in-quis-iure-rem-voluptatem.rsc",
-      "allowHeader": [
-        "host",
-        "x-matched-path",
-        "x-prerender-revalidate",
-        "x-prerender-revalidate-if-generated",
-        "x-next-revalidated-tags",
-        "x-next-revalidate-tag-token"
-      ]
-    },
-    "/blog/est-sint-quis-et-consectetur": {
-      "experimentalBypassFor": [
-        {
-          "type": "header",
-          "key": "Next-Action"
-        },
-        {
-          "type": "header",
-          "key": "content-type",
-          "value": "multipart/form-data;.*"
-        }
-      ],
-      "initialRevalidateSeconds": 300,
-      "initialExpireSeconds": 31536000,
-      "srcRoute": "/blog/[slug]",
-      "dataRoute": "/blog/est-sint-quis-et-consectetur.rsc",
-      "allowHeader": [
-        "host",
-        "x-matched-path",
-        "x-prerender-revalidate",
-        "x-prerender-revalidate-if-generated",
-        "x-next-revalidated-tags",
-        "x-next-revalidate-tag-token"
-      ]
-    },
-    "/blog/facilis-labore-aut-placeat-rerum-maxime-sit": {
-      "experimentalBypassFor": [
-        {
-          "type": "header",
-          "key": "Next-Action"
-        },
-        {
-          "type": "header",
-          "key": "content-type",
-          "value": "multipart/form-data;.*"
-        }
-      ],
-      "initialRevalidateSeconds": 300,
-      "initialExpireSeconds": 31536000,
-      "srcRoute": "/blog/[slug]",
-      "dataRoute": "/blog/facilis-labore-aut-placeat-rerum-maxime-sit.rsc",
-      "allowHeader": [
-        "host",
-        "x-matched-path",
-        "x-prerender-revalidate",
-        "x-prerender-revalidate-if-generated",
-        "x-next-revalidated-tags",
-        "x-next-revalidate-tag-token"
-      ]
-    },
-    "/blog/mollitia-qui-aspernatur-ipsam": {
-      "experimentalBypassFor": [
-        {
-          "type": "header",
-          "key": "Next-Action"
-        },
-        {
-          "type": "header",
-          "key": "content-type",
-          "value": "multipart/form-data;.*"
-        }
-      ],
-      "initialRevalidateSeconds": 300,
-      "initialExpireSeconds": 31536000,
-      "srcRoute": "/blog/[slug]",
-      "dataRoute": "/blog/mollitia-qui-aspernatur-ipsam.rsc",
-      "allowHeader": [
-        "host",
-        "x-matched-path",
-        "x-prerender-revalidate",
-        "x-prerender-revalidate-if-generated",
-        "x-next-revalidated-tags",
-        "x-next-revalidate-tag-token"
-      ]
-    },
-    "/blog/nihil-minus-et-saepe-assumenda-nostrum-minima-esse": {
-      "experimentalBypassFor": [
-        {
-          "type": "header",
-          "key": "Next-Action"
-        },
-        {
-          "type": "header",
-          "key": "content-type",
-          "value": "multipart/form-data;.*"
-        }
-      ],
-      "initialRevalidateSeconds": 300,
-      "initialExpireSeconds": 31536000,
-      "srcRoute": "/blog/[slug]",
-      "dataRoute": "/blog/nihil-minus-et-saepe-assumenda-nostrum-minima-esse.rsc",
-      "allowHeader": [
-        "host",
-        "x-matched-path",
-        "x-prerender-revalidate",
-        "x-prerender-revalidate-if-generated",
-        "x-next-revalidated-tags",
-        "x-next-revalidate-tag-token"
-      ]
-    },
-    "/blog/non-veniam-quod-quia-ut-dolorem-culpa-aut": {
-      "experimentalBypassFor": [
-        {
-          "type": "header",
-          "key": "Next-Action"
-        },
-        {
-          "type": "header",
-          "key": "content-type",
-          "value": "multipart/form-data;.*"
-        }
-      ],
-      "initialRevalidateSeconds": 300,
-      "initialExpireSeconds": 31536000,
-      "srcRoute": "/blog/[slug]",
-      "dataRoute": "/blog/non-veniam-quod-quia-ut-dolorem-culpa-aut.rsc",
-      "allowHeader": [
-        "host",
-        "x-matched-path",
-        "x-prerender-revalidate",
-        "x-prerender-revalidate-if-generated",
-        "x-next-revalidated-tags",
-        "x-next-revalidate-tag-token"
-      ]
-    },
-    "/blog/placeat-assumenda-quia-consectetur-quod-et-et-debitis-exercitationem": {
-      "experimentalBypassFor": [
-        {
-          "type": "header",
-          "key": "Next-Action"
-        },
-        {
-          "type": "header",
-          "key": "content-type",
-          "value": "multipart/form-data;.*"
-        }
-      ],
-      "initialRevalidateSeconds": 300,
-      "initialExpireSeconds": 31536000,
-      "srcRoute": "/blog/[slug]",
-      "dataRoute": "/blog/placeat-assumenda-quia-consectetur-quod-et-et-debitis-exercitationem.rsc",
-      "allowHeader": [
-        "host",
-        "x-matched-path",
-        "x-prerender-revalidate",
-        "x-prerender-revalidate-if-generated",
-        "x-next-revalidated-tags",
-        "x-next-revalidate-tag-token"
-      ]
-    },
-    "/blog/rem-est-est-ex-sit-cum-accusantium": {
-      "experimentalBypassFor": [
-        {
-          "type": "header",
-          "key": "Next-Action"
-        },
-        {
-          "type": "header",
-          "key": "content-type",
-          "value": "multipart/form-data;.*"
-        }
-      ],
-      "initialRevalidateSeconds": 300,
-      "initialExpireSeconds": 31536000,
-      "srcRoute": "/blog/[slug]",
-      "dataRoute": "/blog/rem-est-est-ex-sit-cum-accusantium.rsc",
-      "allowHeader": [
-        "host",
-        "x-matched-path",
-        "x-prerender-revalidate",
-        "x-prerender-revalidate-if-generated",
-        "x-next-revalidated-tags",
-        "x-next-revalidate-tag-token"
-      ]
-    },
-    "/blog/sequi-et-dolor-enim-eaque-a": {
-      "experimentalBypassFor": [
-        {
-          "type": "header",
-          "key": "Next-Action"
-        },
-        {
-          "type": "header",
-          "key": "content-type",
-          "value": "multipart/form-data;.*"
-        }
-      ],
-      "initialRevalidateSeconds": 300,
-      "initialExpireSeconds": 31536000,
-      "srcRoute": "/blog/[slug]",
-      "dataRoute": "/blog/sequi-et-dolor-enim-eaque-a.rsc",
+      "dataRoute": "/blog/placeholder.rsc",
       "allowHeader": [
         "host",
         "x-matched-path",
@@ -1007,8 +579,8 @@
   },
   "notFoundRoutes": [],
   "preview": {
-    "previewModeId": "88be4a14b03255de315b84a04bda1560",
-    "previewModeSigningKey": "ae2ecad13bc1201658495e3a08d3dec9e9607b6c33302b56fe327eeca39ec785",
-    "previewModeEncryptionKey": "fada7f26e220e91f09ab4c6971d2bc99d21ac89452b1428cb89e677049cbd97d"
+    "previewModeId": "cadfd417f9005bcb0e8fe8f065b3c34f",
+    "previewModeSigningKey": "fd0ca7644aad20d61b96592e279bcc8c6eb379340a5383d07eb481059d95529b",
+    "previewModeEncryptionKey": "e322428d7971aed9eebea08e2fe3ccc6215eb22fcdf208928379fbbcfd616473"
   }
 }

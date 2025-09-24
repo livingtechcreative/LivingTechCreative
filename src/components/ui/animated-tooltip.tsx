@@ -21,16 +21,18 @@ export const AnimatedTooltip = ({
   const animationFrameRef = useRef<number | null>(null)
 
   const rotate = useSpring(useTransform(x, [-100, 100], [-45, 45]), springConfig)
-  const translateX = useSpring(useTransform(x, [-100, 100], [-50, 50]), springConfig)
 
-  const handleMouseMove = (event: any) => {
+  const handleMouseMove = (event: React.MouseEvent<HTMLImageElement>) => {
     if (animationFrameRef.current) {
       cancelAnimationFrame(animationFrameRef.current)
     }
 
     animationFrameRef.current = requestAnimationFrame(() => {
-      const halfWidth = event.target.offsetWidth / 2
-      x.set(event.nativeEvent.offsetX - halfWidth)
+      const target = event.currentTarget
+      const rect = target.getBoundingClientRect()
+      const offsetX = event.clientX - rect.left
+      const halfWidth = rect.width / 2
+      x.set(offsetX - halfWidth)
     })
   }
 
@@ -44,7 +46,7 @@ export const AnimatedTooltip = ({
 
   return (
     <>
-      {items.map((item, idx) => (
+      {items.map((item) => (
                  <div
            className="group relative -mr-4"
            key={item.name}
@@ -67,11 +69,10 @@ export const AnimatedTooltip = ({
                   },
                 }}
                 exit={{ opacity: 0, y: 20, scale: 0.6 }}
-                                 style={{
-                   translateX: typeof window !== 'undefined' && window.innerWidth < 768 ? 80 : 50,
-                   rotate: rotate,
-                   whiteSpace: "nowrap",
-                 }}
+                style={{
+                  rotate: rotate,
+                  whiteSpace: "nowrap",
+                }}
                 className="absolute -top-56 -left-24 z-50 flex flex-col items-center justify-center rounded-lg overflow-hidden shadow-xl w-47">
                 <Image src={item.hoverimage || `/memberhover/${item.name.toLowerCase().split(' ')[0]}.jpg`} alt={item.name} width={192} height={192} className="w-48 h-48 object-cover" />
               </motion.div>
