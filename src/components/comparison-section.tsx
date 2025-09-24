@@ -1,3 +1,5 @@
+"use client"
+
 import { motion } from "framer-motion"
 import Image from "next/image"
 import BadgeSubtitle from "./badge-subtitle"
@@ -100,6 +102,9 @@ const rowVariants = {
     }
   }
 }
+
+// Create motion-enabled table row to avoid undefined motion.tr in some builds
+const MotionTr = motion("tr")
 
 export default function ComparisonSection() {
   const comparisonData = [
@@ -206,7 +211,7 @@ export default function ComparisonSection() {
           <table className="w-full">
             {/* Header Row */}
             <thead>
-              <motion.tr
+              <MotionTr
                 variants={rowVariants}
                 initial="hidden"
                 whileInView="visible"
@@ -233,13 +238,13 @@ export default function ComparisonSection() {
                   </div>
                 </th>
                 <th className="bg-white p-6 text-left font-semibold text-gray-900">Other Agencies</th>
-              </motion.tr>
+              </MotionTr>
             </thead>
 
             {/* Body Rows */}
             <tbody>
               {comparisonData.map((item, index) => (
-                <motion.tr 
+                <MotionTr 
                   key={index} 
                   className="border-t border-gray-200"
                   variants={rowVariants}
@@ -268,7 +273,7 @@ export default function ComparisonSection() {
                       <p className="text-sm text-gray-600">{item.others}</p>
                     </div>
                   </td>
-                </motion.tr>
+                </MotionTr>
               ))}
             </tbody>
           </table>
@@ -282,7 +287,7 @@ export default function ComparisonSection() {
           <table className="w-full">
             {/* Header Row */}
             <thead>
-              <motion.tr
+              <MotionTr
                 variants={rowVariants}
                 initial="hidden"
                 whileInView="visible"
@@ -309,13 +314,13 @@ export default function ComparisonSection() {
                   </div>
                 </th>
                 <th className="bg-white p-4 text-left font-semibold text-gray-900 text-sm">Other Agencies</th>
-              </motion.tr>
+              </MotionTr>
             </thead>
 
             {/* Body Rows */}
             <tbody>
               {comparisonData.map((item, index) => (
-                <motion.tr 
+                <MotionTr 
                   key={index} 
                   className="border-t border-gray-200"
                   variants={rowVariants}
@@ -344,7 +349,7 @@ export default function ComparisonSection() {
                       <p className="text-xs text-gray-600">{item.others}</p>
                     </div>
                   </td>
-                </motion.tr>
+                </MotionTr>
               ))}
             </tbody>
           </table>

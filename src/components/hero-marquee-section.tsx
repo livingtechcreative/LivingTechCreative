@@ -3,39 +3,27 @@
 import { motion } from "framer-motion"
 import Image from "next/image"
 import Link from "next/link"
-import { useState, useEffect } from "react"
-import { apiService, Portfolio } from "@/lib/api"
+import { useMemo } from "react"
+import { Portfolio } from "@/lib/api"
 import { normalizeImagePath } from "@/lib/utils"
 
-export default function HeroMarqueeSection() {
-  const [portfolios, setPortfolios] = useState<Portfolio[]>([])
-  const [loading, setLoading] = useState(true)
+type Props = {
+  initialPortfolios?: Portfolio[]
+}
 
-  useEffect(() => {
-    const fetchPortfolios = async () => {
-      try {
-        setLoading(true)
-        const data = await apiService.getPortfolios()
-        // Show active portfolios, prioritize featured ones first, then show up to 6 projects for marquee
-        const activePortfolios = data.filter(portfolio => portfolio.is_active)
-        const featuredFirst = activePortfolios.sort((a, b) => {
-          if (a.is_featured && !b.is_featured) return -1
-          if (!a.is_featured && b.is_featured) return 1
-          return 0
-        })
-        setPortfolios(featuredFirst.slice(0, 6)) // Show up to 6 portfolios for marquee
-      } catch (error) {
-        console.error('Failed to fetch portfolios:', error)
-      } finally {
-        setLoading(false)
-      }
-    }
+export default function HeroMarqueeSection({ initialPortfolios = [] }: Props) {
+  const portfolios = useMemo(() => {
+    const activePortfolios = (initialPortfolios || []).filter(p => p.is_active)
+    const featuredFirst = activePortfolios.sort((a, b) => {
+      if (a.is_featured && !b.is_featured) return -1
+      if (!a.is_featured && b.is_featured) return 1
+      return 0
+    })
+    return featuredFirst.slice(0, 6)
+  }, [initialPortfolios])
 
-    fetchPortfolios()
-  }, [])
-
-  // Show loading state or fallback if no portfolios
-  if (loading || portfolios.length === 0) {
+  // Fallback if no portfolios
+  if (portfolios.length === 0) {
     return (
       <motion.div
         initial={{ opacity: 0, y: 30 }}
@@ -44,7 +32,7 @@ export default function HeroMarqueeSection() {
         className="w-full overflow-hidden bg-gray-50 mt-32"
       >
         <div className="flex items-center justify-center h-64">
-          <div className="text-gray-500">Loading portfolio...</div>
+          <div className="text-gray-500">No portfolio to display</div>
         </div>
       </motion.div>
     )

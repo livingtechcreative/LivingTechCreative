@@ -1,3 +1,5 @@
+"use client"
+
 import { motion } from "framer-motion"
 import BadgeSubtitle from "./badge-subtitle"
 import Image from "next/image"

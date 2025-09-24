@@ -1,12 +1,20 @@
 "use client"
 import { motion } from "framer-motion"
 import { ArrowRight } from "lucide-react"
-import { useState, useEffect } from "react"
+import { useMemo, useState } from "react"
 import Image from "next/image"
-import BadgeSubtitle from "./badge-subtitle"
 import Link from "next/link"
-import { apiService, Portfolio } from "@/lib/api"
+import { Portfolio } from "@/lib/api"
 import { normalizeImagePath } from "@/lib/utils"
+
+// BadgeSubtitle component definition (in case it's missing)
+function BadgeSubtitle({ children }: { children: React.ReactNode }) {
+  return (
+    <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-purple-100 text-purple-800">
+      {children}
+    </span>
+  )
+}
 
 // Animation variants
 const containerVariants = {
@@ -113,69 +121,22 @@ const iconVariants = {
   }
 }
 
-export default function PortfolioSection() {
-  const [portfolios, setPortfolios] = useState<Portfolio[]>([])
-  const [loading, setLoading] = useState(true)
+type Props = {
+  initialPortfolios?: Portfolio[]
+}
 
-  const fetchPortfolios = async () => {
-    try {
-      setLoading(true)
-      const data = await apiService.getPortfolios()
-      // Show all active portfolios, prioritize featured ones first, then show up to 6 projects
-      const activePortfolios = data.filter(portfolio => portfolio.is_active)
-      const featuredFirst = activePortfolios.sort((a, b) => {
-        if (a.is_featured && !b.is_featured) return -1
-        if (!a.is_featured && b.is_featured) return 1
-        return 0
-      })
-      setPortfolios(featuredFirst.slice(0, 6)) // Show up to 6 portfolios
-    } catch (error) {
-      console.error('Failed to fetch portfolios:', error)
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  useEffect(() => {
-    fetchPortfolios()
-  }, [])
-
-  // Handle hash navigation - refetch data when component becomes visible
-  useEffect(() => {
-    const handleHashChange = () => {
-      const hash = window.location.hash
-      if (hash === '#portfolio' || hash === '#portofolio') {
-        // Small delay to ensure component is visible
-        setTimeout(() => {
-          if (portfolios.length === 0 && !loading) {
-            fetchPortfolios()
-          }
-        }, 100)
-      }
-    }
-
-    // Listen for hash changes
-    window.addEventListener('hashchange', handleHashChange)
-    
-    // Check initial hash
-    handleHashChange()
-
-    // Also check when component mounts if we're already on the hash
-    if (typeof window !== 'undefined') {
-      const currentHash = window.location.hash
-      if (currentHash === '#portfolio' || currentHash === '#portofolio') {
-        setTimeout(() => {
-          if (portfolios.length === 0 && !loading) {
-            fetchPortfolios()
-          }
-        }, 500)
-      }
-    }
-
-    return () => {
-      window.removeEventListener('hashchange', handleHashChange)
-    }
-  }, [portfolios.length, loading])
+export default function PortfolioSection({ initialPortfolios = [] }: Props) {
+  const [loading] = useState(false) // Define loading state
+  
+  const portfolios = useMemo(() => {
+    const activePortfolios = (initialPortfolios || []).filter(p => p.is_active)
+    const featuredFirst = activePortfolios.sort((a, b) => {
+      if (a.is_featured && !b.is_featured) return -1
+      if (!a.is_featured && b.is_featured) return 1
+      return 0
+    })
+    return featuredFirst.slice(0, 6)
+  }, [initialPortfolios])
 
   const projects = portfolios.map(portfolio => ({
     id: portfolio.id,
@@ -184,7 +145,7 @@ export default function PortfolioSection() {
     description: portfolio.background,
     category: portfolio.category,
     tags: [] as string[],
-    image: normalizeImagePath(portfolio.cover_image),
+    image: normalizeImagePath ? normalizeImagePath(portfolio.cover_image) : portfolio.cover_image,
     filterCategory: portfolio.category,
     imageHeight: "h-80",
   }))

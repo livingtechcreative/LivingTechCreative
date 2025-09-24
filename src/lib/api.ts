@@ -1,4 +1,4 @@
-const API_BASE_URL = 'https://livingtechcreative.com/api'
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'https://admin.livingtechcreative.com/api'
 
 export interface ShowcaseItem {
   id: number
@@ -94,16 +94,20 @@ class ApiService {
   private async fetchApi<T>(endpoint: string): Promise<T> {
     try {
       const url = `${API_BASE_URL}${endpoint}`
-      console.log(`Making API request to: ${url}`)
       
-      const response = await fetch(url)
+      const response = await fetch(url, {
+        next: { revalidate: 300 }, // Cache for 5 minutes
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      })
+      
       if (!response.ok) {
         console.error(`API request failed: ${response.status} ${response.statusText} for ${url}`)
         throw new Error(`API request failed: ${response.status}`)
       }
       
       const data = await response.json()
-      console.log(`API response received for ${endpoint}:`, data)
       return data
     } catch (error) {
       console.error(`API Error for ${endpoint}:`, error)
@@ -111,20 +115,97 @@ class ApiService {
     }
   }
 
+  // Mock data for development/fallback
+  private getMockPortfolios(): Portfolio[] {
+    return [
+      {
+        id: 1,
+        title: "E-commerce Platform",
+        slug: "ecommerce-platform",
+        background: "A modern e-commerce solution built with cutting-edge technologies",
+        client: "Tech Startup",
+        category: "Web Development",
+        start_date: "2024-01-01",
+        end_date: "2024-03-01",
+        duration_days: 60,
+        problem: "Client needed a scalable e-commerce platform",
+        goal: "Build a modern, responsive online store",
+        conclution: "Successfully delivered a high-performance platform",
+        cover_image: "/placeholder.svg",
+        project_url: "https://example.com",
+        display_order: 1,
+        is_active: true,
+        is_featured: true,
+        created_at: "2024-01-01T00:00:00Z",
+        updated_at: "2024-01-01T00:00:00Z"
+      },
+      {
+        id: 2,
+        title: "Mobile App Design",
+        slug: "mobile-app-design",
+        background: "UI/UX design for a fintech mobile application",
+        client: "Financial Services",
+        category: "UI/UX Design",
+        start_date: "2024-02-01",
+        end_date: "2024-04-01",
+        duration_days: 60,
+        problem: "Needed intuitive design for complex financial features",
+        goal: "Create user-friendly mobile experience",
+        conclution: "Delivered award-winning design system",
+        cover_image: "/placeholder.svg",
+        project_url: "https://example.com",
+        display_order: 2,
+        is_active: true,
+        is_featured: true,
+        created_at: "2024-02-01T00:00:00Z",
+        updated_at: "2024-02-01T00:00:00Z"
+      }
+    ]
+  }
+
   async getPortfolios(): Promise<Portfolio[]> {
     try {
-      const response = await this.fetchApi<ApiResponse<Portfolio[]>>('/portofolios')
-      return response.data
+      // Try multiple possible endpoints
+      const endpoints = ['/portofolios', '/portfolios', '/portfolio']
+      
+      for (const endpoint of endpoints) {
+        try {
+          const response = await this.fetchApi<ApiResponse<Portfolio[]>>(endpoint)
+          return response.data
+        } catch (error) {
+          console.warn(`Endpoint ${endpoint} failed, trying next...`)
+          continue
+        }
+      }
+      
+      // If all endpoints fail, return mock data for development
+      console.warn('All portfolio endpoints failed, using mock data')
+      return this.getMockPortfolios()
+      
     } catch (error) {
       console.error('Failed to fetch portfolios:', error)
-      return []
+      // Return mock data as fallback
+      return this.getMockPortfolios()
     }
   }
 
   async getPortfolio(id: number): Promise<Portfolio | null> {
     try {
-      const response = await this.fetchApi<ApiResponse<Portfolio>>(`/portofolios/${id}`)
-      return response.data
+      const endpoints = [`/portofolios/${id}`, `/portfolios/${id}`, `/portfolio/${id}`]
+      
+      for (const endpoint of endpoints) {
+        try {
+          const response = await this.fetchApi<ApiResponse<Portfolio>>(endpoint)
+          return response.data
+        } catch (error) {
+          continue
+        }
+      }
+      
+      // Fallback: Get all portfolios and find by ID
+      const portfolios = await this.getPortfolios()
+      return portfolios.find(p => p.id === id) || null
+      
     } catch (error) {
       console.error(`Failed to fetch portfolio ${id}:`, error)
       return null
@@ -151,8 +232,18 @@ class ApiService {
 
   async getPortfolioTags(portfolioId: number): Promise<PortfolioTag[]> {
     try {
-      const response = await this.fetchApi<ApiResponse<PortfolioTag[]>>(`/portofolio-tags/${portfolioId}`)
-      return response.data
+      const endpoints = [`/portofolio-tags/${portfolioId}`, `/portfolio-tags/${portfolioId}`]
+      
+      for (const endpoint of endpoints) {
+        try {
+          const response = await this.fetchApi<ApiResponse<PortfolioTag[]>>(endpoint)
+          return response.data
+        } catch (error) {
+          continue
+        }
+      }
+      
+      return []
     } catch (error) {
       console.error(`Failed to fetch portfolio tags for ${portfolioId}:`, error)
       return []

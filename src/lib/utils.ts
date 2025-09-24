@@ -24,7 +24,6 @@ export function normalizeImagePath(imagePath: string | null | undefined): string
     // If it's a portfolio image path that doesn't exist locally, convert to external URL
     if (imagePath.startsWith('/portfolio/')) {
       const externalUrl = `https://livingtechcreative.com/storage${imagePath}`
-      console.log(`Normalizing portfolio image: ${imagePath} -> ${externalUrl}`)
       return externalUrl
     }
     return imagePath
@@ -34,7 +33,6 @@ export function normalizeImagePath(imagePath: string | null | undefined): string
   if (imagePath.startsWith('portfolio/')) {
     // Convert portfolio paths to external URL
     const externalUrl = `https://livingtechcreative.com/storage/${imagePath}`
-    console.log(`Normalizing portfolio image: ${imagePath} -> ${externalUrl}`)
     return externalUrl
   }
   

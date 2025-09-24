@@ -2,6 +2,8 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   /* config options here */
+  // Enable static export
+  output: 'export',
   images: {
     remotePatterns: [
       {
@@ -17,8 +19,8 @@ const nextConfig: NextConfig = {
         pathname: '/**',
       }
     ],
-    // Handle local portfolio images that might not exist
-    unoptimized: false,
+    // Required for static export with next/image (no server-side optimization)
+    unoptimized: true,
     // Add error handling for missing images
     dangerouslyAllowSVG: true,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",

@@ -9,6 +9,7 @@ import Footer from "@/components/footer"
 import { apiService, Portfolio } from "@/lib/api"
 import { motion } from "framer-motion"
 import { normalizeImagePath } from "@/lib/utils"
+import CTABanner from "@/components/cta-banner"
 
 export default function PortfolioPage() {
   const [portfolios, setPortfolios] = useState<Portfolio[]>([])
@@ -165,56 +166,7 @@ export default function PortfolioPage() {
           </motion.div>
 
           {/* Call to Action Banner */}
-          <motion.section 
-            className="mt-16 mb-8 -mx-6"
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.6 }}
-          >
-            <div className="max-w-7xl mx-auto px-6">
-              <div
-                className="relative rounded-2xl overflow-hidden bg-cover bg-center bg-no-repeat w-full"
-                style={{
-                  backgroundImage: "url('/images/bgbanner.png')",
-                  minHeight: "200px",
-                }}
-              >
-                <div className="relative px-12 py-8 text-left">
-                  <h2 className="text-3xl font-bold text-white mb-3 leading-tight">
-                    Time to Stop Scrolling,
-                    <br />
-                    Let&apos;s <Image src="/images/hand.svg" alt="Hand" width={32} height={32} className="w-8 h-8 inline-block" />{" "}
-                    <span className="bg-gradient-to-r from-[#8A38F5] via-[#13CBD4] to-[#2B35AB] bg-clip-text text-transparent">
-                      Book a meeting
-                    </span>{" "}
-                    and discuss it!
-                  </h2>
-                  <p className="text-white/90 text-base mb-6 max-w-xl">
-                    We&apos;re here to listen. Book a meeting with our team to discuss your vision, explore possibilities, and
-                    start creating something.
-                  </p>
-                  <div className="flex flex-col sm:flex-row gap-4">
-                    <Button
-                      size="lg"
-                      className="bg-white text-gray-900 hover:bg-gray-100 px-8 py-3 rounded-lg font-semibold w-full sm:w-auto flex items-center gap-2 justify-center"
-                    >
-                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                      </svg>
-                      Book a meeting
-                    </Button>
-                    <Button
-                      variant="outline"
-                      size="lg"
-                      className="border-white/30 text-white hover:bg-white/10 px-8 py-3 rounded-lg font-semibold bg-black/30 w-full sm:w-auto flex items-center gap-2 justify-center"
-                    >
-                      Contact via WhatsApp →
-                    </Button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </motion.section>
+          <CTABanner className="mt-16 mb-8 -mx-6" />
         </div>
       </main>
 

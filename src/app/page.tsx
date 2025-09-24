@@ -1,6 +1,3 @@
-"use client"
-
-import { useEffect, useState } from "react"
 import IntegratedNavbar from "@/components/integrated-navbar"
 import HeroSection from "@/components/hero-section"
 import HeroMarqueeSection from "@/components/hero-marquee-section"
@@ -13,52 +10,25 @@ import PortfolioSection from "@/components/portfolio-section"
 import FAQSection from "@/components/faq-section"
 import ContactSection from "@/components/contact-section"
 import Footer from "@/components/footer"
+import { apiService } from "@/lib/api"
 
-export default function Home() {
-  const [showNavbar, setShowNavbar] = useState(false)
-
-  useEffect(() => {
-    // Show navbar after a short delay for better UX
-    const timer = setTimeout(() => {
-      setShowNavbar(true)
-    }, 3000) // 0.5 detik delay untuk animasi masuk navbar
-
-    return () => clearTimeout(timer)
-  }, [])
-
-  useEffect(() => {
-    // Handle hash navigation when coming from portfolio pages
-    const handleHashNavigation = () => {
-      if (typeof window !== 'undefined' && window.location.hash) {
-        const hash = window.location.hash.substring(1) // Remove the #
-        const element = document.getElementById(hash)
-        if (element) {
-          setTimeout(() => {
-            element.scrollIntoView({ 
-              behavior: 'smooth',
-              block: 'start'
-            })
-          }, 1000) // Wait for navbar to show
-        }
-      }
-    }
-
-    handleHashNavigation()
-  }, [])
+export default async function Home() {
+  // Server-side fetch to avoid CORS in browser
+  const portfolios = await apiService.getPortfolios()
 
   return (
     <div className="min-h-screen overflow-x-hidden bg-white">
-      {showNavbar && <IntegratedNavbar />}
+      <IntegratedNavbar />
         <div id="hero">
           <HeroSection />
         </div>
-        <HeroMarqueeSection />
+        <HeroMarqueeSection initialPortfolios={portfolios} />
         <ComparisonSection />
         <div id="services">
           <ServicesSection />
         </div>
         <div id="portofolio">
-          <PortfolioSection />
+          <PortfolioSection initialPortfolios={portfolios} />
         </div>
         <BannerSection />
         <div id="about">
