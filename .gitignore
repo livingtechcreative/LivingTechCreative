@@ -22,7 +22,9 @@
 /dist
 
 dist/
-git addgitgi
+
+# env files
+.env
 # misc
 .DS_Store
 *.pem

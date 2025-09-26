@@ -172,7 +172,7 @@ export default function ComparisonSection() {
                     whileHover="hover"
                   >
                     <Image
-                      src="/images/Handsake.svg"
+                      src="/images/handshake.png"
                       alt="Handshake"
                       width={56}
                       height={56}

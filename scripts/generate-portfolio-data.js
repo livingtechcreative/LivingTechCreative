@@ -1,5 +1,6 @@
 const fs = require('fs')
 const path = require('path')
+require('dotenv').config()
 
 async function generatePortfolioData() {
   // Write into src/data so it can be imported via alias '@/data/...'
@@ -7,14 +8,15 @@ async function generatePortfolioData() {
   const slugsPath = path.join(dataDir, 'portfolio-slugs.json')
   const itemsPath = path.join(dataDir, 'portfolio-items.json')
   try {
-    const base = process.env.NEXT_PUBLIC_API_BASE_URL || 'https://admin.livingtechcreative.com/api'
+    const base = process.env.NEXT_PUBLIC_API_BASE_URL || 'https://dashboard.livingtechcreative.com/api'
     // Try multiple likely endpoints
-    const endpoints = ['/portofolios', '/portfolios', '/portfolio']
+    const endpoints = ['portofolios', 'portfolios', 'portfolio']
     let items = []
 
     for (const endpoint of endpoints) {
       try {
-        const url = new URL(endpoint, base).toString()
+        const baseUrl = base.endsWith('/') ? base : base + '/'
+        const url = new URL(endpoint, baseUrl).toString()
         const res = await fetch(url)
         if (!res.ok) throw new Error(`Request failed ${res.status}`)
         const json = await res.json()

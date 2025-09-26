@@ -222,41 +222,34 @@ export default function FAQSection() {
                   variants={iconVariants}
                 >
                   <Image
-                    src="/images/chat.svg"
+                    src="/images/chat.png"
                     alt="Chat"
-                    width={56}
-                    height={56}
-                    className="rounded-lg object-cover w-8 h-8 sm:w-12 sm:h-12 md:w-14 md:h-14"
+                    width={48}
+                    height={48}
+                    className="object-contain w-12 h-12 sm:w-12 sm:h-12 md:w-14 md:h-14"
                   />
                 </motion.div>
                 <span className="inline-block bg-gradient-to-r from-[#2B35AB] via-[#8A38F5] to-[#13CBD4] bg-clip-text text-transparent">
                   Ask
-                </span>
-                <span>Us Anything,</span>
-              </div>
-              <div className="flex flex-wrap items-center gap-4">
-                <span>We&apos;ve</span>
-                <span className="text-gray-900">
-                  Got
                 </span>
                 <motion.div 
                   className="relative inline-block"
                   variants={iconVariants}
                 >
                   <Image
-                    src="/images/people.svg"
+                    src="/images/people.png"
                     alt="People"
-                    width={56}
-                    height={56}
-                    className="rounded-lg object-cover w-8 h-8 sm:w-12 sm:h-12 md:w-14 md:h-14"
+                    width={48}
+                    height={48}
+                    className="object-contain w-12 h-12 sm:w-12 sm:h-12 md:w-14 md:h-14"
                   />
                 </motion.div>
               </div>
-              <span className="inline-block bg-gradient-to-r from-[#2B35AB] via-[#8A38F5] to-[#13CBD4] bg-clip-text text-transparent">
-                the Answers
-              </span>
-            </motion.h2>
-          </motion.div>
+                <span className="inline-block bg-gradient-to-r from-[#2B35AB] via-[#8A38F5] to-[#13CBD4] bg-clip-text text-transparent">
+                  the answers
+                </span>
+              </motion.h2>
+            </motion.div>
 
           {/* Right Column - Chat Interface */}
           <motion.div 

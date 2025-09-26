@@ -137,7 +137,7 @@ export default function AboutUsSection() {
                   whileHover="hover"
                 >
                   <Image
-                    src="/images/handwaves.svg"
+                    src="/images/handwaves.png"
                     alt="Hand Wave"
                     width={56}
                     height={56}

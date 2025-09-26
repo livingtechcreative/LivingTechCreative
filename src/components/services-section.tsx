@@ -191,11 +191,11 @@ export default function ServicesSection() {
                 whileHover="hover"
               >
                 <Image
-                  src="/images/paint.svg"
+                  src="/images/paint.png"
                   alt="paint icon"
                   width={40}
                   height={40}
-                  className="rounded-lg object-cover w-8 h-8 sm:w-12 sm:h-12 md:w-14 md:h-14"
+                  className="w-10 h-10 object-contain"
                 />
               </motion.div>
               <span className="inline-block bg-gradient-to-r from-[#2B35AB] via-[#8A38F5] to-[#13CBD4] bg-clip-text text-transparent">

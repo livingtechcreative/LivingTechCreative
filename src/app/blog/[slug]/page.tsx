@@ -1,8 +1,8 @@
 import { notFound } from "next/navigation"
 import Image from "next/image"
-import { Button } from "@/components/ui/button"
+import ShareButton from "@/components/blog/share-button"
 import { Card, CardContent } from "@/components/ui/card"
-import { ArrowLeft, Calendar, Clock, User, Share2 } from "lucide-react"
+import { ArrowLeft, Calendar, Clock, User } from "lucide-react"
 import Link from "next/link"
 import IntegratedNavbar from "@/components/integrated-navbar"
 import Footer from "@/components/footer"
@@ -17,8 +17,9 @@ import blogSlugs from '@/data/blog-slugs.json'
 export async function generateStaticParams(): Promise<{ slug: string }[]> {
   try {
     console.log('[build] generateStaticParams(blog/page) called')
-    const base = process.env.NEXT_PUBLIC_API_BASE_URL || 'https://admin.livingtechcreative.com/api'
-    const url = new URL('/blog-posts', base).toString()
+    const base = process.env.NEXT_PUBLIC_API_BASE_URL || 'https://dashboard.livingtechcreative.com/api'
+    const baseUrl = base.endsWith('/') ? base : base + '/'
+    const url = new URL('blog-posts', baseUrl).toString()
     const res = await fetch(url, { next: { revalidate: 0 } })
     if (!res.ok) throw new Error(`Failed ${res.status}`)
     const data = await res.json()
@@ -155,17 +156,11 @@ export default async function BlogDetailPage({ params }: { params: Promise<{ slu
                 {blogPost.excerpt}
               </p>
 
-              {/* Action Buttons */}
               <div className="flex items-center justify-center gap-4">
-                <Button 
-                  onClick={handleShare}
-                  variant="outline" 
-                  size="sm" 
-                  className="gap-2 bg-transparent"
-                >
-                  <Share2 className="w-4 h-4" />
-                  Share
-                </Button>
+                <ShareButton 
+                  title={blogPost.title}
+                  url={`${process.env.NEXT_PUBLIC_SITE_URL || 'https://livingtechcreative.com'}/blog/${blogPost.slug}`}
+                />
                 
                 {/* No live/code links for blog posts */}
               </div>

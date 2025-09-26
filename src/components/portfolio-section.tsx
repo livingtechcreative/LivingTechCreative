@@ -101,13 +101,11 @@ const textVariants = {
 const iconVariants = {
   hidden: { 
     opacity: 0, 
-    scale: 0.8,
-    rotate: -10
+    scale: 0.8 
   },
   visible: {
     opacity: 1,
     scale: 1,
-    rotate: 0,
     transition: {
       duration: 0.5
     }
@@ -121,33 +119,71 @@ const iconVariants = {
   }
 }
 
-type Props = {
-  initialPortfolios?: Portfolio[]
-}
+export default function PortfolioSection({ portfolios = [] }: { portfolios: Portfolio[] }) {
+  const [activeFilter, setActiveFilter] = useState('all')
+  const [loading, setLoading] = useState(false)
+  const [hoveredProject, setHoveredProject] = useState<string | null>(null)
 
-export default function PortfolioSection({ initialPortfolios = [] }: Props) {
-  const [loading] = useState(false) // Define loading state
-  
-  const portfolios = useMemo(() => {
-    const activePortfolios = (initialPortfolios || []).filter(p => p.is_active)
-    const featuredFirst = activePortfolios.sort((a, b) => {
-      if (a.is_featured && !b.is_featured) return -1
-      if (!a.is_featured && b.is_featured) return 1
-      return 0
-    })
-    return featuredFirst.slice(0, 6)
-  }, [initialPortfolios])
-
-  const projects = portfolios.map(portfolio => ({
-    id: portfolio.id,
-    slug: portfolio.slug,
-    title: portfolio.title,
-    description: portfolio.background,
-    category: portfolio.category,
-    tags: [] as string[],
-    image: normalizeImagePath ? normalizeImagePath(portfolio.cover_image) : portfolio.cover_image,
-    filterCategory: portfolio.category,
-    imageHeight: "h-80",
+  // Mock data for demonstration
+  const projects = [
+    {
+      id: '1',
+      title: 'E-commerce Website',
+      description: 'A modern e-commerce platform with seamless checkout experience',
+      category: 'Web Development',
+      image: '/images/project1.jpg',
+      link: '/portfolio/ecommerce',
+      imageHeight: 'h-80',
+    },
+    {
+      id: '2',
+      title: 'Mobile App Design',
+      description: 'UI/UX design for a fitness tracking mobile application',
+      category: 'UI/UX Design',
+      image: '/images/project2.jpg',
+      link: '/portfolio/mobile-app',
+      imageHeight: 'h-96',
+    },
+    {
+      id: '3',
+      title: 'Brand Identity',
+      description: 'Complete brand identity design for a startup company',
+      category: 'Branding',
+      image: '/images/project3.jpg',
+      link: '/portfolio/brand-identity',
+      imageHeight: 'h-80',
+    },
+    {
+      id: '4',
+      title: 'Web Application',
+      description: 'Enterprise web application with advanced analytics',
+      category: 'Web Development',
+      image: '/images/project4.jpg',
+      link: '/portfolio/web-app',
+      imageHeight: 'h-96',
+    },
+    {
+      id: '5',
+      title: 'Marketing Campaign',
+      description: 'Digital marketing campaign for product launch',
+      category: 'Marketing',
+      image: '/images/project5.jpg',
+      link: '/portfolio/marketing',
+      imageHeight: 'h-80',
+    },
+    {
+      id: '6',
+      title: 'Mobile App Development',
+      description: 'Cross-platform mobile application development',
+      category: 'Mobile',
+      image: '/images/project6.jpg',
+      link: '/portfolio/mobile-dev',
+      imageHeight: 'h-96',
+    },
+  ].map(project => ({
+    ...project,
+    image: normalizeImagePath(project.image),
+    imageHeight: project.imageHeight || 'h-80',
   }))
 
   const filteredProjects = projects
@@ -186,11 +222,11 @@ export default function PortfolioSection({ initialPortfolios = [] }: Props) {
                   whileHover="hover"
                 >
                   <Image
-                    src="/images/liv.svg"
+                    src="/images/liv.png"
                     alt="Liv"
                     width={56}
                     height={56}
-                    className="rounded-lg object-cover w-8 h-8 sm:w-12 sm:h-12 md:w-14 md:h-14"
+                    className="w-14 h-14 object-contain"
                   />
                 </motion.div>
                 <span className="inline-block bg-gradient-to-r from-[#2B35AB] via-[#8A38F5] to-[#13CBD4] bg-clip-text text-transparent">
@@ -205,11 +241,11 @@ export default function PortfolioSection({ initialPortfolios = [] }: Props) {
                   whileHover="hover"
                 >
                   <Image
-                    src="/images/project.svg"
+                    src="/images/paint.png"
                     alt="Project"
                     width={56}
                     height={56}
-                    className="rounded-lg object-cover w-8 h-8 sm:w-12 sm:h-12 md:w-14 md:h-14"
+                    className="w-14 h-14 object-contain"
                   />
                 </motion.div>
                 <span className="inline-block bg-gradient-to-r from-[#2B35AB] via-[#8A38F5] to-[#13CBD4] bg-clip-text text-transparent">
@@ -250,52 +286,36 @@ export default function PortfolioSection({ initialPortfolios = [] }: Props) {
                   <div className="bg-gray-200 rounded-2xl h-80 mb-4"></div>
                   <div className="h-6 bg-gray-200 rounded mb-2"></div>
                   <div className="h-4 bg-gray-200 rounded mb-3 w-3/4"></div>
-                  <div className="flex gap-2">
-                    <div className="h-6 bg-gray-200 rounded w-16"></div>
-                    <div className="h-6 bg-gray-200 rounded w-20"></div>
-                  </div>
                 </div>
               </motion.div>
             ))}
-          </motion.div>
-        ) : projects.length === 0 ? (
-          <motion.div 
-            className="text-center py-12"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            <div className="text-gray-500 text-lg mb-2">No portfolios available</div>
-            <p className="text-gray-400">Portfolio data will appear here once available</p>
           </motion.div>
         ) : (
           <motion.div 
             className="columns-1 md:columns-2 gap-6 space-y-6"
             variants={containerVariants}
+            initial="hidden"
+            animate="visible"
           >
-            {filteredProjects.map((project, index) => (
+            {filteredProjects.map((project) => (
               <motion.div 
-                key={project.id} 
-                className="break-inside-avoid mb-6"
+                key={project.id}
+                className="break-inside-avoid mb-6 group"
                 variants={cardVariants}
-                whileHover="hover"
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
+                onMouseEnter={() => setHoveredProject(project.id)}
+                onMouseLeave={() => setHoveredProject(null)}
               >
-                {/* Project Image - Clickable Card */}
-                <Link href={`/portofolio/${project.slug}`}>
-                  <motion.div
-                    className={`group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer ${project.imageHeight}`}
+                <Link href={project.link} className="block">
+                  <motion.div 
+                    className={`relative rounded-2xl overflow-hidden ${project.imageHeight} w-full`}
                     variants={imageVariants}
                   >
                     <Image
-                      src={project.image || "/placeholder.svg"}
+                      src={project.image}
                       alt={project.title}
-                      fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-300"
-                      unoptimized={project.image?.includes('livingtechcreative.com')}
+                      width={600}
+                      height={400}
+                      className="w-full h-full object-cover"
                     />
 
                     {/* Category Badge */}

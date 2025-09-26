@@ -1,4 +1,4 @@
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'https://admin.livingtechcreative.com/api'
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'https://dashboard.livingtechcreative.com/api'
 
 export interface ShowcaseItem {
   id: number

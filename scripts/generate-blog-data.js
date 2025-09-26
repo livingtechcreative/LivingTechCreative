@@ -1,5 +1,6 @@
 const fs = require('fs')
 const path = require('path')
+require('dotenv').config()
 
 async function generateBlogData() {
   // Write into src/data so it can be imported via alias '@/data/...'
@@ -7,14 +8,28 @@ async function generateBlogData() {
   const slugsPath = path.join(dataDir, 'blog-slugs.json')
   const postsPath = path.join(dataDir, 'blog-posts.json')
   try {
-    const base = process.env.NEXT_PUBLIC_API_BASE_URL || 'https://admin.livingtechcreative.com/api'
-    const endpoint = '/blog-posts'
-    const url = new URL(endpoint, base).toString()
-
-    const res = await fetch(url)
-    if (!res.ok) throw new Error(`Request failed ${res.status}`)
-    const json = await res.json()
-    const posts = Array.isArray(json?.data) ? json.data : Array.isArray(json) ? json : []
+    const base = process.env.NEXT_PUBLIC_API_BASE_URL || 'https://dashboard.livingtechcreative.com/api'
+    const endpoints = ['blog-posts', 'blogs', 'blogposts', 'blog/posts']
+    let posts = []
+    let lastError = null
+    for (const ep of endpoints) {
+      try {
+        const baseUrl = base.endsWith('/') ? base : base + '/'
+        const url = new URL(ep, baseUrl).toString()
+        console.log(`Fetching blog data from: ${url}`)
+        const res = await fetch(url)
+        if (!res.ok) throw new Error(`Request failed ${res.status}`)
+        const json = await res.json()
+        posts = Array.isArray(json?.data) ? json.data : Array.isArray(json) ? json : []
+        if (posts.length) break
+      } catch (e) {
+        lastError = e
+        continue
+      }
+    }
+    if (!posts.length && lastError) {
+      console.warn(`All blog endpoints returned empty or failed. Last error: ${lastError}`)
+    }
     const slugs = posts
       .filter(p => p && typeof p.slug === 'string' && (p.is_active === undefined || p.is_active === true))
       .map(p => p.slug)

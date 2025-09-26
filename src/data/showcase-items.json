@@ -1,0 +1,132 @@
+[
+  {
+    "id": 1,
+    "title": "E-Commerce Website Design",
+    "image": "showcases/ecommerce-demo.jpg",
+    "url": "https://www.behance.net/gallery/178945632/E-Commerce-Website-UI-UX-Design",
+    "display_order": 1,
+    "is_active": true,
+    "created_at": "2025-09-14T08:37:44.000000Z",
+    "updated_at": "2025-09-14T08:37:44.000000Z"
+  },
+  {
+    "id": 2,
+    "title": "Creative Portfolio Website",
+    "image": "showcases/portfolio-demo.jpg",
+    "url": "https://www.behance.net/gallery/156789123/Creative-Portfolio-Web-Design",
+    "display_order": 2,
+    "is_active": true,
+    "created_at": "2025-09-14T08:37:44.000000Z",
+    "updated_at": "2025-09-14T08:37:44.000000Z"
+  },
+  {
+    "id": 3,
+    "title": "Restaurant Mobile App UI",
+    "image": "showcases/restaurant-app.jpg",
+    "url": "https://www.behance.net/gallery/165432198/Restaurant-Food-Delivery-App-Design",
+    "display_order": 3,
+    "is_active": true,
+    "created_at": "2025-09-14T08:37:44.000000Z",
+    "updated_at": "2025-09-14T08:37:44.000000Z"
+  },
+  {
+    "id": 4,
+    "title": "Real Estate Platform Design",
+    "image": "showcases/realestate-demo.jpg",
+    "url": "https://www.behance.net/gallery/142567890/Real-Estate-Web-Platform-UIUX",
+    "display_order": 4,
+    "is_active": false,
+    "created_at": "2025-09-14T08:37:44.000000Z",
+    "updated_at": "2025-09-14T08:37:44.000000Z"
+  },
+  {
+    "id": 5,
+    "title": "Learning Management System",
+    "image": "showcases/lms-demo.jpg",
+    "url": "https://www.behance.net/gallery/189234567/Online-Learning-Platform-Design",
+    "display_order": 5,
+    "is_active": true,
+    "created_at": "2025-09-14T08:37:44.000000Z",
+    "updated_at": "2025-09-14T08:37:44.000000Z"
+  },
+  {
+    "id": 6,
+    "title": "Social Media Dashboard",
+    "image": "showcases/social-dashboard.jpg",
+    "url": "https://www.behance.net/gallery/173456789/Social-Media-Analytics-Dashboard",
+    "display_order": 6,
+    "is_active": true,
+    "created_at": "2025-09-14T08:37:44.000000Z",
+    "updated_at": "2025-09-14T08:37:44.000000Z"
+  },
+  {
+    "id": 7,
+    "title": "Task Management Tool",
+    "image": "showcases/task-management.jpg",
+    "url": "https://www.behance.net/gallery/167891234/Project-Management-Tool-UI-Design",
+    "display_order": 7,
+    "is_active": false,
+    "created_at": "2025-09-14T08:37:44.000000Z",
+    "updated_at": "2025-09-14T08:37:44.000000Z"
+  },
+  {
+    "id": 8,
+    "title": "Minimalist Blog Design",
+    "image": "showcases/blog-platform.jpg",
+    "url": "https://www.behance.net/gallery/154321098/Modern-Blog-Website-Design",
+    "display_order": 8,
+    "is_active": true,
+    "created_at": "2025-09-14T08:37:44.000000Z",
+    "updated_at": "2025-09-14T08:37:44.000000Z"
+  },
+  {
+    "id": 9,
+    "title": "CRM System Interface",
+    "image": "showcases/crm-system.jpg",
+    "url": "https://www.behance.net/gallery/198765432/Customer-Relationship-Management-UI",
+    "display_order": 9,
+    "is_active": true,
+    "created_at": "2025-09-14T08:37:44.000000Z",
+    "updated_at": "2025-09-14T08:37:44.000000Z"
+  },
+  {
+    "id": 10,
+    "title": "Banking Mobile App Design",
+    "image": "showcases/mobile-banking.jpg",
+    "url": "https://www.behance.net/gallery/176543210/Mobile-Banking-App-UI-UX-Design",
+    "display_order": 10,
+    "is_active": false,
+    "created_at": "2025-09-14T08:37:44.000000Z",
+    "updated_at": "2025-09-14T08:37:44.000000Z"
+  },
+  {
+    "id": 11,
+    "title": "Travel Booking Website",
+    "image": "showcases/travel-booking.jpg",
+    "url": "https://www.behance.net/gallery/163498765/Travel-Booking-Platform-Design",
+    "display_order": 11,
+    "is_active": true,
+    "created_at": "2025-09-14T08:37:44.000000Z",
+    "updated_at": "2025-09-14T08:37:44.000000Z"
+  },
+  {
+    "id": 12,
+    "title": "Fitness App Interface",
+    "image": "showcases/fitness-app.jpg",
+    "url": "https://www.behance.net/gallery/187654321/Fitness-Workout-Mobile-App-UI",
+    "display_order": 12,
+    "is_active": true,
+    "created_at": "2025-09-14T08:37:44.000000Z",
+    "updated_at": "2025-09-14T08:37:44.000000Z"
+  },
+  {
+    "id": 13,
+    "title": "Landing Page Dinamis UMKM Makanan",
+    "image": "showcases/01K5YC9TZV701S2FNNZAGCB538.jpg",
+    "url": "https://dashboard.livingtechcreative.com/admin/showcases/create",
+    "display_order": 0,
+    "is_active": true,
+    "created_at": "2025-09-24T17:28:24.000000Z",
+    "updated_at": "2025-09-24T17:28:24.000000Z"
+  }
+]

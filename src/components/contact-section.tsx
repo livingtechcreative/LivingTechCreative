@@ -247,7 +247,7 @@ export default function ContactSection() {
                 variants={iconVariants}
               >
                 <Image 
-                  src="/images/hand.svg" 
+                  src="/images/hand.png" 
                   alt="Hand" 
                   width={56}
                   height={56}
