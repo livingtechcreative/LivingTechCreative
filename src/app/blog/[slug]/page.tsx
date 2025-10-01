@@ -37,9 +37,9 @@ export async function generateStaticParams(): Promise<{ slug: string }[]> {
     return mapped
   }
 }
-// CRITICAL: These settings are required for static export
-export const dynamicParams = false  // MUST be false for static export
-  export const dynamic = 'force-static'
+// Mengubah ke SSR mode
+export const dynamicParams = true  // Mengizinkan parameter dinamis untuk SSR
+export const dynamic = 'force-dynamic'  // Menggunakan SSR
   
   export default async function BlogDetailPage({ params }: { params: Promise<{ slug: string }> }) {
     const { slug } = await params

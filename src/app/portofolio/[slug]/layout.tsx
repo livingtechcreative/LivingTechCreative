@@ -6,8 +6,9 @@ export function generateStaticParams(): { slug: string }[] {
   return (portfolioSlugs as string[]).map((slug) => ({ slug }))
 }
 
-export const dynamicParams = false
-export const dynamic = 'force-static'
+// Mengubah ke SSR mode
+export const dynamicParams = true
+export const dynamic = 'force-dynamic'
 
 export default function PortfolioSlugLayout({ children }: { children: ReactNode }) {
   return <>{children}</>

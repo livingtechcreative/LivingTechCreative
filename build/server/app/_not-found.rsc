@@ -1,0 +1,26 @@
+1:"$Sreact.fragment"
+2:I[4573,["63","static/chunks/63-3d751bd68575be5a.js","963","static/chunks/963-0156314a21037738.js","277","static/chunks/277-6cd9c283f70fe2a1.js","849","static/chunks/849-480521f34398746b.js","465","static/chunks/465-7367f464a6c24341.js","177","static/chunks/app/layout-a5eabd128b5a0438.js"],"default"]
+3:I[6701,["63","static/chunks/63-3d751bd68575be5a.js","963","static/chunks/963-0156314a21037738.js","277","static/chunks/277-6cd9c283f70fe2a1.js","849","static/chunks/849-480521f34398746b.js","465","static/chunks/465-7367f464a6c24341.js","177","static/chunks/app/layout-a5eabd128b5a0438.js"],"default"]
+4:I[7555,[],""]
+5:I[1295,[],""]
+6:I[9543,["63","static/chunks/63-3d751bd68575be5a.js","963","static/chunks/963-0156314a21037738.js","874","static/chunks/874-88e24f0e286df0b2.js","345","static/chunks/app/not-found-57db5fa63be04eef.js"],"default"]
+7:I[4556,["63","static/chunks/63-3d751bd68575be5a.js","963","static/chunks/963-0156314a21037738.js","277","static/chunks/277-6cd9c283f70fe2a1.js","849","static/chunks/849-480521f34398746b.js","465","static/chunks/465-7367f464a6c24341.js","177","static/chunks/app/layout-a5eabd128b5a0438.js"],"default"]
+8:I[3317,["63","static/chunks/63-3d751bd68575be5a.js","963","static/chunks/963-0156314a21037738.js","277","static/chunks/277-6cd9c283f70fe2a1.js","849","static/chunks/849-480521f34398746b.js","465","static/chunks/465-7367f464a6c24341.js","177","static/chunks/app/layout-a5eabd128b5a0438.js"],"default"]
+9:I[894,[],"ClientPageRoot"]
+c:I[9665,[],"OutletBoundary"]
+e:I[4911,[],"AsyncMetadataOutlet"]
+10:I[9665,[],"ViewportBoundary"]
+12:I[9665,[],"MetadataBoundary"]
+13:"$Sreact.suspense"
+15:I[7726,["63","static/chunks/63-3d751bd68575be5a.js","963","static/chunks/963-0156314a21037738.js","874","static/chunks/874-88e24f0e286df0b2.js","219","static/chunks/app/global-error-2b6cc507d429bca2.js"],"default"]
+:HL["/_next/static/css/d9bcac48589b8964.css","style"]
+:HL["/_next/static/css/5245f8864fedc1ac.css","style"]
+:HL["/_next/static/css/bbd093fe12be409f.css","style"]
+0:{"P":null,"b":"sfKIhRKOj2inUKjNTtr-x","p":"","c":["","_not-found",""],"i":false,"f":[[["",{"children":["/_not-found",{"children":["__PAGE__",{}]}]},"$undefined","$undefined",true],["",["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/d9bcac48589b8964.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}],["$","link","1",{"rel":"stylesheet","href":"/_next/static/css/5245f8864fedc1ac.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}],["$","link","2",{"rel":"stylesheet","href":"/_next/static/css/bbd093fe12be409f.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","html",null,{"lang":"en","className":"__variable_8e83e0 __variable_e0f4e5 font-sans","style":{"fontFamily":"Trap, sans-serif"},"children":[["$","head",null,{"children":[["$","link",null,{"rel":"icon","href":"/metaicon.svg","type":"image/svg+xml"}],["$","link",null,{"rel":"shortcut icon","href":"/metaicon.svg"}],["$","link",null,{"rel":"apple-touch-icon","href":"/metaicon.svg"}]]}],["$","body",null,{"className":"min-h-screen bg-white","children":["$","$L2",null,{"children":[["$","$L3",null,{}],["$","$L4",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L5",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[["$","$L6",null,{}],[]],"forbidden":"$undefined","unauthorized":"$undefined"}],["$","$L7",null,{}],["$","$L8",null,{}]]}]}]]}]]}],{"children":["/_not-found",["$","$1","c",{"children":[null,["$","$L4",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L5",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":["__PAGE__",["$","$1","c",{"children":[["$","$L9",null,{"Component":"$6","searchParams":{},"params":{},"promises":["$@a","$@b"]}],null,["$","$Lc",null,{"children":["$Ld",["$","$Le",null,{"promise":"$@f"}]]}]]}],{},null,false]},null,false]},null,false],["$","$1","h",{"children":[["$","meta",null,{"name":"robots","content":"noindex"}],[["$","$L10",null,{"children":"$L11"}],null],["$","$L12",null,{"children":["$","div",null,{"hidden":true,"children":["$","$13",null,{"fallback":null,"children":"$L14"}]}]}]]}],false]],"m":"$undefined","G":["$15",[]],"s":false,"S":true}
+a:{}
+b:"$0:f:0:1:2:children:2:children:1:props:children:0:props:params"
+11:[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]
+d:null
+16:I[8175,[],"IconMark"]
+f:{"metadata":[["$","title","0",{"children":"LivingTech Creative"}],["$","meta","1",{"name":"description","content":"Created with Creative Engineering"}],["$","meta","2",{"name":"generator","content":"v0.dev"}],["$","link","3",{"rel":"icon","href":"/favicon.ico","type":"image/x-icon","sizes":"16x16"}],["$","$L16","4",{}]],"error":null,"digest":"$undefined"}
+14:"$f:metadata"

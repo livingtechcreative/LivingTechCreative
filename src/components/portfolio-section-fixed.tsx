@@ -315,7 +315,7 @@ export default function PortfolioSection({ portfolios = [] }: { portfolios: Port
                       alt={project.title}
                       width={600}
                       height={400}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-contain"
                     />
 
                     {/* Category Badge */}

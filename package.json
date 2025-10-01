@@ -6,7 +6,6 @@
     "dev": "next dev --turbopack",
     "prebuild": "node scripts/generate-blog-data.js && node scripts/generate-portfolio-data.js && node scripts/generate-showcase-data.js",
     "build": "next build",
-    "export": "npm run build && next export",
     "start": "next start",
     "lint": "next lint",
     "test": "jest",

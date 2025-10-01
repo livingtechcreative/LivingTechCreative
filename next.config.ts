@@ -2,8 +2,6 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   /* config options here */
-  // Enable static export
-  output: 'export',
   images: {
     remotePatterns: [
       {

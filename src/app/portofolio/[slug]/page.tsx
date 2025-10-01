@@ -4,31 +4,24 @@ import { Card, CardContent } from "@/components/ui/card"
 import { ArrowLeft, ExternalLink } from "lucide-react"
 import Link from "next/link"
 import { apiService } from "@/lib/api"
-import portfolioSlugs from "@/data/portfolio-slugs.json"
-import portfolioItems from "@/data/portfolio-items.json"
 import { normalizeImagePath } from "@/lib/utils"
 import { notFound } from "next/navigation"
 import CTABanner from "@/components/cta-banner"
 
-// Generate static params using prebuilt data (created in scripts/generate-portfolio-data.js)
-export function generateStaticParams(): { slug: string }[] {
-  console.log('[build] generateStaticParams(portofolio/page) called')
-  const slugs = (portfolioSlugs as string[])
-  if (!Array.isArray(slugs) || slugs.length === 0) {
-    return []
-  }
-  return slugs.map((slug) => ({ slug }))
+export const dynamicParams = true
+export const dynamic = 'force-dynamic'
+
+interface PageProps {
+  params: Promise<{ slug: string }>
+  searchParams?: Promise<{ [key: string]: string | string[] | undefined }>
 }
 
-// Keep these settings for static export
-export const dynamicParams = false
-export const dynamic = 'force-static'
-
-export default async function PortfolioDetailPage({ params }: { params: Promise<{ slug: string }> }) {
+export default async function PortfolioDetailPage({ params }: PageProps) {
+  // Await params to get the slug
   const { slug } = await params
-  
-  // Use prebuilt items during static export to avoid runtime network calls
-  const allPortfolios = (portfolioItems as any[])
+
+  // SSR: fetch from API
+  const allPortfolios = await apiService.getPortfolios()
   const activePortfolios = allPortfolios.filter(p => p?.is_active)
   const portfolio = activePortfolios.find(p => p.slug === slug)
   const currentIndex = activePortfolios.findIndex(p => p.slug === slug)

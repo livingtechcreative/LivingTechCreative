@@ -110,7 +110,7 @@ const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'https://dashboard.
     try {
       const url = `${API_BASE_URL}${endpoint}`
       const response = await fetch(url, {
-        next: { revalidate: 300 },
+        cache: 'no-store',
         headers: { 'Content-Type': 'application/json' }
       })
       if (!response.ok) {
@@ -275,15 +275,30 @@ const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'https://dashboard.
       const endpoints = [`/portofolio-solutions/${portfolioId}`, `/portfolio-solutions/${portfolioId}`]
       for (const endpoint of endpoints) {
         try {
-          const response = await this.fetchApi<PortfolioSolution[]>(endpoint)
-          return Array.isArray((response as any).data) ? (response as any).data : ([] as PortfolioSolution[])
+          // Menggunakan fetch langsung untuk menghindari throw error
+          const url = `${API_BASE_URL}${endpoint}`
+          const response = await fetch(url, {
+            cache: 'no-store',
+            headers: { 'Content-Type': 'application/json' }
+          })
+          
+          if (!response.ok) {
+            // Log error tapi tidak throw error
+            console.log(`API request for portfolio solutions returned ${response.status} for ${url}`)
+            continue
+          }
+          
+          const responseData = await response.json()
+          return Array.isArray(responseData.data) ? responseData.data : []
         } catch (error) {
+          // Log error tapi lanjut ke endpoint berikutnya
+          console.log(`Error fetching from ${endpoints[0]}:`, error)
           continue
         }
       }
       return []
     } catch (error) {
-      console.error(`Failed to fetch portfolio solutions for ${portfolioId}:`, error)
+      console.log(`Failed to fetch portfolio solutions for ${portfolioId}:`, error)
       return []
     }
   }

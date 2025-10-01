@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
+  // SSR mode (menghapus output: 'export')
   trailingSlash: true,
   distDir: 'build',
   eslint: {
@@ -8,8 +8,15 @@ const nextConfig = {
     ignoreDuringBuilds: true,
   },
   images: {
-    // Next/Image optimization is not available in static export
-    unoptimized: true,
+    // Mengaktifkan optimasi gambar untuk SSR
+    unoptimized: false,
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'dashboard.livingtechcreative.com',
+        pathname: '/storage/**',
+      },
+    ],
   },
 }
 

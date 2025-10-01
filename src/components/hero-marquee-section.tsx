@@ -81,7 +81,7 @@ export default function HeroMarqueeSection({ initialPortfolios = [] }: Props) {
                   src={normalizeImagePath(portfolio.cover_image) || "/placeholder.svg"}
                   alt={portfolio.title}
                   fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-300"
+                  className="object-fill group-hover:scale-105 transition-transform duration-300"
                   unoptimized={normalizeImagePath(portfolio.cover_image)?.includes('livingtechcreative.com')}
                 />
                 
@@ -125,7 +125,7 @@ export default function HeroMarqueeSection({ initialPortfolios = [] }: Props) {
                   src={normalizeImagePath(portfolio.cover_image) || "/placeholder.svg"}
                   alt={portfolio.title}
                   fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-300"
+                  className="object-fill group-hover:scale-105 transition-transform duration-300"
                   unoptimized={normalizeImagePath(portfolio.cover_image)?.includes('livingtechcreative.com')}
                 />
                 
