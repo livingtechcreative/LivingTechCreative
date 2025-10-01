@@ -131,11 +131,8 @@ export default async function PortfolioDetailPage({ params }: { params: Promise<
               </h2>
               <div 
                 className="prose prose-gray max-w-none"
-              >
-                <p className="text-sm sm:text-base text-gray-700 leading-relaxed mb-4">
-                  {portfolio.background}
-                </p>
-              </div>
+                dangerouslySetInnerHTML={{ __html: String(portfolio.background || '') }}
+              />
             </section>
 
             <section 
@@ -183,11 +180,8 @@ export default async function PortfolioDetailPage({ params }: { params: Promise<
               </h2>
               <div 
                 className="prose prose-gray max-w-none"
-              >
-                <p className="text-sm sm:text-base text-gray-700 leading-relaxed mb-4">
-                  {portfolio.problem}
-                </p>
-              </div>
+                dangerouslySetInnerHTML={{ __html: String(portfolio.problem || '') }}
+              />
             </section>
 
             <section 
@@ -201,11 +195,8 @@ export default async function PortfolioDetailPage({ params }: { params: Promise<
               </h2>
               <div 
                 className="prose prose-gray max-w-none"
-              >
-                <p className="text-sm sm:text-base text-gray-700 leading-relaxed mb-4">
-                  {portfolio.goal}
-                </p>
-              </div>
+                dangerouslySetInnerHTML={{ __html: String(portfolio.goal || '') }}
+              />
             </section>
 
             <section 

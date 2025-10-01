@@ -6,6 +6,7 @@ import Link from "next/link"
 import { useMemo } from "react"
 import { Portfolio } from "@/lib/api"
 import { normalizeImagePath } from "@/lib/utils"
+import portfolioItems from "@/data/portfolio-items.json"
 
 type Props = {
   initialPortfolios?: Portfolio[]
@@ -13,8 +14,12 @@ type Props = {
 
 export default function HeroMarqueeSection({ initialPortfolios = [] }: Props) {
   const portfolios = useMemo(() => {
-    const activePortfolios = (initialPortfolios || []).filter(p => p.is_active)
-    const featuredFirst = activePortfolios.sort((a, b) => {
+    const source: any[] = (initialPortfolios && initialPortfolios.length > 0)
+      ? (initialPortfolios as any[])
+      : ((portfolioItems as any[]) || [])
+    
+    const activePortfolios = (source || []).filter((p) => p?.is_active)
+    const featuredFirst = [...activePortfolios].sort((a: any, b: any) => {
       if (a.is_featured && !b.is_featured) return -1
       if (!a.is_featured && b.is_featured) return 1
       return 0

@@ -6,6 +6,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { Portfolio } from "@/lib/api"
 import { normalizeImagePath } from "@/lib/utils"
+import portfolioItems from "@/data/portfolio-items.json"
 
 // BadgeSubtitle component definition (in case it's missing)
 function BadgeSubtitle({ children }: { children: React.ReactNode }) {
@@ -124,66 +125,21 @@ export default function PortfolioSection({ portfolios = [] }: { portfolios: Port
   const [loading, setLoading] = useState(false)
   const [hoveredProject, setHoveredProject] = useState<string | null>(null)
 
-  // Mock data for demonstration
-  const projects = [
-    {
-      id: '1',
-      title: 'E-commerce Website',
-      description: 'A modern e-commerce platform with seamless checkout experience',
-      category: 'Web Development',
-      image: '/images/project1.jpg',
-      link: '/portfolio/ecommerce',
-      imageHeight: 'h-80',
-    },
-    {
-      id: '2',
-      title: 'Mobile App Design',
-      description: 'UI/UX design for a fitness tracking mobile application',
-      category: 'UI/UX Design',
-      image: '/images/project2.jpg',
-      link: '/portfolio/mobile-app',
-      imageHeight: 'h-96',
-    },
-    {
-      id: '3',
-      title: 'Brand Identity',
-      description: 'Complete brand identity design for a startup company',
-      category: 'Branding',
-      image: '/images/project3.jpg',
-      link: '/portfolio/brand-identity',
-      imageHeight: 'h-80',
-    },
-    {
-      id: '4',
-      title: 'Web Application',
-      description: 'Enterprise web application with advanced analytics',
-      category: 'Web Development',
-      image: '/images/project4.jpg',
-      link: '/portfolio/web-app',
-      imageHeight: 'h-96',
-    },
-    {
-      id: '5',
-      title: 'Marketing Campaign',
-      description: 'Digital marketing campaign for product launch',
-      category: 'Marketing',
-      image: '/images/project5.jpg',
-      link: '/portfolio/marketing',
-      imageHeight: 'h-80',
-    },
-    {
-      id: '6',
-      title: 'Mobile App Development',
-      description: 'Cross-platform mobile application development',
-      category: 'Mobile',
-      image: '/images/project6.jpg',
-      link: '/portfolio/mobile-dev',
-      imageHeight: 'h-96',
-    },
-  ].map(project => ({
-    ...project,
-    image: normalizeImagePath(project.image),
-    imageHeight: project.imageHeight || 'h-80',
+  // Build projects from real data (prop portfolios or local JSON fallback)
+  const sourceItems: any[] = (portfolios && portfolios.length > 0)
+    ? (portfolios as any[])
+    : ((portfolioItems as any[]) || [])
+
+  const activeItems = sourceItems.filter((p) => p?.is_active)
+
+  const projects = activeItems.map((item) => ({
+    id: String(item.id),
+    title: item.title,
+    description: item.background || item.goal || '',
+    category: item.category || 'Project',
+    image: normalizeImagePath(item.cover_image),
+    link: `/portofolio/${item.slug}`,
+    imageHeight: 'h-80',
   }))
 
   const filteredProjects = projects
