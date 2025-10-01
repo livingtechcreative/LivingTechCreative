@@ -139,7 +139,7 @@ export default function SimpleNavbar() {
         >
           <Button
             className="bg-transparent text-white hover:bg-gray-800 transition-all duration-300 font-semibold text-base"
-            onClick={() => window.open('https://calendar.app.google/Gtr3aLwyQB5mP8es5', '_blank')}
+            onClick={() => window.open('https://calendar.app.google/gHQsqDPtkg2MFs519', '_blank')}
           >
             Book a Call
           </Button>
@@ -172,7 +172,7 @@ export default function SimpleNavbar() {
           {/* Mobile CTA Button */}
           <Button
             className="bg-black text-white hover:bg-gray-800 transition-all duration-300 font-semibold text-sm px-4 py-2 rounded-full"
-            onClick={() => window.open('https://calendar.app.google/Gtr3aLwyQB5mP8es5', '_blank')}
+            onClick={() => window.open('https://calendar.app.google/gHQsqDPtkg2MFs519', '_blank')}
           >
             Book a Call
           </Button>
