@@ -27,7 +27,7 @@ export default function HomeClient({ portfolios }: HomeClientProps) {
       <div id="services">
         <ServicesSection />
       </div>
-      <div id="portofolio">
+      <div id="portfolio">
         <PortfolioSection portfolios={portfolios} />
       </div>
       <BannerSection />

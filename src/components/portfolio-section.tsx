@@ -222,7 +222,7 @@ export default function PortfolioSection({ portfolios = [] }: { portfolios: Port
                   whileHover="hover"
                 >
                   <Image
-                    src="/images/liv.png"
+                    src="/images/liv.svg"
                     alt="Liv"
                     width={56}
                     height={56}
@@ -241,7 +241,7 @@ export default function PortfolioSection({ portfolios = [] }: { portfolios: Port
                   whileHover="hover"
                 >
                   <Image
-                    src="/images/paint.png"
+                    src="/images/paint.svg"
                     alt="Project"
                     width={56}
                     height={56}

@@ -222,7 +222,7 @@ export default function FAQSection() {
                   variants={iconVariants}
                 >
                   <Image
-                    src="/images/chat.png"
+                    src="/images/chat.svg"
                     alt="Chat"
                     width={48}
                     height={48}
@@ -237,7 +237,7 @@ export default function FAQSection() {
                   variants={iconVariants}
                 >
                   <Image
-                    src="/images/people.png"
+                    src="/images/people.svg"
                     alt="People"
                     width={48}
                     height={48}

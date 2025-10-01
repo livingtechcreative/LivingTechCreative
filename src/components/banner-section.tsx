@@ -129,7 +129,7 @@ export default function BannerSection() {
                       variants={iconVariants}
                     >
                       <Image 
-                        src="/images/books.png" 
+                        src="/images/books.svg" 
                         alt="Books" 
                         width={56}
                         height={56}
@@ -152,7 +152,7 @@ export default function BannerSection() {
                         variants={iconVariants}
                       >
                         <Image 
-                          src="/images/books.png" 
+                          src="/images/books.svg" 
                           alt="Books" 
                           width={56}
                           height={56}

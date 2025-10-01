@@ -1,120 +1,120 @@
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'https://dashboard.livingtechcreative.com/api'
-
-export interface ShowcaseItem {
-  id: number
-  title: string
-  image: string
-  url: string
-  display_order: number
-  is_active: boolean
-  created_at: string
-  updated_at: string
-}
-
-export interface Portfolio {
-  id: number
-  title: string
-  slug: string
-  background: string
-  client: string
-  category: string
-  start_date: string
-  end_date: string
-  duration_days: number
-  problem: string
-  goal: string
-  conclution: string
-  cover_image: string
-  project_url: string
-  display_order: number
-  is_active: boolean
-  is_featured: boolean
-  created_at: string
-  updated_at: string
-}
-
-export interface BlogPost {
-  id: number
-  title: string
-  excerpt: string
-  content: string
-  introduction: string | null
-  conclution: string | null
-  slug: string
-  cover_image: string
-  author: string
-  read_duration: number | null
-  published_at: string
-  display_order: number
-  is_active: boolean
-  created_at: string | null
-  updated_at: string | null
-}
-
-export interface BlogPostCategory {
-  id: number
-  blog_post_id: number
-  category_id: number
-  created_at: string | null
-  updated_at: string | null
-}
-
-export interface PortfolioTag {
-  id: number
-  portofolio_id: number
-  tag_id: number
-  created_at: string
-  updated_at: string
-}
-
-export interface ContactFormData {
-  name: string
-  email: string
-  phone: string
-  message: string
-  information_source: string
-}
-
-export interface ContactFormResponse {
-  id: number
-  name: string
-  email: string
-  phone: string
-  message: string
-  information_source: string
-  created_at: string
-  updated_at: string
-}
-
-export interface ApiResponse<T> {
-  data: T
-}
-
-class ApiService {
-  private async fetchApi<T>(endpoint: string): Promise<T> {
+ 
+ // Default to the live API base URL if env is not provided
+  // The docs URL is not an API endpoint; keep it only for documentation reference
+  // Example override in .env.local: NEXT_PUBLIC_API_BASE_URL=https://dashboard.livingtechcreative.com/api
+  const __API_DEFAULT_CHECK__ = 'https://dashboard.livingtechcreative.com/api'
+ 
+  export interface ShowcaseItem {
+    id: number
+    title: string
+    image: string
+    url: string
+    display_order: number
+    is_active: boolean
+    created_at: string
+    updated_at: string
+  }
+  
+  export interface Portfolio {
+    id: number
+    title: string
+    slug: string
+    background: string
+    client: string
+    category: string
+    start_date: string
+    end_date: string
+    duration_days: number
+    problem: string
+    goal: string
+    conclution: string
+    cover_image: string
+    project_url: string
+    display_order: number
+    is_active: boolean
+    is_featured: boolean
+    created_at: string
+    updated_at: string
+  }
+  
+  export interface BlogPost {
+    id: number
+    title: string
+    excerpt: string
+    content: string
+    introduction: string | null
+    conclution: string | null
+    slug: string
+    cover_image: string
+    author: string
+    read_duration: number | null
+    published_at: string
+    display_order: number
+    is_active: boolean
+    created_at: string | null
+    updated_at: string | null
+  }
+  
+  export interface BlogPostCategory {
+    id: number
+    blog_post_id: number
+    category_id: number
+    created_at: string | null
+    updated_at: string | null
+  }
+  
+  export interface PortfolioTag {
+    id: number
+    portofolio_id: number
+    tag_id: number
+    created_at: string
+    updated_at: string
+  }
+  
+  export interface ContactFormData {
+    name: string
+    email: string
+    phone: string
+    message: string
+    information_source: string
+  }
+  
+  export interface ContactFormResponse {
+    id: number
+    name: string
+    email: string
+    phone: string
+    message: string
+    information_source: string
+    created_at: string
+    updated_at: string
+  }
+  
+  export interface ApiResponse<T> {
+    data: T
+  }
+ 
+  class ApiService {
+   private async fetchApi<T>(endpoint: string): Promise<ApiResponse<T>> {
     try {
       const url = `${API_BASE_URL}${endpoint}`
-      
       const response = await fetch(url, {
-        next: { revalidate: 300 }, // Cache for 5 minutes
-        headers: {
-          'Content-Type': 'application/json',
-        }
+        next: { revalidate: 300 },
+        headers: { 'Content-Type': 'application/json' }
       })
-      
       if (!response.ok) {
         console.error(`API request failed: ${response.status} ${response.statusText} for ${url}`)
         throw new Error(`API request failed: ${response.status}`)
       }
-      
-      const data = await response.json()
+      const data = await response.json() as ApiResponse<T>
       return data
     } catch (error) {
       console.error(`API Error for ${endpoint}:`, error)
       throw error
     }
   }
-
+ 
   // Mock data for development/fallback
   private getMockPortfolios(): Portfolio[] {
     return [
@@ -170,7 +170,7 @@ class ApiService {
       
       for (const endpoint of endpoints) {
         try {
-          const response = await this.fetchApi<ApiResponse<Portfolio[]>>(endpoint)
+          const response = await this.fetchApi<Portfolio[]>(endpoint)
           return response.data
         } catch (error) {
           console.warn(`Endpoint ${endpoint} failed, trying next...`)
@@ -195,7 +195,7 @@ class ApiService {
       
       for (const endpoint of endpoints) {
         try {
-          const response = await this.fetchApi<ApiResponse<Portfolio>>(endpoint)
+          const response = await this.fetchApi<Portfolio>(endpoint)
           return response.data
         } catch (error) {
           continue
@@ -236,7 +236,7 @@ class ApiService {
       
       for (const endpoint of endpoints) {
         try {
-          const response = await this.fetchApi<ApiResponse<PortfolioTag[]>>(endpoint)
+          const response = await this.fetchApi<PortfolioTag[]>(endpoint)
           return response.data
         } catch (error) {
           continue
@@ -264,7 +264,7 @@ class ApiService {
     try {
       // Try to fetch from showcases endpoint (note the plural)
       try {
-        const response = await this.fetchApi<ApiResponse<ShowcaseItem[]>>('/showcases')
+        const response = await this.fetchApi<ShowcaseItem[]>('/showcases')
         return response.data
       } catch (showcaseError) {
         console.warn('Showcases endpoint not available, using portfolio data as fallback')
@@ -295,7 +295,7 @@ class ApiService {
     try {
       // Try to fetch from showcases endpoint first (note the plural)
       try {
-        const response = await this.fetchApi<ApiResponse<ShowcaseItem>>(`/showcases/${id}`)
+        const response = await this.fetchApi<ShowcaseItem>(`/showcases/${id}`)
         return response.data
       } catch (showcaseError) {
         console.warn(`Showcases item endpoint not available, using portfolio data as fallback for ID: ${id}`)
@@ -312,7 +312,7 @@ class ApiService {
 
   async getBlogPosts(): Promise<BlogPost[]> {
     try {
-      const response = await this.fetchApi<ApiResponse<BlogPost[]>>('/blog-posts')
+      const response = await this.fetchApi<BlogPost[]>('/blog-posts')
       return response.data
     } catch (error) {
       console.error('Failed to fetch blog posts:', error)
@@ -322,7 +322,7 @@ class ApiService {
 
   async getBlogPost(id: number): Promise<BlogPost | null> {
     try {
-      const response = await this.fetchApi<ApiResponse<BlogPost>>(`/blog-posts/${id}`)
+      const response = await this.fetchApi<BlogPost>(`/blog-posts/${id}`)
       return response.data
     } catch (error) {
       console.error(`Failed to fetch blog post ${id}:`, error)
@@ -335,26 +335,14 @@ class ApiService {
       // Fetch all blog posts and find by slug
       const blogPosts = await this.getBlogPosts()
       const blogPost = blogPosts.find(p => p.slug === slug && p.is_active)
-      
       if (!blogPost) {
         console.warn(`Blog post with slug "${slug}" not found or not active`)
         return null
       }
-      
       return blogPost
     } catch (error) {
       console.error(`Failed to fetch blog post with slug ${slug}:`, error)
       return null
-    }
-  }
-
-  async getBlogPostCategories(blogPostId: number): Promise<BlogPostCategory[]> {
-    try {
-      const response = await this.fetchApi<ApiResponse<BlogPostCategory[]>>(`/blog-post-categories/${blogPostId}`)
-      return response.data
-    } catch (error) {
-      console.error(`Failed to fetch blog post categories for ${blogPostId}:`, error)
-      return []
     }
   }
 

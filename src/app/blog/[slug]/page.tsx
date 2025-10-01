@@ -10,10 +10,8 @@ import { apiService } from "@/lib/api"
 import { normalizeImagePath } from "@/lib/utils"
 import blogPosts from "@/data/blog-posts.json"
 
-// Local fallback slugs generated at prebuild (used only if API is unavailable during build)
 import blogSlugs from '@/data/blog-slugs.json'
 
-// Generate static params for blog pages – prefer live API during build, fallback to prebuilt JSON
 export async function generateStaticParams(): Promise<{ slug: string }[]> {
   try {
     console.log('[build] generateStaticParams(blog/page) called')
@@ -41,23 +39,28 @@ export async function generateStaticParams(): Promise<{ slug: string }[]> {
     return mapped
   }
 }
-
 // CRITICAL: These settings are required for static export
 export const dynamicParams = false  // MUST be false for static export
-export const dynamic = 'force-static'
-
-export default async function BlogDetailPage({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params
+  export const dynamic = 'force-static'
   
-  try {
-    const allBlogPosts = (blogPosts as any[]).filter((p) => p?.is_active)
-    const blogPost = allBlogPosts.find(p => p.slug === slug)
-    const currentIndex = allBlogPosts.findIndex(p => p.slug === slug)
-
+  export default async function BlogDetailPage({ params }: { params: Promise<{ slug: string }> }) {
+    const { slug } = await params
+    
+    try {
+    let allBlogPosts = (blogPosts as any[]).filter((p) => p?.is_active)
+    let blogPost = allBlogPosts.find(p => p.slug === slug)
+    let currentIndex = allBlogPosts.findIndex(p => p.slug === slug)
+    // Fallback to live API if not found in local data
     if (!blogPost) {
-      notFound()
+      const livePosts = await apiService.getBlogPosts()
+      const activeLivePosts = (livePosts || []).filter((p) => p?.is_active)
+      const liveMatch = activeLivePosts.find(p => p.slug === slug)
+      if (liveMatch) {
+        allBlogPosts = activeLivePosts
+        blogPost = liveMatch
+        currentIndex = allBlogPosts.findIndex(p => p.slug === slug)
+      }
     }
-
     const previous = currentIndex > 0 ? allBlogPosts[currentIndex - 1] : null
     const next = currentIndex < allBlogPosts.length - 1 ? allBlogPosts[currentIndex + 1] : null
 

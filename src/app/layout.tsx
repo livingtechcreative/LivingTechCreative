@@ -5,6 +5,8 @@ import '../styles/fonts.css'
 import FloatingWhatsApp from '@/components/floating-whatsapp'
 import ErrorBoundary from '@/components/error-boundary'
 import '@/lib/error-handler'
+import IntegratedNavbar from '@/components/integrated-navbar'
+import Footer from '@/components/footer'
 
 export const metadata: Metadata = {
   title: 'LivingTech Creative',
@@ -26,8 +28,10 @@ export default function RootLayout({
       </head>
       <body className="min-h-screen bg-white">
         <ErrorBoundary>
+          <IntegratedNavbar />
           {children}
           <FloatingWhatsApp />
+          <Footer />
         </ErrorBoundary>
       </body>
     </html>

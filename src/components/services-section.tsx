@@ -191,7 +191,7 @@ export default function ServicesSection() {
                 whileHover="hover"
               >
                 <Image
-                  src="/images/paint.png"
+                  src="/images/paint.svg"
                   alt="paint icon"
                   width={40}
                   height={40}
