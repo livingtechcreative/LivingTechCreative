@@ -2,7 +2,7 @@
 const nextConfig = {
   // SSR mode (menghapus output: 'export')
   trailingSlash: true,
-  distDir: 'build',
+  // Removed distDir: 'build' for Vercel compatibility
   eslint: {
     // Ignore ESLint errors during builds (useful when tests/dev files have strict rules)
     ignoreDuringBuilds: true,
