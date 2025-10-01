@@ -4,8 +4,6 @@ import ShareButton from "@/components/blog/share-button"
 import { Card, CardContent } from "@/components/ui/card"
 import { ArrowLeft, Calendar, Clock, User } from "lucide-react"
 import Link from "next/link"
-import IntegratedNavbar from "@/components/integrated-navbar"
-import Footer from "@/components/footer"
 import { apiService } from "@/lib/api"
 import { normalizeImagePath } from "@/lib/utils"
 import blogPosts from "@/data/blog-posts.json"
@@ -26,7 +24,7 @@ export async function generateStaticParams(): Promise<{ slug: string }[]> {
     const mapped = slugs.map((slug: string) => ({ slug }))
     if (mapped.length === 0) {
       console.log('[build] generateStaticParams(blog/page) no API slugs, using mock fallback')
-      return [{ slug: 'placeholder' }]
+      return []
     }
     return mapped
   } catch (e) {
@@ -34,7 +32,7 @@ export async function generateStaticParams(): Promise<{ slug: string }[]> {
     const mapped = (blogSlugs as string[]).map((slug) => ({ slug }))
     if (mapped.length === 0) {
       console.log('[build] generateStaticParams(blog/page) local json empty, using mock fallback')
-      return [{ slug: 'placeholder' }]
+      return []
     }
     return mapped
   }
@@ -97,7 +95,6 @@ export const dynamicParams = false  // MUST be false for static export
 
     return (
       <div className="min-h-screen bg-white">
-        <IntegratedNavbar />
         
         {/* Header Section */}
         <header className="pt-24 pb-8 bg-gradient-to-br from-gray-50 to-white">
@@ -328,8 +325,6 @@ export const dynamicParams = false  // MUST be false for static export
             </div>
           </div>
         </main>
-
-        <Footer />
       </div>
     )
   } catch (error) {

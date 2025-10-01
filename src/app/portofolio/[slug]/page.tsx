@@ -3,8 +3,6 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { ArrowLeft, ExternalLink } from "lucide-react"
 import Link from "next/link"
-import IntegratedNavbar from "@/components/integrated-navbar"
-import Footer from "@/components/footer"
 import { apiService } from "@/lib/api"
 import portfolioSlugs from "@/data/portfolio-slugs.json"
 import portfolioItems from "@/data/portfolio-items.json"
@@ -17,11 +15,7 @@ export function generateStaticParams(): { slug: string }[] {
   console.log('[build] generateStaticParams(portofolio/page) called')
   const slugs = (portfolioSlugs as string[])
   if (!Array.isArray(slugs) || slugs.length === 0) {
-    // Fallback mock slugs to ensure export can proceed
-    return [
-      { slug: 'ecommerce-platform' },
-      { slug: 'mobile-banking-app' },
-    ]
+    return []
   }
   return slugs.map((slug) => ({ slug }))
 }
@@ -57,7 +51,6 @@ export default async function PortfolioDetailPage({ params }: { params: Promise<
 
   return (
     <div className="min-h-screen bg-white">
-      <IntegratedNavbar />
       <header 
         className="bg-white pt-20 sm:pt-32"
       >
@@ -224,66 +217,12 @@ export default async function PortfolioDetailPage({ params }: { params: Promise<
               >
                 Solution
               </h2>
-
-              <div 
-                className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-6 sm:mb-8"
-              >
+              {Boolean((portfolio as any).solution) && (
                 <div 
-                  className="space-y-3 p-3 sm:p-0"
-                >
-                  <div 
-                    className="bg-gray-200 rounded-lg h-24 sm:h-32 flex items-center justify-center"
-                  >
-                    <div className="w-full h-full bg-gray-200 rounded-lg"></div>
-                  </div>
-                  <h3 className="font-semibold text-gray-900 text-sm sm:text-base">User-Centered Design</h3>
-                  <p className="text-xs sm:text-sm text-gray-700">
-                    Implemented intuitive user interfaces and seamless user experiences that prioritize user needs and goals.
-                  </p>
-                </div>
-
-                <div 
-                  className="space-y-3 p-3 sm:p-0"
-                >
-                  <div 
-                    className="bg-gray-200 rounded-lg h-24 sm:h-32 flex items-center justify-center"
-                  >
-                    <div className="w-full h-full bg-gray-200 rounded-lg"></div>
-                  </div>
-                  <h3 className="font-semibold text-gray-900 text-sm sm:text-base">Modern Technology Stack</h3>
-                  <p className="text-xs sm:text-sm text-gray-700">
-                    Utilized cutting-edge technologies and frameworks to ensure scalability, performance, and maintainability.
-                  </p>
-                </div>
-
-                <div 
-                  className="space-y-3 p-3 sm:p-0"
-                >
-                  <div 
-                    className="bg-gray-200 rounded-lg h-24 sm:h-32 flex items-center justify-center"
-                  >
-                    <div className="w-full h-full bg-gray-200 rounded-lg"></div>
-                  </div>
-                  <h3 className="font-semibold text-gray-900 text-sm sm:text-base">Responsive Architecture</h3>
-                  <p className="text-xs sm:text-sm text-gray-700">
-                    Built flexible and adaptive systems that work seamlessly across all devices and platforms.
-                  </p>
-                </div>
-
-                <div 
-                  className="space-y-3 p-3 sm:p-0"
-                >
-                  <div 
-                    className="bg-gray-200 rounded-lg h-24 sm:h-32 flex items-center justify-center"
-                  >
-                    <div className="w-full h-full bg-gray-200 rounded-lg"></div>
-                  </div>
-                  <h3 className="font-semibold text-gray-900 text-sm sm:text-base">Performance Optimization</h3>
-                  <p className="text-xs sm:text-sm text-gray-700">
-                    Optimized for speed and efficiency, ensuring fast loading times and smooth user interactions.
-                  </p>
-                </div>
-              </div>
+                  className="prose prose-gray max-w-none"
+                  dangerouslySetInnerHTML={{ __html: (portfolio as any).solution }}
+                />
+              )}
             </section>
 
             <section 
@@ -371,10 +310,7 @@ export default async function PortfolioDetailPage({ params }: { params: Promise<
             </div>
           </div>
         </div>
-
-        <CTABanner className="mt-12 sm:mt-16 mb-6 sm:mb-8 -mx-4 sm:-mx-6" compact />
       </main>
-      <Footer />
     </div>
   )
 }

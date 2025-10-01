@@ -14,11 +14,11 @@
     "conclution": "lkndlskdsa",
     "cover_image": "portofolio/01K63GQ36NPZRBV3PF897C8WJK.jpg",
     "project_url": null,
-    "display_order": 0,
+    "display_order": 2,
     "is_active": true,
     "is_featured": false,
     "created_at": "2025-09-26T17:21:45.000000Z",
-    "updated_at": "2025-09-26T17:21:45.000000Z"
+    "updated_at": "2025-10-01T13:05:29.000000Z"
   },
   {
     "id": 12,
@@ -35,31 +35,31 @@
     "conclution": "dsad",
     "cover_image": "portofolio-cover-image/01K63KSWAZSZ7RJZVXN7DSRPJ0.jpg",
     "project_url": null,
-    "display_order": 0,
+    "display_order": 3,
     "is_active": true,
     "is_featured": false,
     "created_at": "2025-09-26T18:15:42.000000Z",
-    "updated_at": "2025-09-26T18:15:42.000000Z"
+    "updated_at": "2025-10-01T13:05:29.000000Z"
   },
   {
-    "id": 13,
-    "title": "sds",
-    "slug": "sds",
-    "background": "sdsad",
-    "client": "dasd",
-    "category": "Corporate Event",
+    "id": 14,
+    "title": "HR Attrition Dashboard",
+    "slug": "hr-attrition-dashboard",
+    "background": "In competitive business landscape, effective human resource management plays a pivotal role in sustaining company growth and operational stability. One of the most pressing challenges for many organization is to understainding the patterns behind employee retention and attrition. \n\nTo address this challenge, we initiated the development of a comprehensive dashboard that provides a view of employee data, with focus on analyzing retention and attrition trends.",
+    "client": "HR CNB",
+    "category": "Data Visualization",
     "start_date": "2025-09-01T00:00:00.000000Z",
-    "end_date": "2025-09-03T00:00:00.000000Z",
-    "duration_days": 2,
-    "problem": "<p>sdas</p>",
-    "goal": "sad",
-    "conclution": "sadsd",
-    "cover_image": "portofolio-cover-image/01K63M2M9KH71G22ZZKRAZBZB0.jpg",
+    "end_date": "2025-09-30T00:00:00.000000Z",
+    "duration_days": 29,
+    "problem": "<h2><strong>1. Overview</strong></h2>\n<p>The <strong>Overview section</strong> provides a high-level summary of key HR metrics to monitor the workforce status and highlight areas that require attention:</p>\n<ul>\n<li><strong>Total number of employees</strong>: A real-time count of current employees and those who have left (attrition), including the <strong>attrition percentage</strong>.</li>\n<li><strong>Attrition/Retention by Department</strong>: Highlights which departments have the highest and lowest attrition or retention counts.</li>\n<li><strong>Attrition/Retention by Job Role</strong>: Provides visibility into turnover patterns across different roles within the company.</li>\n</ul>\n<h2><strong>2. Demographics</strong></h2>\n<p>Understanding the <strong>demographic composition</strong> of the workforce is essential for creating inclusive and targeted employee policies. This section visualizes:</p>\n<ul>\n<li><strong>Gender Distribution</strong> among current employees to support diversity and equity initiatives.</li>\n<li><strong>Attrition and Retention by Age Group</strong> to reveal if younger or older employees are more likely to leave or stay.</li>\n<li><strong>Education Levels</strong> associated with both attrition and retention trends to identify whether certain qualifications influence employee longevity.</li>\n</ul>\n<h2><strong>3. Income</strong></h2>\n<p>The <strong>Income section</strong> focuses on analyzing compensation trends in relation to employee profiles, providing insights into fairness, motivation, and potential drivers of attrition:</p>\n<ul>\n<li>\n<p><strong>Average Income by Education and Gender</strong>: Explores how pay varies across gender and educational backgrounds, identifying any disparities that might affect retention.</p>\n</li>\n<li>\n<p><strong>Correlation between Average Monthly Income, Age, and Job Roles</strong>: Visualizes how income scales with experience and responsibilities, helping to evaluate whether compensation policies align with employee expectations.</p>\n</li>\n</ul>",
+    "goal": "1. Overview\n\nThe Overview section provides a high-level summary of key HR metrics to monitor the workforce status and highlight areas that require attention:\n\nTotal number of employees: A real-time count of current employees and those who have left (attrition), including the attrition percentage.\nAttrition/Retention by Department: Highlights which departments have the highest and lowest attrition or retention counts.\nAttrition/Retention by Job Role: Provides visibility into turnover patterns across different roles within the company.\n2. Demographics\n\nUnderstanding the demographic composition of the workforce is essential for creating inclusive and targeted employee policies. This section visualizes:\n\nGender Distribution among current employees to support diversity and equity initiatives.\nAttrition and Retention by Age Group to reveal if younger or older employees are more likely to leave or stay.\nEducation Levels associated with both attrition and retention trends to identify whether certain qualifications influence employee longevity.\n3. Income\n\nThe Income section focuses on analyzing compensation trends in relation to employee profiles, providing insights into fairness, motivation, and potential drivers of attrition:\n\nAverage Income by Education and Gender: Explores how pay varies across gender and educational backgrounds, identifying any disparities that might affect retention.\n\nCorrelation between Average Monthly Income, Age, and Job Roles: Visualizes how income scales with experience and responsibilities, helping to evaluate whether compensation policies align with employee expectations.",
+    "conclution": "By tracking attrition and retention across key categories such as department, role, demographics, and income, the company can better understand why employees stay or leave—and respond with targeted interventions to improve employee satisfaction, reduce turnover, and build a resilient workforce.",
+    "cover_image": "portofolio-cover-image/01K6FY122EDWFXZXZ0A1TRRWEG.png",
     "project_url": null,
-    "display_order": 0,
+    "display_order": 1,
     "is_active": true,
     "is_featured": false,
-    "created_at": "2025-09-26T18:20:28.000000Z",
-    "updated_at": "2025-09-26T18:20:28.000000Z"
+    "created_at": "2025-10-01T13:05:16.000000Z",
+    "updated_at": "2025-10-01T13:05:29.000000Z"
   }
 ]

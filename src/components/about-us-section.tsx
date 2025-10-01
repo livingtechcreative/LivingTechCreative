@@ -132,7 +132,7 @@ export default function AboutUsSection() {
             >
               <div className="flex flex-wrap items-center gap-2">
                 <motion.div 
-                  className="relative inline-block"
+                  className="relative -translate-y-1 inline-block overflow-hidden hero-icon"
                   variants={imageVariants}
                   whileHover="hover"
                 >
@@ -141,7 +141,7 @@ export default function AboutUsSection() {
                     alt="Hand Wave"
                     width={56}
                     height={56}
-                    className="rounded-lg object-cover w-8 h-8 sm:w-12 sm:h-12 md:w-14 md:h-14"
+                    className="object-contain w-8 h-8 sm:w-12 sm:h-12 md:w-14 md:h-14"
                   />
                 </motion.div>
                 <span className="inline-block bg-gradient-to-r from-[#2B35AB] via-[#8A38F5] to-[#13CBD4] bg-clip-text text-transparent">

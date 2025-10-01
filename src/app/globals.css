@@ -250,10 +250,64 @@ img[src$=".svg"] {
 }
 
 /* Prevent any system-level color adjustments */
-@media (prefers-color-scheme: dark) {
-  .hero-icon img[src$=".svg"] {
+  @media (prefers-color-scheme: dark) {
+    .hero-icon img[src$=".svg"] {
+      filter: none !important;
+      -webkit-filter: none !important;
+      opacity: 1 !important;
+    }
+  }
+
+/* Generic heading icon wrapper to match hero icon rendering */
+.heading-icon {
+  display: inline-block;
+  vertical-align: middle;
+  overflow: hidden;
+  transform: translateY(0.15em) translateZ(0);
+  -webkit-transform: translateY(0.15em) translateZ(0);
+  will-change: transform;
+}
+.heading-icon img,
+.heading-icon svg {
+  width: 1em;
+  height: 1em;
+  object-fit: contain;
+  image-rendering: auto;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  filter: none;
+  -webkit-filter: none;
+}
+@media (max-width: 640px) {
+  .heading-icon img,
+  .heading-icon svg {
+    image-rendering: auto;
+    -webkit-image-rendering: auto;
+    filter: contrast(1) brightness(1) saturate(1);
+    -webkit-filter: contrast(1) brightness(1) saturate(1);
+    opacity: 1 !important;
+    color: inherit;
+    fill: currentColor;
+  }
+  .heading-icon svg path,
+  .heading-icon svg g {
+    fill: inherit;
+    stroke: inherit;
+  }
+}
+@media screen {
+  .heading-icon img[src$=".svg"] {
     filter: none !important;
     -webkit-filter: none !important;
     opacity: 1 !important;
+    color-scheme: light !important;
+    forced-color-adjust: none !important;
+    -webkit-forced-color-adjust: none !important;
+    image-rendering: auto !important;
+    -webkit-image-rendering: auto !important;
+    background: transparent !important;
+    mix-blend-mode: normal !important;
   }
 }
