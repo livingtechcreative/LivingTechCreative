@@ -29,23 +29,37 @@ export function normalizeImagePath(imagePath: string | null | undefined): string
     return `${assetBase}/${imagePath}`
   }
   
-  // If it's already a relative path starting with "/", check if it's a portfolio image
+  // If it's already a relative path starting with "/", check if it's a portfolio/portofolio image
   if (imagePath.startsWith('/')) {
-    // If it's a portfolio image path that doesn't exist locally, convert to external URL
-    if (imagePath.startsWith('/portfolio/')) {
-      const externalUrl = `${assetBase}/storage${imagePath}`
-      return externalUrl
+    const lower = imagePath.toLowerCase()
+    const isPortfolioLike = lower.startsWith('/portfolio/')
+      || lower.startsWith('/portfolio-cover-image/')
+      || lower.startsWith('/portofolio/')
+      || lower.startsWith('/portofolio-cover-image/')
+      || lower.startsWith('/portofolio-cover/')
+
+    if (isPortfolioLike) {
+      // Map to external storage URL
+      return `${assetBase}/storage${imagePath}`
     }
+    // Otherwise assume it's a valid public asset path
     return imagePath
   }
   
   // For relative paths without leading slash
-  if (imagePath.startsWith('portfolio/')) {
-    // Convert portfolio paths to external URL
-    const externalUrl = `${assetBase}/storage/${imagePath}`
-    return externalUrl
+  {
+    const lower = imagePath.toLowerCase()
+    const isPortfolioLike = lower.startsWith('portfolio/')
+      || lower.startsWith('portfolio-cover-image/')
+      || lower.startsWith('portofolio/')
+      || lower.startsWith('portofolio-cover-image/')
+      || lower.startsWith('portofolio-cover/')
+
+    if (isPortfolioLike) {
+      return `${assetBase}/storage/${imagePath}`
+    }
   }
   
-  // Add leading slash for other relative paths
-  return `/${imagePath}`
+  // Default: treat as backend storage key when not an absolute URL
+  return `${assetBase}/storage/${imagePath}`
 }

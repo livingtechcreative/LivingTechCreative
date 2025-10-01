@@ -17,6 +17,12 @@ const nextConfig: NextConfig = {
         hostname: 'livingtechcreative.com',
         port: '',
         pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'dashboard.livingtechcreative.com',
+        port: '',
+        pathname: '/**',
       }
     ],
     // Required for static export with next/image (no server-side optimization)

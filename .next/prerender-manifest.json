@@ -30,30 +30,6 @@
         "x-next-revalidate-tag-token"
       ]
     },
-    "/showcase": {
-      "experimentalBypassFor": [
-        {
-          "type": "header",
-          "key": "Next-Action"
-        },
-        {
-          "type": "header",
-          "key": "content-type",
-          "value": "multipart/form-data;.*"
-        }
-      ],
-      "initialRevalidateSeconds": false,
-      "srcRoute": "/showcase",
-      "dataRoute": "/showcase.rsc",
-      "allowHeader": [
-        "host",
-        "x-matched-path",
-        "x-prerender-revalidate",
-        "x-prerender-revalidate-if-generated",
-        "x-next-revalidated-tags",
-        "x-next-revalidate-tag-token"
-      ]
-    },
     "/portofolio": {
       "experimentalBypassFor": [
         {
@@ -78,7 +54,7 @@
         "x-next-revalidate-tag-token"
       ]
     },
-    "/portofolio/event-launching-product-baru": {
+    "/showcase": {
       "experimentalBypassFor": [
         {
           "type": "header",
@@ -91,8 +67,8 @@
         }
       ],
       "initialRevalidateSeconds": false,
-      "srcRoute": "/portofolio/[slug]",
-      "dataRoute": "/portofolio/event-launching-product-baru.rsc",
+      "srcRoute": "/showcase",
+      "dataRoute": "/showcase.rsc",
       "allowHeader": [
         "host",
         "x-matched-path",
@@ -102,7 +78,7 @@
         "x-next-revalidate-tag-token"
       ]
     },
-    "/portofolio/hr-attrition-dashboard": {
+    "/blog": {
       "experimentalBypassFor": [
         {
           "type": "header",
@@ -115,32 +91,8 @@
         }
       ],
       "initialRevalidateSeconds": false,
-      "srcRoute": "/portofolio/[slug]",
-      "dataRoute": "/portofolio/hr-attrition-dashboard.rsc",
-      "allowHeader": [
-        "host",
-        "x-matched-path",
-        "x-prerender-revalidate",
-        "x-prerender-revalidate-if-generated",
-        "x-next-revalidated-tags",
-        "x-next-revalidate-tag-token"
-      ]
-    },
-    "/portofolio/landing-page-dinamis-umkm-makanan": {
-      "experimentalBypassFor": [
-        {
-          "type": "header",
-          "key": "Next-Action"
-        },
-        {
-          "type": "header",
-          "key": "content-type",
-          "value": "multipart/form-data;.*"
-        }
-      ],
-      "initialRevalidateSeconds": false,
-      "srcRoute": "/portofolio/[slug]",
-      "dataRoute": "/portofolio/landing-page-dinamis-umkm-makanan.rsc",
+      "srcRoute": "/blog",
+      "dataRoute": "/blog.rsc",
       "allowHeader": [
         "host",
         "x-matched-path",
@@ -175,7 +127,7 @@
         "x-next-revalidate-tag-token"
       ]
     },
-    "/blog": {
+    "/portofolio/hr-attrition-dashboard": {
       "experimentalBypassFor": [
         {
           "type": "header",
@@ -188,8 +140,32 @@
         }
       ],
       "initialRevalidateSeconds": false,
-      "srcRoute": "/blog",
-      "dataRoute": "/blog.rsc",
+      "srcRoute": "/portofolio/[slug]",
+      "dataRoute": "/portofolio/hr-attrition-dashboard.rsc",
+      "allowHeader": [
+        "host",
+        "x-matched-path",
+        "x-prerender-revalidate",
+        "x-prerender-revalidate-if-generated",
+        "x-next-revalidated-tags",
+        "x-next-revalidate-tag-token"
+      ]
+    },
+    "/portofolio/information-system-dayang-express": {
+      "experimentalBypassFor": [
+        {
+          "type": "header",
+          "key": "Next-Action"
+        },
+        {
+          "type": "header",
+          "key": "content-type",
+          "value": "multipart/form-data;.*"
+        }
+      ],
+      "initialRevalidateSeconds": false,
+      "srcRoute": "/portofolio/[slug]",
+      "dataRoute": "/portofolio/information-system-dayang-express.rsc",
       "allowHeader": [
         "host",
         "x-matched-path",
