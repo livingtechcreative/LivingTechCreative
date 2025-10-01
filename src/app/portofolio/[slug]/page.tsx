@@ -40,6 +40,22 @@ export default async function PortfolioDetailPage({ params }: { params: Promise<
   const previous = currentIndex > 0 ? activePortfolios[currentIndex - 1] : null
   const next = currentIndex < activePortfolios.length - 1 ? activePortfolios[currentIndex + 1] : null
 
+  // Fetch solutions from separate endpoint (build-time) with graceful fallback
+  let solutions: Array<{ id: number; title: string; description: string; image: string }> = []
+  try {
+    const apiSolutions = await apiService.getPortfolioSolutions(Number(portfolio.id))
+    if (Array.isArray(apiSolutions) && apiSolutions.length > 0) {
+      solutions = apiSolutions.map((s: any) => ({
+        id: Number(s.id),
+        title: String(s.title || ''),
+        description: String(s.description || ''),
+        image: String(s.image || '')
+      }))
+    }
+  } catch (e) {
+    // ignore and fallback below
+  }
+
   const formatDate = (dateString: string) => {
     const date = new Date(dateString)
     return date.toLocaleDateString('en-US', { 
@@ -208,11 +224,37 @@ export default async function PortfolioDetailPage({ params }: { params: Promise<
               >
                 Solution
               </h2>
-              {Boolean((portfolio as any).solution) && (
-                <div 
-                  className="prose prose-gray max-w-none"
-                  dangerouslySetInnerHTML={{ __html: (portfolio as any).solution }}
-                />
+              {solutions.length > 0 ? (
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  {solutions.map((sol) => (
+                    <div key={sol.id} className="border border-gray-200 rounded-xl overflow-hidden">
+                      {sol.image ? (
+                        <div className="relative h-40 sm:h-48">
+                          <Image
+                            src={normalizeImagePath(sol.image)}
+                            alt={sol.title}
+                            fill
+                            className="object-cover"
+                          />
+                        </div>
+                      ) : null}
+                      <div className="p-4">
+                        <h3 className="text-base font-semibold text-gray-900 mb-2">{sol.title}</h3>
+                        <div
+                          className="prose prose-gray max-w-none text-sm"
+                          dangerouslySetInnerHTML={{ __html: sol.description }}
+                        />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                Boolean((portfolio as any).solution) && (
+                  <div 
+                    className="prose prose-gray max-w-none"
+                    dangerouslySetInnerHTML={{ __html: (portfolio as any).solution }}
+                  />
+                )
               )}
             </section>
 

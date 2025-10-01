@@ -9,16 +9,16 @@
     "start_date": "2025-09-01T00:00:00.000000Z",
     "end_date": "2025-09-30T00:00:00.000000Z",
     "duration_days": 29,
-    "problem": "<p>1. Overview<br>The Overview section provides a high-level summary of key HR metrics to monitor the workforce status and highlight areas that require attention:</p>\n<p>- Total number of employees: A real-time count of current employees and those who have left (attrition), including the attrition percentage.<br>- Attrition/Retention by Department: Highlights which departments have the highest and lowest attrition or retention counts.<br>- Attrition/Retention by Job Role: Provides visibility into turnover patterns across different roles within the company.</p>\n<p>2. Demographics<br>Understanding the demographic composition of the workforce is essential for creating inclusive and targeted employee policies. This section visualizes:</p>\n<p>- Gender Distribution among current employees to support diversity and equity initiatives.<br>- Attrition and Retention by Age Group to reveal if younger or older employees are more likely to leave or stay.<br>- Education Levels associated with both attrition and retention trends to identify whether certain qualifications influence employee longevity.</p>\n<p>3. Income<br>- The Income section focuses on analyzing compensation trends in relation to employee profiles, providing insights into fairness, motivation, and potential drivers of attrition:</p>\n<p>- Average Income by Education and Gender: Explores how pay varies across gender and educational backgrounds, identifying any disparities that might affect retention.</p>\n<p>- Correlation between Average Monthly Income, Age, and Job Roles: Visualizes how income scales with experience and responsibilities, helping to evaluate whether compensation policies align with employee expectations.</p>",
-    "goal": "1. Overview\nThe Overview section provides a high-level summary of key HR metrics to monitor the workforce status and highlight areas that require attention:\n\n- Total number of employees: A real-time count of current employees and those who have left (attrition), including the attrition percentage.\n- Attrition/Retention by Department: Highlights which departments have the highest and lowest attrition or retention counts.\n- Attrition/Retention by Job Role: Provides visibility into turnover patterns across different roles within the company.\n\n2. Demographics\nUnderstanding the demographic composition of the workforce is essential for creating inclusive and targeted employee policies. This section visualizes:\n\n- Gender Distribution among current employees to support diversity and equity initiatives.\n- Attrition and Retention by Age Group to reveal if younger or older employees are more likely to leave or stay.\n- Education Levels associated with both attrition and retention trends to identify whether certain qualifications influence employee longevity.\n\n3. Income\n- The Income section focuses on analyzing compensation trends in relation to employee profiles, providing insights into fairness, motivation, and potential drivers of attrition:\n\n- Average Income by Education and Gender: Explores how pay varies across gender and educational backgrounds, identifying any disparities that might affect retention.\n\n- Correlation between Average Monthly Income, Age, and Job Roles: Visualizes how income scales with experience and responsibilities, helping to evaluate whether compensation policies align with employee expectations.",
+    "problem": "<p data-start=\"70\" data-end=\"502\">In today&rsquo;s competitive business landscape, effective human resource management is crucial for sustaining company growth and ensuring operational stability. However, one of the most pressing challenges faced by organizations is understanding the underlying patterns of employee retention and attrition. Without clear insights, businesses risk increased turnover costs, reduced productivity, and weakened organizational performance.</p>\n<p data-start=\"504\" data-end=\"857\">To address this issue, we propose the development of a comprehensive dashboard that consolidates employee data and focuses on analyzing retention and attrition trends. This tool will enable organizations to identify key factors influencing employee behavior, support data-driven decision-making, and ultimately enhance workforce management strategies.</p>",
+    "goal": "The Overview section provides a high-level summary of key HR metrics to monitor workforce status and highlight areas that require attention. It presents the total number of employees, including those who have left the organization, along with the attrition percentage. It also breaks down retention and attrition by department to show which areas have the highest and lowest turnover, as well as by job role to provide visibility into specific positions with notable patterns.\n\nThe Demographics section focuses on understanding the composition of the workforce to support the development of inclusive and targeted employee policies. It visualizes gender distribution among current employees, analyzes attrition and retention across different age groups, and highlights the relationship between education levels and employee turnover. These insights help reveal whether certain demographics are more likely to leave or stay.\n\nThe Income section emphasizes compensation trends and their connection to employee profiles. It examines average income by education and gender to uncover potential disparities that may influence retention, while also visualizing the correlation between monthly income, age, and job roles. This allows organizations to evaluate whether compensation policies are aligned with employee expectations, motivation, and responsibilities.",
     "conclution": "By tracking attrition and retention across key categories such as department, role, demographics, and income, the company can better understand why employees stay or leave—and respond with targeted interventions to improve employee satisfaction, reduce turnover, and build a resilient workforce.",
-    "cover_image": "portofolio-cover-image/01K6G0A9HCAFY5PAGXPWXXBYTY.png",
+    "cover_image": "portofolio-cover-image/01K6G2S2GXPC10Z92F5SSSP733.png",
     "project_url": null,
     "display_order": 1,
     "is_active": true,
     "is_featured": false,
     "created_at": "2025-10-01T13:05:16.000000Z",
-    "updated_at": "2025-10-01T13:46:14.000000Z"
+    "updated_at": "2025-10-01T14:36:02.000000Z"
   },
   {
     "id": 16,
@@ -40,5 +40,26 @@
     "is_featured": false,
     "created_at": "2025-10-01T13:59:53.000000Z",
     "updated_at": "2025-10-01T13:59:53.000000Z"
+  },
+  {
+    "id": 17,
+    "title": "Designing and Developing an Exam Management website for Elementary School",
+    "slug": "designing-and-developing-an-exam-management-website-for-elementary-school",
+    "background": "The Ujianku Web is a user-friendly platform designed to simplify and enhance offline exam preparation and management for elementary schools. It streamlines data management, facilitates collaboration between administrators, teachers, and head master. Empowers informed through exam reports and exam card for students.",
+    "client": "SD N 1 Pandowan",
+    "category": "Web Development, UI/UX Design",
+    "start_date": "2023-04-03T00:00:00.000000Z",
+    "end_date": "2023-12-11T00:00:00.000000Z",
+    "duration_days": 252,
+    "problem": "<p>When I interviewed the school administrator about exam management preparation, she explained how difficult it was to handle everything on her own. Managing all the data manually often leads to human error, and entering information for each student's exam card is particularly challenging. She expressed the need for a single platform that can manage and enhance offline exam preparation.</p>\n<p>How might we centralize and streamline&nbsp;the management of teacher, course,&nbsp;session, and grade data?</p>\n<p>How might we automate the creation and&nbsp;management of student exam cards, schedule, and report to save time and&nbsp;reduce errors</p>",
+    "goal": "Enhance Data Management Efficiency\nCentralize and streamline data entry and\nmanagement for students, teachers, courses,\nsessions, and grades.\n\nAutomate Exam Preparation Processes\n1. Automate the creation and management of\nstudent exam cards.\n2. Automate exam scheduling to ensure\nefficient and conflict-free planning.\n3. Automate the generation of detailed exam\nreports for accurate performance insights.",
+    "conclution": "The website can be used by admin",
+    "cover_image": "portofolio-cover-image/01K6G2QBTTQ9TF2BDSHWBVSV7B.png",
+    "project_url": null,
+    "display_order": 0,
+    "is_active": true,
+    "is_featured": false,
+    "created_at": "2025-10-01T14:27:21.000000Z",
+    "updated_at": "2025-10-01T14:27:21.000000Z"
   }
 ]

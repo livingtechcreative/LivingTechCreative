@@ -71,6 +71,16 @@ const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'https://dashboard.
     created_at: string
     updated_at: string
   }
+ 
+  export interface PortfolioSolution {
+    id: number
+    portofolio_id: number
+    title: string
+    description: string
+    image: string
+    created_at: string | null
+    updated_at: string | null
+  }
   
   export interface ContactFormData {
     name: string
@@ -256,6 +266,24 @@ const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'https://dashboard.
       return portfolios.filter(portfolio => portfolio.is_featured && portfolio.is_active)
     } catch (error) {
       console.error('Failed to fetch featured portfolios:', error)
+      return []
+    }
+  }
+
+  async getPortfolioSolutions(portfolioId: number): Promise<PortfolioSolution[]> {
+    try {
+      const endpoints = [`/portofolio-solutions/${portfolioId}`, `/portfolio-solutions/${portfolioId}`]
+      for (const endpoint of endpoints) {
+        try {
+          const response = await this.fetchApi<PortfolioSolution[]>(endpoint)
+          return Array.isArray((response as any).data) ? (response as any).data : ([] as PortfolioSolution[])
+        } catch (error) {
+          continue
+        }
+      }
+      return []
+    } catch (error) {
+      console.error(`Failed to fetch portfolio solutions for ${portfolioId}:`, error)
       return []
     }
   }

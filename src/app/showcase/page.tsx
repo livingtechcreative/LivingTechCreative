@@ -178,23 +178,19 @@ export default function ShowcasePage() {
                     fill
                     className="object-cover transition-transform duration-300 group-hover:scale-110"
                   />
-                  
-                                     {/* Overlay with title */}
-                   <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-60 transition-all duration-300 flex items-center justify-center">
-                     {/* Title appears on hover */}
-                     <div className="opacity-0 group-hover:opacity-100 text-center text-white transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
-                       <h3 className="text-xl font-semibold mb-3">{item.title}</h3>
-                       <motion.button
-                         onClick={() => handleGoToLink(item.url)}
-                         className="bg-white text-gray-900 px-6 py-3 rounded-lg font-medium flex items-center gap-2 shadow-lg mx-auto"
-                         whileHover={{ scale: 1.05 }}
-                         whileTap={{ scale: 0.95 }}
-                       >
-                         <span>Go to Link</span>
-                         <ExternalLink className="w-4 h-4" />
-                       </motion.button>
-                     </div>
-                   </div>
+                  {/* Bottom gradient and title (match portfolio preview style) */}
+                  <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-4 flex flex-col">
+                    <h3 className="text-white font-semibold text-base sm:text-lg mb-2">{item.title}</h3>
+                    <motion.button
+                      onClick={() => handleGoToLink(item.url)}
+                      className="self-start bg-white text-gray-900 px-4 py-2 rounded-lg font-medium flex items-center gap-2 shadow-lg"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <span>View Project</span>
+                      <ExternalLink className="w-4 h-4" />
+                    </motion.button>
+                  </div>
                 </motion.div>
               </motion.div>
             ))}
