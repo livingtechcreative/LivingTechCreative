@@ -214,7 +214,6 @@ export default function ShowcasePage() {
         </div>
       </motion.main>
 
-      <Footer />
     </div>
   )
 }

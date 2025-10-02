@@ -165,11 +165,10 @@ export default function PortfolioPage() {
           </motion.div>
 
           {/* Call to Action Banner */}
-          <CTABanner className="mt-16 mb-8 -mx-6" />
-        </div>
-      </main>
-
-      <Footer />
+      <CTABanner className="mt-16 mb-8 -mx-6" />
     </div>
+  </main>
+
+</div>
   )
-} 
+}

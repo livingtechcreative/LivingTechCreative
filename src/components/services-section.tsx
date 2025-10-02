@@ -5,6 +5,7 @@ import BadgeSubtitle from "./badge-subtitle"
 import Image from "next/image"
 import { useState } from "react"
 import { RetroGrid } from "./ui/retro-grid"
+import { OptimizedIcon } from "./ui/optimized-icon"
 
 // Animation variants
 const containerVariants = {
@@ -190,12 +191,10 @@ export default function ServicesSection() {
                 variants={iconVariants}
                 whileHover="hover"
               >
-                <Image
+                <OptimizedIcon
                   src="/images/paint.svg"
                   alt="paint icon"
-                  width={40}
-                  height={40}
-                  className="w-10 h-10 object-contain"
+                  variants={iconVariants}
                 />
               </motion.div>
               <span className="inline-block bg-gradient-to-r from-[#2B35AB] via-[#8A38F5] to-[#13CBD4] bg-clip-text text-transparent">
@@ -236,13 +235,11 @@ export default function ServicesSection() {
                   className="mb-4 sm:mb-6"
                   variants={iconVariants}
                 >
-                  <div className="w-16 h-16 flex items-center justify-center">
-                    <Image
+                  <div className="w-8 h-8 flex items-center justify-center">
+                    <OptimizedIcon
                       src={service.icon || "/placeholder.svg"}
                       alt={service.title}
-                      width={64}
-                      height={64}
-                      className="w-full h-full object-contain"
+                      variants={iconVariants}
                     />
                   </div>
                 </motion.div>

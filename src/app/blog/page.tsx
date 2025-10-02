@@ -66,9 +66,8 @@ export default function BlogPage() {
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900 mx-auto mb-4"></div>
             <p className="text-gray-600">Loading blog posts...</p>
           </div>
-        </div>
-        <Footer />
       </div>
+    </div>
     )
   }
 
@@ -243,7 +242,6 @@ export default function BlogPage() {
         </div>
       </main>
 
-      <Footer />
     </div>
   )
 }

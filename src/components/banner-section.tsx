@@ -3,6 +3,7 @@
 import { motion } from "framer-motion"
 import { ArrowRight } from "lucide-react"
 import Image from "next/image"
+import { BannerIcon } from "./ui/optimized-icon"
 
 // Animation variants
 const containerVariants = {
@@ -124,18 +125,11 @@ export default function BannerSection() {
                   {/* Mobile Layout */}
                   <div className="lg:hidden flex flex-wrap items-center gap-3 md:gap-4">
                     <span>We Teach</span>
-                    <motion.div 
-                      className="relative inline-block mx-1"
+                    <BannerIcon 
+                      src="/images/books.svg" 
+                      alt="Books" 
                       variants={iconVariants}
-                    >
-                      <Image 
-                        src="/images/books.svg" 
-                        alt="Books" 
-                        width={56}
-                        height={56}
-                        className="rounded-lg object-cover w-8 h-8 sm:w-12 sm:h-12 md:w-14 md:h-14" 
-                      />
-                    </motion.div>
+                    />
                     <span className="inline-block bg-gradient-to-r from-[#2B35AB] via-[#8A38F5] to-[#13CBD4] bg-clip-text text-transparent">Something</span>
                   </div>
                   <div className="lg:hidden flex flex-wrap items-center gap-3 md:gap-4 mt-2">
@@ -147,18 +141,11 @@ export default function BannerSection() {
                       <span>We Teach</span>
                     </div>
                     <div className="flex items-center gap-3 mt-2">
-                      <motion.div 
-                        className="relative inline-block"
+                      <BannerIcon 
+                        src="/images/books.svg" 
+                        alt="Books" 
                         variants={iconVariants}
-                      >
-                        <Image 
-                          src="/images/books.svg" 
-                          alt="Books" 
-                          width={56}
-                          height={56}
-                          className="rounded-lg object-cover w-8 h-8 sm:w-12 sm:h-12 md:w-14 md:h-14" 
-                        />
-                      </motion.div>
+                      />
                       <span className="inline-block bg-gradient-to-r from-[#2B35AB] via-[#8A38F5] to-[#13CBD4] bg-clip-text text-transparent">Something</span>
                       <span className="text-gray-900">Too...</span>
                     </div>

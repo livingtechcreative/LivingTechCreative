@@ -4,6 +4,7 @@ import { motion } from "framer-motion"
 import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
+import { BannerIcon } from "./ui/optimized-icon"
 import React from "react"
 
 interface CTABannerProps {
@@ -40,7 +41,11 @@ export default function CTABanner({
               <span className="block">Time to Stop Scrolling,</span>
               <span className="flex items-center gap-2 mt-1">
                 <b className="font-bold">Let&apos;s</b>
-                <Image src="/images/hand.svg" alt="Hand" width={32} height={32} className={compact ? "w-6 h-6 sm:w-8 sm:h-8 inline-block" : "w-8 h-8 inline-block"} />
+                <BannerIcon 
+                  src="/images/hand.svg" 
+                  alt="Hand" 
+                  className={compact ? "w-6 h-6 sm:w-8 sm:h-8 inline-block" : "w-8 h-8 inline-block"}
+                />
                 <span className="bg-gradient-to-r from-[#8A38F5] via-[#13CBD4] to-[#2B35AB] bg-clip-text text-transparent font-bold">
                   Book a meeting
                 </span>
