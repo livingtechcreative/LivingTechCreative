@@ -1,6 +1,13 @@
 "use client"
 
+import { useEffect, useState } from 'react'
+
 export default function Footer() {
+  const [isClient, setIsClient] = useState(false)
+
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
   const navigationLinks = [
     { name: "Home", href: "#hero" },
     { name: "About", href: "#about" },
@@ -19,15 +26,18 @@ export default function Footer() {
 
   return (
     <footer 
-      className="relative text-white pt-12 pb-6 px-4 sm:px-6 lg:px-8 bg-cover bg-center bg-no-repeat"
+      className="relative text-white bg-cover bg-center bg-no-repeat w-full"
       style={{
         backgroundImage: "url('/images/footerbg.png')",
         backgroundSize: "cover",
         backgroundPosition: "center",
-        backgroundRepeat: "no-repeat"
+        backgroundRepeat: "no-repeat",
+        backgroundColor: "#000000", // Fallback color
       }}
+      suppressHydrationWarning
     >
-      <div className="relative z-10 max-w-7xl mx-auto">
+      <div className="pt-8 pb-4 px-4 sm:px-6 lg:px-8">
+        <div className="relative z-10 max-w-7xl mx-auto">
         {/* Desktop Layout */}
         <div className="hidden lg:block">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
@@ -162,6 +172,7 @@ export default function Footer() {
           </div>
         </div>
       </div>
+    </div>
     </footer>
   )
 }

@@ -4,6 +4,7 @@ import { motion } from "framer-motion"
 import { ArrowRight } from "lucide-react"
 import Image from "next/image"
 import { BannerIcon } from "./ui/optimized-icon"
+import { useMobileIcon } from "@/hooks/use-mobile-icon"
 
 // Animation variants
 const containerVariants = {
@@ -94,6 +95,8 @@ const imageVariants = {
 }
 
 export default function BannerSection() {
+  const { getIconSrc } = useMobileIcon()
+
   return (
     <motion.section 
       id="banner" 
@@ -126,7 +129,7 @@ export default function BannerSection() {
                   <div className="lg:hidden flex flex-wrap items-center gap-3 md:gap-4">
                     <span>We Teach</span>
                     <BannerIcon 
-                      src="/images/books.svg" 
+                      src={getIconSrc("/images/books.svg", "/images/books.png")} 
                       alt="Books" 
                       variants={iconVariants}
                     />
@@ -142,7 +145,7 @@ export default function BannerSection() {
                     </div>
                     <div className="flex items-center gap-3 mt-2">
                       <BannerIcon 
-                        src="/images/books.svg" 
+                        src={getIconSrc("/images/books.svg", "/images/books.png")} 
                         alt="Books" 
                         variants={iconVariants}
                       />

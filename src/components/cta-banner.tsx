@@ -5,6 +5,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { BannerIcon } from "./ui/optimized-icon"
+import { useMobileIcon } from "@/hooks/use-mobile-icon"
 import React from "react"
 
 interface CTABannerProps {
@@ -19,6 +20,7 @@ export default function CTABanner({
   compact = false,
 }: CTABannerProps) {
   const waNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? ""
+  const { getIconSrc } = useMobileIcon()
 
   return (
     <motion.section
@@ -39,15 +41,17 @@ export default function CTABanner({
           <div className={compact ? "relative px-6 sm:px-12 py-6 sm:py-8 text-left" : "relative px-8 sm:px-12 py-8 text-left"}>
             <h2 className={compact ? "text-xl sm:text-2xl md:text-3xl font-bold text-white mb-3 leading-tight" : "text-2xl sm:text-3xl font-bold text-white mb-3 leading-tight"}>
               <span className="block">Time to Stop Scrolling,</span>
-              <span className="flex items-center gap-2 mt-1">
-                <b className="font-bold">Let&apos;s</b>
-                <BannerIcon 
-                  src="/images/hand.svg" 
-                  alt="Hand" 
-                  className={compact ? "w-6 h-6 sm:w-8 sm:h-8 inline-block" : "w-8 h-8 inline-block"}
-                />
-                <span className="bg-gradient-to-r from-[#8A38F5] via-[#13CBD4] to-[#2B35AB] bg-clip-text text-transparent font-bold">
-                  Book a meeting
+              <span className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2 mt-1">
+                <span className="flex items-center gap-2">
+                  <b className="font-bold">Let&apos;s</b>
+                  <BannerIcon 
+                    src={getIconSrc("/images/hand.svg", "/images/hand.png")} 
+                    alt="Hand" 
+                    className={`${compact ? "w-6 h-6 sm:w-8 sm:h-8" : "w-8 h-8"} hidden sm:inline-block`}
+                  />
+                  <span className="bg-gradient-to-r from-[#8A38F5] via-[#13CBD4] to-[#2B35AB] bg-clip-text text-transparent font-bold">
+                    Book a meeting
+                  </span>
                 </span>
                 <b className="font-bold">and discuss it!</b>
               </span>

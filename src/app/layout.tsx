@@ -26,8 +26,9 @@ export default function RootLayout({
         <link rel="icon" href="/metaicon.svg" type="image/svg+xml" />
         <link rel="shortcut icon" href="/metaicon.svg" />
         <link rel="apple-touch-icon" href="/metaicon.svg" />
+        <meta name="format-detection" content="telephone=no, date=no, email=no, address=no" />
       </head>
-      <body className="min-h-screen bg-white">
+      <body className="min-h-screen bg-white md:pb-0 pb-24">
         <ErrorBoundary>
           <IntegratedNavbar />
           {children}

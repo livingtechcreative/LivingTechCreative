@@ -55,7 +55,7 @@ export const Navigation = () => {
               <MobileNav onItemClick={handleItemClick} />
               <a 
                 href="#book-call" 
-                className="px-3 py-1.5 text-sm font-medium text-primary-foreground bg-primary rounded-lg hover:bg-primary/90 transition-colors whitespace-nowrap"
+                className="px-2 py-1 text-xs font-medium text-primary-foreground bg-primary rounded-lg hover:bg-primary/90 transition-colors whitespace-nowrap"
               >
                 Book a Call
               </a>

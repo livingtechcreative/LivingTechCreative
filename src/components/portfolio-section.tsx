@@ -7,6 +7,7 @@ import Link from "next/link"
 import { Portfolio } from "@/lib/api"
 import { normalizeImagePath } from "@/lib/utils"
 import portfolioItems from "@/data/portfolio-items.json"
+import { useMobileIcon } from "@/hooks/use-mobile-icon"
 
 // BadgeSubtitle component definition (in case it's missing)
 function BadgeSubtitle({ children }: { children: React.ReactNode }) {
@@ -124,6 +125,7 @@ export default function PortfolioSection({ portfolios = [] }: { portfolios: Port
   const [activeFilter, setActiveFilter] = useState('all')
   const [loading, setLoading] = useState(false)
   const [hoveredProject, setHoveredProject] = useState<string | null>(null)
+  const { getIconSrc } = useMobileIcon()
 
   // Build projects from real data (prop portfolios or local JSON fallback)
   const sourceItems: any[] = (portfolios && portfolios.length > 0)
@@ -178,11 +180,11 @@ export default function PortfolioSection({ portfolios = [] }: { portfolios: Port
                   whileHover="hover"
                 >
                   <Image
-                    src="/images/liv.svg"
+                    src={getIconSrc("/images/liv.svg", "/images/liv.png")}
                     alt="Liv"
                     width={56}
                     height={56}
-                    className="w-14 h-14 object-contain"
+                    className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 object-contain"
                   />
                 </motion.div>
                 <span className="inline-block bg-gradient-to-r from-[#2B35AB] via-[#8A38F5] to-[#13CBD4] bg-clip-text text-transparent">
@@ -197,11 +199,11 @@ export default function PortfolioSection({ portfolios = [] }: { portfolios: Port
                   whileHover="hover"
                 >
                   <Image
-                    src="/images/paint.svg"
+                    src={getIconSrc("/images/paint.svg", "/images/paint.png")}
                     alt="Project"
                     width={56}
                     height={56}
-                    className="w-14 h-14 object-contain"
+                    className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 object-contain"
                   />
                 </motion.div>
                 <span className="inline-block bg-gradient-to-r from-[#2B35AB] via-[#8A38F5] to-[#13CBD4] bg-clip-text text-transparent">
@@ -263,7 +265,7 @@ export default function PortfolioSection({ portfolios = [] }: { portfolios: Port
               >
                 <Link href={project.link} className="block">
                   <motion.div 
-                    className={`relative rounded-2xl overflow-hidden ${project.imageHeight} w-full`}
+                    className={`relative rounded-2xl overflow-hidden aspect-[4/3] md:aspect-[16/10] w-full`}
                     variants={imageVariants}
                   >
                     <Image
@@ -271,7 +273,7 @@ export default function PortfolioSection({ portfolios = [] }: { portfolios: Port
                       alt={project.title}
                       width={600}
                       height={400}
-                      className="w-full h-full object-fill"
+                      className="w-full h-full object-cover"
                     />
 
                     {/* Category Badge */}

@@ -29,7 +29,11 @@ export const AnimatedTooltip = ({
 
     animationFrameRef.current = requestAnimationFrame(() => {
       const target = event.currentTarget
+      if (!target) return // Null safety check
+      
       const rect = target.getBoundingClientRect()
+      if (!rect || rect.width === 0) return // Additional safety check
+      
       const offsetX = event.clientX - rect.left
       const halfWidth = rect.width / 2
       x.set(offsetX - halfWidth)

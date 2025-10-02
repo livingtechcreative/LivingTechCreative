@@ -272,15 +272,30 @@ const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'https://dashboard.
 
   async getPortfolioSolutions(portfolioId: number): Promise<PortfolioSolution[]> {
     try {
-      const endpoints = [`/portofolio-solutions/${portfolioId}`, `/portfolio-solutions/${portfolioId}`]
+      // Tambahkan berbagai kemungkinan endpoint
+      const endpoints = [
+        `/portofolio-solutions/${portfolioId}`, 
+        `/portfolio-solutions/${portfolioId}`,
+        `/portofolio-solutions?portofolio_id=${portfolioId}`,
+        `/portfolio-solutions?portfolio_id=${portfolioId}`,
+        `/portofolios/${portfolioId}/solutions`,
+        `/portfolios/${portfolioId}/solutions`
+      ]
+      
+      console.log(`Attempting to fetch portfolio solutions for ID: ${portfolioId}`)
+      
       for (const endpoint of endpoints) {
         try {
           // Menggunakan fetch langsung untuk menghindari throw error
           const url = `${API_BASE_URL}${endpoint}`
+          console.log(`Trying endpoint: ${url}`)
+          
           const response = await fetch(url, {
             cache: 'no-store',
             headers: { 'Content-Type': 'application/json' }
           })
+          
+          console.log(`Response status: ${response.status} for ${url}`)
           
           if (!response.ok) {
             // Log error tapi tidak throw error
@@ -289,14 +304,35 @@ const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'https://dashboard.
           }
           
           const responseData = await response.json()
-          return Array.isArray(responseData.data) ? responseData.data : []
+          console.log(`Response data:`, responseData)
+          
+          // Cek berbagai kemungkinan struktur response
+          let solutions: PortfolioSolution[] = []
+          
+          if (Array.isArray(responseData)) {
+            // Jika response langsung array
+            solutions = responseData
+          } else if (Array.isArray(responseData.data)) {
+            // Jika response punya property data yang berisi array
+            solutions = responseData.data
+          } else if (responseData.solutions && Array.isArray(responseData.solutions)) {
+            // Jika response punya property solutions
+            solutions = responseData.solutions
+          }
+          
+          console.log(`Found ${solutions.length} solutions`)
+          return solutions
+          
         } catch (error) {
           // Log error tapi lanjut ke endpoint berikutnya
-          console.log(`Error fetching from ${endpoints[0]}:`, error)
+          console.log(`Error fetching from ${endpoint}:`, error)
           continue
         }
       }
+      
+      console.log(`No solutions found for portfolio ${portfolioId} from any endpoint`)
       return []
+      
     } catch (error) {
       console.log(`Failed to fetch portfolio solutions for ${portfolioId}:`, error)
       return []

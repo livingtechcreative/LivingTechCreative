@@ -194,6 +194,15 @@ svg {
 
 
 
+/* Additional mobile fixes */
+@media (max-width: 768px) {
+  body {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+}
+
+
+
 /* Additional SVG fixes for mobile deployment */
 @media (max-width: 640px) {
   /* Prevent browser from applying dark mode filters to SVGs */

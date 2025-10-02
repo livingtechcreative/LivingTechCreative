@@ -9,10 +9,12 @@ import { apiService, Portfolio } from "@/lib/api"
 import { motion } from "framer-motion"
 import { normalizeImagePath } from "@/lib/utils"
 import CTABanner from "@/components/cta-banner"
+import { useMobileIcon } from "../../hooks/use-mobile-icon"
 
 export default function PortfolioPage() {
   const [portfolios, setPortfolios] = useState<Portfolio[]>([])
   const [loading, setLoading] = useState(true)
+  const { getIconSrc } = useMobileIcon()
 
   useEffect(() => {
     const fetchPortfolios = async () => {
@@ -60,7 +62,7 @@ export default function PortfolioPage() {
       <IntegratedNavbar />
       
       {/* Main Content */}
-      <main className="pt-32 relative">
+      <main className="pt-20 relative">
         <div className="max-w-7xl mx-auto px-6 py-12">
           {/* Large Title Section */}
           <motion.div 
@@ -74,11 +76,11 @@ export default function PortfolioPage() {
                 <span>Discover</span>
                 <div className="relative inline-block mx-1">
                   <Image
-                    src="/images/liv.svg"
+                    src={getIconSrc("/images/liv.svg", "/images/liv.png")}
                     alt="Liv"
                     width={56}
                     height={56}
-                    className="rounded-lg object-cover w-8 h-8 sm:w-12 sm:h-12 md:w-14 md:h-14"
+                    className="rounded-lg object-cover w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-14 lg:h-14"
                   />
                 </div>
                 <span className="inline-block bg-gradient-to-r from-[#2B35AB] via-[#8A38F5] to-[#13CBD4] bg-clip-text text-transparent">
@@ -93,7 +95,7 @@ export default function PortfolioPage() {
                     alt="Project"
                     width={56}
                     height={56}
-                    className="rounded-lg object-cover w-8 h-8 sm:w-12 sm:h-12 md:w-14 md:h-14"
+                    className="rounded-lg object-cover w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-14 lg:h-14"
                   />
                 </div>
                 <span className="inline-block bg-gradient-to-r from-[#2B35AB] via-[#8A38F5] to-[#13CBD4] bg-clip-text text-transparent">
@@ -113,13 +115,13 @@ export default function PortfolioPage() {
             {portfolios.map((portfolio) => (
               <div key={portfolio.id} className="group">
                 {/* Project Image - Fixed Height */}
-                <div className="relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 mb-4">
+                <div className="relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 mb-4 aspect-[4/3] md:aspect-[16/10]">
                   <Image
                     src={normalizeImagePath(portfolio.cover_image)}
                     alt={portfolio.title}
                     width={400}
                     height={256}
-                    className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     unoptimized={normalizeImagePath(portfolio.cover_image).includes('livingtechcreative.com')}
                   />
 
@@ -147,7 +149,7 @@ export default function PortfolioPage() {
                   <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-purple-600 transition-colors">
                     {portfolio.title}
                   </h3>
-                  <p className="text-gray-600 text-sm leading-relaxed mb-4">
+                  <p className="text-gray-600 text-sm leading-relaxed mb-4 line-clamp-2">
                     {portfolio.background}
                   </p>
 

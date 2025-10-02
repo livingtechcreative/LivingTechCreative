@@ -127,7 +127,7 @@ export default function ShowcasePage() {
       <IntegratedNavbar />
       
       <motion.main 
-        className="pt-32 pb-16 px-4 sm:px-6 lg:px-8"
+        className="pt-20 pb-16 px-4 sm:px-6 lg:px-8"
         initial="hidden"
         animate="visible"
         variants={containerVariants}

@@ -3,6 +3,7 @@
 import { motion } from "framer-motion"
 import Image from "next/image"
 import BadgeSubtitle from "./badge-subtitle"
+import { useMobileIcon } from "@/hooks/use-mobile-icon"
 
 // Animation variants
 const containerVariants = {
@@ -107,6 +108,8 @@ const rowVariants = {
 const MotionTr = motion("tr")
 
 export default function ComparisonSection() {
+  const { getIconSrc } = useMobileIcon()
+  
   const comparisonData = [
     {
       category: "Education",
@@ -172,7 +175,7 @@ export default function ComparisonSection() {
                     whileHover="hover"
                   >
                     <Image
-                      src="/images/Handsake.svg"
+                      src={getIconSrc("/images/Handsake.svg", "/images/handshake.png")}
                       alt="Handshake"
                       width={56}
                       height={56}

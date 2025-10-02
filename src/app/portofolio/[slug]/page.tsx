@@ -33,21 +33,15 @@ export default async function PortfolioDetailPage({ params }: PageProps) {
   const previous = currentIndex > 0 ? activePortfolios[currentIndex - 1] : null
   const next = currentIndex < activePortfolios.length - 1 ? activePortfolios[currentIndex + 1] : null
 
-  // Fetch solutions from separate endpoint (build-time) with graceful fallback
-  let solutions: Array<{ id: number; title: string; description: string; image: string }> = []
-  try {
-    const apiSolutions = await apiService.getPortfolioSolutions(Number(portfolio.id))
-    if (Array.isArray(apiSolutions) && apiSolutions.length > 0) {
-      solutions = apiSolutions.map((s: any) => ({
-        id: Number(s.id),
-        title: String(s.title || ''),
-        description: String(s.description || ''),
-        image: String(s.image || '')
-      }))
-    }
-  } catch (e) {
-    // ignore and fallback below
-  }
+  // Fetch solutions - gunakan data real dari API dan filter berdasarkan portfolio ID
+  const allSolutions = await apiService.getPortfolioSolutions(Number(portfolio.id))
+  console.log('Raw API solutions response:', allSolutions)
+  
+  // Filter solutions yang sesuai dengan portfolio ID saat ini
+  const solutions = Array.isArray(allSolutions) 
+    ? allSolutions.filter((sol: any) => Number(sol.portofolio_id) === Number(portfolio.id))
+    : []
+  console.log(`Filtered solutions for portfolio ${portfolio.id}:`, solutions)
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString)
@@ -58,10 +52,24 @@ export default async function PortfolioDetailPage({ params }: PageProps) {
     })
   }
 
+  const formatContentWithLists = (content: string) => {
+    if (!content) return ''
+    
+    // Replace numbered lists with proper HTML formatting
+    let formatted = content
+      .replace(/(\d+)\.\s/g, '<br><strong class="text-blue-600 text-base">$1.</strong> ')
+      .replace(/^<br>/, '') // Remove leading br if content starts with number
+    
+    // Add proper spacing and styling for better readability
+    formatted = formatted.replace(/<br><strong/g, '<br><br><strong')
+    
+    return formatted
+  }
+
   return (
     <div className="min-h-screen bg-white">
       <header 
-        className="bg-white pt-20 sm:pt-32"
+        className="bg-white pt-16 sm:pt-24"
       >
         <div className="max-w-4xl mx-auto px-4 sm:px-6 py-6">
           <div 
@@ -102,24 +110,21 @@ export default async function PortfolioDetailPage({ params }: PageProps) {
         <section 
           className="mb-8 sm:mb-12"
         >
-          <div>
-            <Card className="w-full max-w-4xl mx-auto">
-              <CardContent className="p-0">
-                {portfolio.cover_image && (
-                  <div
-                    className="w-full h-64 sm:h-80 md:h-96 relative rounded-lg overflow-hidden"
-                  >
-                    <Image
-                      src={normalizeImagePath(portfolio.cover_image)}
-                      alt={portfolio.title}
-                      fill
-                      className="object-cover"
-                      unoptimized={normalizeImagePath(portfolio.cover_image).includes('livingtechcreative.com')}
-                    />
-                  </div>
-                )}
-              </CardContent>
-            </Card>
+          <div className="w-full max-w-4xl mx-auto">
+            {portfolio.cover_image && (
+              <div
+                className="w-full h-64 sm:h-80 md:h-96 relative rounded-lg overflow-hidden"
+              >
+                <Image
+                  src={normalizeImagePath(portfolio.cover_image)}
+                  alt={portfolio.title}
+                  fill
+                  className="object-cover w-full h-full"
+                  style={{ objectFit: 'cover' }}
+                  unoptimized={normalizeImagePath(portfolio.cover_image).includes('livingtechcreative.com')}
+                />
+              </div>
+            )}
           </div>
         </section>
 
@@ -139,8 +144,8 @@ export default async function PortfolioDetailPage({ params }: PageProps) {
                 Background
               </h2>
               <div 
-                className="prose prose-gray max-w-none"
-                dangerouslySetInnerHTML={{ __html: String(portfolio.background || '') }}
+                className="prose prose-gray max-w-none leading-relaxed"
+                dangerouslySetInnerHTML={{ __html: formatContentWithLists(String(portfolio.background || '')) }}
               />
             </section>
 
@@ -188,8 +193,8 @@ export default async function PortfolioDetailPage({ params }: PageProps) {
                 Problem
               </h2>
               <div 
-                className="prose prose-gray max-w-none"
-                dangerouslySetInnerHTML={{ __html: String(portfolio.problem || '') }}
+                className="prose prose-gray max-w-none leading-relaxed"
+                dangerouslySetInnerHTML={{ __html: formatContentWithLists(String(portfolio.problem || '')) }}
               />
             </section>
 
@@ -203,8 +208,8 @@ export default async function PortfolioDetailPage({ params }: PageProps) {
                 Goal
               </h2>
               <div 
-                className="prose prose-gray max-w-none"
-                dangerouslySetInnerHTML={{ __html: String(portfolio.goal || '') }}
+                className="prose prose-gray max-w-none leading-relaxed"
+                dangerouslySetInnerHTML={{ __html: formatContentWithLists(String(portfolio.goal || '')) }}
               />
             </section>
 
@@ -218,11 +223,12 @@ export default async function PortfolioDetailPage({ params }: PageProps) {
                 Solution
               </h2>
               {solutions.length > 0 ? (
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                  {solutions.map((sol) => (
-                    <div key={sol.id} className="border border-gray-200 rounded-xl overflow-hidden">
+                <div className="space-y-8 sm:space-y-12">
+                  {solutions.map((sol, index) => (
+                    <div key={sol.id} className="">
+                      {/* Gambar dengan rounded corners - terpisah dari description */}
                       {sol.image ? (
-                        <div className="relative h-40 sm:h-48">
+                        <div className="relative w-full h-64 sm:h-80 mb-6 sm:mb-8 rounded-2xl overflow-hidden bg-gray-100">
                           <Image
                             src={normalizeImagePath(sol.image)}
                             alt={sol.title}
@@ -230,12 +236,23 @@ export default async function PortfolioDetailPage({ params }: PageProps) {
                             className="object-cover"
                           />
                         </div>
-                      ) : null}
-                      <div className="p-4">
-                        <h3 className="text-base font-semibold text-gray-900 mb-2">{sol.title}</h3>
+                      ) : (
+                        <div className="w-full h-64 sm:h-80 mb-6 sm:mb-8 rounded-2xl overflow-hidden bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center">
+                          <div className="text-center">
+                            <div className="w-20 h-20 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                              <span className="text-white font-bold text-2xl">{index + 1}</span>
+                            </div>
+                            <p className="text-gray-500 text-sm">Solution {index + 1}</p>
+                          </div>
+                        </div>
+                      )}
+                      
+                      {/* Description di bawah gambar - tidak dalam card */}
+                      <div className="space-y-4">
+                        <h3 className="text-xl sm:text-2xl font-semibold text-gray-900">{sol.title}</h3>
                         <div
-                          className="prose prose-gray max-w-none text-sm"
-                          dangerouslySetInnerHTML={{ __html: sol.description }}
+                          className="prose prose-gray max-w-none text-base leading-relaxed"
+                          dangerouslySetInnerHTML={{ __html: formatContentWithLists(sol.description) }}
                         />
                       </div>
                     </div>
@@ -244,8 +261,8 @@ export default async function PortfolioDetailPage({ params }: PageProps) {
               ) : (
                 Boolean((portfolio as any).solution) && (
                   <div 
-                    className="prose prose-gray max-w-none"
-                    dangerouslySetInnerHTML={{ __html: (portfolio as any).solution }}
+                    className="prose prose-gray max-w-none leading-relaxed"
+                    dangerouslySetInnerHTML={{ __html: formatContentWithLists((portfolio as any).solution) }}
                   />
                 )
               )}
@@ -269,46 +286,48 @@ export default async function PortfolioDetailPage({ params }: PageProps) {
               </div>
             </section>
 
-            <div 
-              className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 pt-6 sm:pt-8 border-t border-gray-200"
-            >
-              <div
-                className="w-full sm:w-auto"
+            {(previous || next) && (
+              <div 
+                className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 pt-6 sm:pt-8 border-t border-gray-200"
               >
-                <Button 
-                  variant="ghost" 
-                  size="sm" 
-                  className="gap-2 text-gray-600 hover:text-gray-900 w-full sm:w-auto justify-start"
-                  asChild
-                  disabled={!previous}
+                <div
+                  className="w-full sm:w-auto"
                 >
-                  <Link href={previous ? `/portofolio/${previous.slug}` : "#"}>
-                  <ArrowLeft className="w-4 h-4" />
-                  <span className="truncate">
-                      {previous ? previous.title : 'Previous Project'}
-                  </span>
-                  </Link>
-                </Button>
-              </div>
-              <div
-                className="w-full sm:w-auto"
-              >
-                <Button 
-                  variant="ghost" 
-                  size="sm" 
-                  className="gap-2 text-gray-600 hover:text-gray-900 w-full sm:w-auto justify-end"
-                  asChild
-                  disabled={!next}
+                  <Button 
+                    variant="ghost" 
+                    size="sm" 
+                    className="gap-2 text-gray-600 hover:text-gray-900 w-full sm:w-auto justify-start"
+                    asChild
+                    disabled={!previous}
+                  >
+                    <Link href={previous ? `/portofolio/${previous.slug}` : "#"}>
+                    <ArrowLeft className="w-4 h-4" />
+                    <span className="truncate">
+                        {previous ? previous.title : 'Previous Project'}
+                    </span>
+                    </Link>
+                  </Button>
+                </div>
+                <div
+                  className="w-full sm:w-auto"
                 >
-                  <Link href={next ? `/portofolio/${next.slug}` : "#"}>
-                  <span className="truncate">
-                      {next ? next.title : 'Next Project'}
-                  </span>
-                  <ArrowLeft className="w-4 h-4 rotate-180" />
-                  </Link>
-                </Button>
+                  <Button 
+                    variant="ghost" 
+                    size="sm" 
+                    className="gap-2 text-gray-600 hover:text-gray-900 w-full sm:w-auto justify-end"
+                    asChild
+                    disabled={!next}
+                  >
+                    <Link href={next ? `/portofolio/${next.slug}` : "#"}>
+                    <span className="truncate">
+                        {next ? next.title : 'Next Project'}
+                    </span>
+                    <ArrowLeft className="w-4 h-4 rotate-180" />
+                    </Link>
+                  </Button>
+                </div>
               </div>
-            </div>
+            )}
           </div>
 
           <div 

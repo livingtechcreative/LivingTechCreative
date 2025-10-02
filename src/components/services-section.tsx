@@ -6,6 +6,7 @@ import Image from "next/image"
 import { useState } from "react"
 import { RetroGrid } from "./ui/retro-grid"
 import { OptimizedIcon } from "./ui/optimized-icon"
+import { useMobileIcon } from "@/hooks/use-mobile-icon"
 
 // Animation variants
 const containerVariants = {
@@ -93,6 +94,7 @@ const textVariants = {
 
 export default function ServicesSection() {
   const [activeCard, setActiveCard] = useState<number | null>(null)
+  const { getIconSrc } = useMobileIcon()
 
   const handleCardClick = (index: number) => {
     setActiveCard(activeCard === index ? null : index)
@@ -192,7 +194,7 @@ export default function ServicesSection() {
                 whileHover="hover"
               >
                 <OptimizedIcon
-                  src="/images/paint.svg"
+                  src={getIconSrc("/images/paint.svg", "/images/paint.png")}
                   alt="paint icon"
                   variants={iconVariants}
                 />

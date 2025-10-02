@@ -226,7 +226,7 @@ export default function FAQSection() {
                     alt="Chat"
                     width={48}
                     height={48}
-                    className="object-contain w-12 h-12 sm:w-12 sm:h-12 md:w-14 md:h-14"
+                    className="object-contain w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-14 lg:h-14"
                   />
                 </motion.div>
                 <span className="inline-block bg-gradient-to-r from-[#2B35AB] via-[#8A38F5] to-[#13CBD4] bg-clip-text text-transparent">
@@ -241,7 +241,7 @@ export default function FAQSection() {
                     alt="People"
                     width={48}
                     height={48}
-                    className="object-contain w-12 h-12 sm:w-12 sm:h-12 md:w-14 md:h-14"
+                    className="object-contain w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-14 lg:h-14"
                   />
                 </motion.div>
               </div>
@@ -309,7 +309,7 @@ export default function FAQSection() {
                         whileHover={{ scale: 1.1 }}
                         whileTap={{ scale: 0.9 }}
                       >
-                        <MoreVertical className="w-5 h-5 text-gray-600" />
+                        <MoreVertical className="w-4 h-4 sm:w-5 sm:h-5 text-gray-600" />
                       </motion.button>
 
                       {/* Dropdown Menu */}
@@ -374,9 +374,9 @@ export default function FAQSection() {
                           transition={{ duration: 0.2 }}
                         >
                           {activeIndex === index ? (
-                            <Minus className="w-4 h-4 text-gray-600" />
+                            <Minus className="w-3 h-3 sm:w-4 sm:h-4 text-gray-600" />
                           ) : (
-                            <Plus className="w-4 h-4 text-gray-600" />
+                          <Plus className="w-3 h-3 sm:w-4 sm:h-4 text-gray-600" />
                           )}
                         </motion.div>
                         <span className="text-sm font-medium text-gray-900 leading-relaxed">{faq.question}</span>
