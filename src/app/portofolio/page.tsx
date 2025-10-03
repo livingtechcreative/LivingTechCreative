@@ -91,7 +91,7 @@ export default function PortfolioPage() {
                 <span>Recent</span>
                 <div className="relative inline-block mx-1">
                   <Image
-                    src="/images/project.svg"
+                    src={getIconSrc("/images/project.svg", "/images/paint.png")}
                     alt="Project"
                     width={56}
                     height={56}

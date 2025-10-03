@@ -7,6 +7,7 @@ import { useState } from "react"
 import BadgeSubtitle from "./badge-subtitle"
 import PhoneInput from "./phone-input"
 import { apiService, ContactFormData } from "@/lib/api"
+import { useMobileIcon } from "@/hooks/use-mobile-icon"
 
 // Animation variants
 const containerVariants = {
@@ -111,6 +112,7 @@ interface FormData {
 }
 
 export default function ContactSection() {
+  const { getIconSrc } = useMobileIcon()
   const [currentStep, setCurrentStep] = useState(1)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
@@ -247,9 +249,9 @@ export default function ContactSection() {
                 variants={iconVariants}
               >
                 <Image 
-                  src="/images/hand.svg" 
+                  src={getIconSrc("/images/hand.svg", "/images/hand.png")}
                   alt="Hand" 
-                  width={56}
+                  width={56} 
                   height={56}
                   className="w-6 h-6 sm:w-8 sm:h-8 md:w-12 md:h-12 lg:w-14 lg:h-14" 
                 />

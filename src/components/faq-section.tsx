@@ -4,6 +4,7 @@ import { Plus, Minus, MoreVertical } from "lucide-react"
 import { useState, useRef, useEffect } from "react"
 import Image from "next/image"
 import BadgeSubtitle from "./badge-subtitle"
+import { useMobileIcon } from "@/hooks/use-mobile-icon"
 
 // Animation variants
 const containerVariants = {
@@ -120,6 +121,7 @@ const answerVariants = {
 }
 
 export default function FAQSection() {
+  const { getIconSrc } = useMobileIcon()
   const [activeIndex, setActiveIndex] = useState<number | null>(null)
   const [showDropdown, setShowDropdown] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
@@ -144,7 +146,7 @@ export default function FAQSection() {
         "Our pricing varies based on project scope and requirements. We provide custom quotes after understanding your specific needs.",
     },
     {
-      question: "What if I&apos;m not satisfied with the results?",
+      question: "What if I'm not satisfied with the results?",
       answer:
         "We offer revisions and work closely with you to ensure the final result meets your expectations and business goals.",
     },
@@ -160,7 +162,7 @@ export default function FAQSection() {
     {
       question: "What are the working hours of Living Tech Creative?",
       answer:
-        "We typically work Monday to Friday, 9 AM to 6 PM. However, we&apos;re flexible and can accommodate different time zones for our clients.",
+        "We typically work Monday to Friday, 9 AM to 6 PM. However, we're flexible and can accommodate different time zones for our clients.",
     },
   ]
 
@@ -222,7 +224,7 @@ export default function FAQSection() {
                   variants={iconVariants}
                 >
                   <Image
-                    src="/images/chat.svg"
+                    src={getIconSrc("/images/chat.svg", "/images/chat.png")}
                     alt="Chat"
                     width={48}
                     height={48}
@@ -237,7 +239,7 @@ export default function FAQSection() {
                   variants={iconVariants}
                 >
                   <Image
-                    src="/images/people.svg"
+                    src={getIconSrc("/images/people.svg", "/images/people.png")}
                     alt="People"
                     width={48}
                     height={48}

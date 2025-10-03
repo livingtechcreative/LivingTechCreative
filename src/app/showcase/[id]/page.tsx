@@ -25,10 +25,10 @@ function formatDate(dateString: string) {
 	})
 }
 
-export default async function ShowcaseDetailPage({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = await params
+export default async function ShowcaseDetailPage({ params }: { params: { id: string } }) {
+  const { id } = params
   const idNum = Number(id)
-	const showcaseItem = await apiService.getShowcaseItem(idNum)
+  const showcaseItem = await apiService.getShowcaseItem(idNum)
 
 	if (!showcaseItem) {
 		return (
@@ -95,7 +95,7 @@ export default async function ShowcaseDetailPage({ params }: { params: Promise<{
 
 							<div className="space-y-6">
 								<h3 className="text-xl font-semibold text-gray-900">Project Details</h3>
-								<div className="grid sm:grid-cols-2 gap-6">
+								{/* <div className="grid sm:grid-cols-2 gap-6"> */}
 									<div className="flex items-center gap-3 p-4 bg-gray-50 rounded-lg">
 										<Calendar className="w-5 h-5 text-[#2B35AB]" />
 										<div>

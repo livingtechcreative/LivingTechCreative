@@ -4,6 +4,7 @@ import { motion } from "framer-motion"
 import Image from "next/image"
 import BadgeSubtitle from "./badge-subtitle"
 import { AnimatedTooltip } from "./ui/animated-tooltip"
+import { useMobileIcon } from "@/hooks/use-mobile-icon"
 
 // Animation variants
 const containerVariants = {
@@ -69,6 +70,8 @@ const imageVariants = {
 }
 
 export default function AboutUsSection() {
+  const { getIconSrc } = useMobileIcon()
+  
   const teamMembers = [
     {
       id: 1,
@@ -137,7 +140,7 @@ export default function AboutUsSection() {
                   whileHover="hover"
                 >
                   <Image
-                    src="/images/handwaves.svg"
+                    src={getIconSrc("/images/handwaves.svg", "/images/handwaves.png")}
                     alt="Hand Wave"
                     width={56}
                     height={56}

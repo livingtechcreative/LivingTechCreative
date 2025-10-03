@@ -1,39 +1,157 @@
 "use client"
 
+import { useEffect } from "react"
 import { motion } from "framer-motion"
-import Image from "next/image"
 import Link from "next/link"
-import { ArrowLeft, Home, Search } from "lucide-react"
+import { ArrowLeft, Home } from "lucide-react"
+
+// Pastikan halaman ini dirender sebagai client component
+export const dynamic = 'force-dynamic'
 
 export default function NotFound() {
-  return (
-    <div className="min-h-screen bg-white flex items-center justify-center px-4 relative overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute inset-0 z-0">
-        {/* Left Background Image - Faded */}
-        <div className="absolute left-1/4 top-1/2 transform -translate-y-1/2 -translate-x-1/2 opacity-20">
-          <Image 
-            src="/images/kiri.png" 
-            alt="Left background" 
-            width={400} 
-            height={464} 
-            className="opacity-50"
-          />
-        </div>
+  useEffect(() => {
+    // Fungsi untuk menyembunyikan navbar, footer, dan WhatsApp float button
+    const hideElements = () => {
+      try {
+        // Cari dan sembunyikan navbar dengan berbagai selector
+        const navbarSelectors = [
+          '[data-slot="navbar"]',
+          '.fixed.top-0.left-0.right-0.z-50',
+          '#navbar',
+          'header',
+          'nav'
+        ]
         
-        {/* Right Background Image - Faded */}
-        <div className="absolute right-1/4 top-1/2 transform -translate-y-1/2 translate-x-1/2 opacity-20">
-          <Image 
-            src="/images/kanan.png" 
-            alt="Right background" 
-            width={400} 
-            height={517} 
-            className="opacity-50"
-          />
-        </div>
-      </div>
-
-      <div className="max-w-4xl mx-auto text-center relative z-10">
+        // Cari dan sembunyikan footer dengan berbagai selector
+        const footerSelectors = [
+          '[data-slot="footer"]',
+          'footer',
+          '#footer',
+          '.footer'
+        ]
+        
+        // Cari dan sembunyikan WhatsApp float button
+        const whatsappSelectors = [
+          '.floating-whatsapp',
+          '.floating-wpp',
+          '.whatsapp-button',
+          '.whatsapp-float',
+          '[data-testid="whatsapp"]',
+          '[data-slot="whatsapp"]',
+          '.react-floating-whatsapp',
+          '.react-whatsapp',
+          '.whatsapp-widget'
+        ]
+        
+        // Sembunyikan navbar
+        navbarSelectors.forEach(selector => {
+          const elements = document.querySelectorAll(selector)
+          elements.forEach(el => {
+            if (el) (el as HTMLElement).style.display = 'none'
+          })
+        })
+        
+        // Sembunyikan footer
+        footerSelectors.forEach(selector => {
+          const elements = document.querySelectorAll(selector)
+          elements.forEach(el => {
+            if (el) (el as HTMLElement).style.display = 'none'
+          })
+        })
+        
+        // Sembunyikan WhatsApp float button
+        whatsappSelectors.forEach(selector => {
+          const elements = document.querySelectorAll(selector)
+          elements.forEach(el => {
+            if (el) (el as HTMLElement).style.display = 'none'
+          })
+        })
+        
+        // Sembunyikan semua elemen fixed di pojok kanan bawah (kemungkinan WhatsApp float)
+        const allFixedElements = document.querySelectorAll('.fixed, [style*="position: fixed"]')
+        allFixedElements.forEach(el => {
+          const style = window.getComputedStyle(el)
+          const position = style.getPropertyValue('position')
+          const bottom = style.getPropertyValue('bottom')
+          const right = style.getPropertyValue('right')
+          
+          // Jika elemen fixed di pojok kanan bawah, kemungkinan WhatsApp float
+          if (position === 'fixed' && 
+              (bottom.includes('px') || bottom.includes('rem')) && 
+              (right.includes('px') || right.includes('rem'))) {
+            (el as HTMLElement).style.display = 'none'
+          }
+        })
+        
+        // Tambahkan class ke body untuk membantu styling
+        document.body.classList.add('not-found-page')
+      } catch (error) {
+        console.error('Error hiding elements:', error)
+      }
+    }
+    
+    // Jalankan beberapa kali untuk memastikan
+    hideElements()
+    
+    // Jalankan lagi setelah DOM sepenuhnya dimuat
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', hideElements)
+    }
+    
+    // Jalankan lagi setelah semua resource dimuat
+    window.addEventListener('load', hideElements)
+    
+    // Jalankan beberapa kali dengan interval untuk menangani elemen yang muncul terlambat
+    const interval = setInterval(hideElements, 200)
+    setTimeout(() => clearInterval(interval), 2000)
+    
+    return () => {
+      window.removeEventListener('load', hideElements)
+      document.removeEventListener('DOMContentLoaded', hideElements)
+      clearInterval(interval)
+    }
+  }, [])
+  
+  return (
+    <>
+      <style jsx global>{`
+        /* Sembunyikan navbar dan footer */
+        .fixed.top-0.left-0.right-0.z-50,
+        .fixed.bottom-0.left-0.right-0.z-50,
+        footer.relative,
+        [data-testid="navbar"],
+        [data-testid="footer"],
+        header,
+        nav,
+        footer,
+        .floating-whatsapp,
+        .floating-wpp,
+        .whatsapp-button,
+        .whatsapp-float,
+        [data-testid="whatsapp"],
+        [data-slot="whatsapp"],
+        .react-floating-whatsapp,
+        .react-whatsapp,
+        .whatsapp-widget,
+        div[style*="position:fixed"][style*="bottom"][style*="right"],
+        div[style*="position: fixed"][style*="bottom"][style*="right"] {
+          display: none !important;
+        }
+        
+        /* Pastikan halaman 404 tampil penuh */
+        body.not-found-page {
+          overflow: auto !important;
+          height: 100% !important;
+        }
+        
+        /* Reset padding dan margin */
+        body.not-found-page > div {
+          padding: 0 !important;
+          margin: 0 !important;
+        }
+      `}</style>
+      <div className="min-h-screen bg-white flex items-center justify-center px-4" style={{ paddingTop: '0 !important', paddingBottom: '0 !important' }}>
+      <div className="max-w-4xl mx-auto text-center">
         {/* 404 Animation */}
         <motion.div
           initial={{ opacity: 0, y: -50 }}
@@ -69,43 +187,19 @@ export default function NotFound() {
           transition={{ duration: 0.6, delay: 0.4 }}
           className="mb-12"
         >
-          <div className="flex items-center justify-center gap-4 mb-8">
-            <motion.div
-              animate={{ 
-                rotate: [0, 10, -10, 0],
-                scale: [1, 1.1, 1]
-              }}
-              transition={{ 
-                duration: 2,
-                repeat: Infinity,
-                repeatType: "reverse"
-              }}
-              className="hero-icon"
-            >
-              <Image
-                src="/images/ghost.svg"
-                alt="Lost Ghost"
-                width={80}
-                height={80}
-                className="object-contain"
-                unoptimized={true}
-              />
-            </motion.div>
-            <div className="text-4xl sm:text-5xl">👻</div>
-            <motion.div
-              animate={{ 
-                y: [0, -10, 0],
-                opacity: [1, 0.7, 1]
-              }}
-              transition={{ 
-                duration: 1.5,
-                repeat: Infinity,
-                repeatType: "reverse"
-              }}
-            >
-              <Search className="w-12 h-12 text-gray-400" />
-            </motion.div>
-          </div>
+          <motion.div
+            animate={{ 
+              y: [0, -10, 0],
+              opacity: [1, 0.7, 1]
+            }}
+            transition={{ 
+              duration: 1.5,
+              repeat: Infinity,
+              repeatType: "reverse"
+            }}
+          >
+            <div className="text-6xl sm:text-7xl md:text-8xl">👻</div>
+          </motion.div>
         </motion.div>
 
         {/* Action Buttons */}
@@ -146,5 +240,6 @@ export default function NotFound() {
         </motion.div>
       </div>
     </div>
+  </>
   )
 }
