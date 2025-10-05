@@ -13,6 +13,7 @@ export const AnimatedTooltip = ({
     designation: string
     image: string
     hoverimage?: string
+    linkedinUrl?: string
   }[]
 }) => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
@@ -40,8 +41,10 @@ export const AnimatedTooltip = ({
     })
   }
 
-  const handleClick = (itemId: number) => {
-    if (hoveredIndex === itemId) {
+  const handleClick = (itemId: number, linkedinUrl?: string) => {
+    if (linkedinUrl) {
+      window.open(linkedinUrl, "_blank", "noopener,noreferrer")
+    } else if (hoveredIndex === itemId) {
       setHoveredIndex(null)
     } else {
       setHoveredIndex(itemId)
@@ -56,7 +59,8 @@ export const AnimatedTooltip = ({
            key={item.name}
            onMouseEnter={() => setHoveredIndex(item.id)}
            onMouseLeave={() => setHoveredIndex(null)}
-           onClick={() => handleClick(item.id)}
+           onClick={() => handleClick(item.id, item.linkedinUrl)}
+           style={{ cursor: item.linkedinUrl ? 'pointer' : 'default' }}
          >
           <AnimatePresence>
             {hoveredIndex === item.id && (

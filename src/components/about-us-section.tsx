@@ -79,6 +79,7 @@ export default function AboutUsSection() {
       designation: "Team Lead",
       image: "/member/danisa.jpg",
       hoverimage: "/memberhover/danisa.jpg",
+      linkedinUrl: "https://www.linkedin.com/in/danisarahadians/",
     },
     {
       id: 2,
@@ -86,6 +87,7 @@ export default function AboutUsSection() {
       designation: "UI/UX Designer",
       image: "/member/wachid.jpg",
       hoverimage: "/memberhover/wachid.jpg",
+      linkedinUrl: "https://www.linkedin.com/in/wachidmuslihm/",
     },
     {
       id: 3,
@@ -93,6 +95,7 @@ export default function AboutUsSection() {
       designation: "Backend Developer",
       image: "/member/anshori.jpg",
       hoverimage: "/memberhover/anshori.jpg",
+      linkedinUrl: "https://www.linkedin.com/in/m-anshoria/",
     },
     {
       id: 4,
@@ -100,6 +103,7 @@ export default function AboutUsSection() {
       designation: "Graphic Designer",
       image: "/member/satria.jpg",
       hoverimage: "/memberhover/satria.jpg",
+      linkedinUrl: "https://www.linkedin.com/in/satriawirabuana/",
     },
     {
       id: 5,
@@ -107,6 +111,7 @@ export default function AboutUsSection() {
       designation: "Fullstack Developer",
       image: "/member/fakri.jpg",
       hoverimage: "/memberhover/fakri.jpg",
+      linkedinUrl: "https://www.linkedin.com/in/fakriab/",
     },
   ]
 
