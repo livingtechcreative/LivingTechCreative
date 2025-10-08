@@ -11,8 +11,34 @@ import Footer from '@/components/footer'
 
 export const metadata: Metadata = {
   title: 'LivingTech Creative',
-  description: 'Created with Creative Engineering',
-  generator: 'v0.dev',
+  description: 'We create stunning, high-performance websites that don\'t ghost you after launch. Your success is our priority, from concept to launch and beyond.',
+  generator: 'Next.js',
+  icons: {
+    icon: '/metaicon.svg',
+    shortcut: '/metaicon.svg',
+    apple: '/metaicon.svg',
+  },
+  openGraph: {
+    title: 'LivingTech Creative',
+    description: 'We create stunning, high-performance websites that don\'t ghost you after launch. Your success is our priority, from concept to launch and beyond.',
+    url: 'https://livingtechcreative.com',
+    siteName: 'LivingTech Creative',
+    images: [
+      {
+        url: '/images/livtechlogo.svg',
+        width: 1200,
+        height: 630,
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'LivingTech Creative',
+    description: 'We create stunning, high-performance websites that don\'t ghost you after launch. Your success is our priority, from concept to launch and beyond.',
+    images: ['/images/livtechlogo.svg'],
+  },
 }
 
 export default function RootLayout({
