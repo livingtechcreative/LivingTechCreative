@@ -10,34 +10,60 @@ import IntegratedNavbar from '@/components/integrated-navbar'
 import Footer from '@/components/footer'
 
 export const metadata: Metadata = {
-  title: 'LivingTech Creative',
-  description: 'We create stunning, high-performance websites that don\'t ghost you after launch. Your success is our priority, from concept to launch and beyond.',
-  generator: 'Next.js',
-  icons: {
-    icon: '/metaicon.svg',
-    shortcut: '/metaicon.svg',
-    apple: '/metaicon.svg',
+  metadataBase: new URL('https://livingtechcreative.com'),
+  title: {
+    default: 'LivingTech Creative - Web Development & Design Agency',
+    template: '%s | LivingTech Creative'
   },
+  description: 'We create stunning, high-performance websites that don\'t ghost you after launch. Your success is our priority, from concept to launch and beyond.',
+  keywords: ['web development', 'web design', 'digital agency', 'website creation', 'LivingTech Creative'],
+  authors: [{ name: 'LivingTech Creative' }],
+  creator: 'LivingTech Creative',
+  publisher: 'LivingTech Creative',
+  
+  // Icons - sesuai struktur folder /favicon/
+  icons: {
+    icon: [
+      { url: '/favicon/favicon.ico', sizes: 'any' },
+      { url: '/favicon/favicon.svg', type: 'image/svg+xml' },
+      { url: '/favicon/favicon-96x96.png', sizes: '96x96', type: 'image/png' },
+    ],
+    apple: [
+      { url: '/favicon/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+    ],
+  },
+  
+  // Manifest
+  manifest: '/favicon/site.webmanifest',
+  
+  // Open Graph untuk sharing (card preview)
   openGraph: {
-    title: 'LivingTech Creative',
-    description: 'We create stunning, high-performance websites that don\'t ghost you after launch. Your success is our priority, from concept to launch and beyond.',
+    type: 'website',
+    locale: 'en_US',
     url: 'https://livingtechcreative.com',
     siteName: 'LivingTech Creative',
-    images: [
-      {
-        url: '/images/livtechlogo.svg',
-        width: 1200,
-        height: 630,
-      },
-    ],
-    locale: 'en_US',
-    type: 'website',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'LivingTech Creative',
+    title: 'LivingTech Creative - Web Development & Design Agency',
     description: 'We create stunning, high-performance websites that don\'t ghost you after launch. Your success is our priority, from concept to launch and beyond.',
-    images: ['/images/livtechlogo.svg'],
+  },
+  
+  // Twitter Card
+  twitter: {
+    card: 'summary',
+    title: 'LivingTech Creative - Web Development & Design Agency',
+    description: 'We create stunning, high-performance websites that don\'t ghost you after launch. Your success is our priority, from concept to launch and beyond.',
+  },
+  
+  // Robots
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
   },
 }
 
@@ -49,10 +75,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${interDisplay.variable} font-sans`} style={{ fontFamily: 'Trap, sans-serif' }}>
       <head>
-        <link rel="icon" href="/metaicon.svg" type="image/svg+xml" />
-        <link rel="shortcut icon" href="/metaicon.svg" />
-        <link rel="apple-touch-icon" href="/metaicon.svg" />
+        {/* Meta tags tambahan untuk compatibility */}
         <meta name="format-detection" content="telephone=no, date=no, email=no, address=no" />
+        <meta name="theme-color" content="#000000" />
       </head>
       <body className="min-h-screen bg-white md:pb-0 pb-24">
         <ErrorBoundary>
