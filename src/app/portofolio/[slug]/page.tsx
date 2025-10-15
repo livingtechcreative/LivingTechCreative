@@ -7,6 +7,8 @@ import { apiService } from "@/lib/api"
 import { normalizeImagePath } from "@/lib/utils"
 import { notFound } from "next/navigation"
 import CTABanner from "@/components/cta-banner"
+import ScrollToTop from "@/components/scroll-to-top"
+import { ImageWithModal } from "@/components/ui/image-modal"
 
 export const dynamicParams = true
 export const dynamic = 'force-dynamic'
@@ -84,16 +86,16 @@ export default async function PortfolioDetailPage({ params }: PageProps) {
               </Link>
             </div>
           </div>
-          <div 
-            className="text-center mt-6 sm:mt-8 mb-6"
+          <div
+            className="text-left mt-6 sm:mt-8 mb-6"
           >
-            <h1 
+            <h1
               className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4 px-4"
             >
               {portfolio.title}
             </h1>
             {portfolio.project_url && (
-              <div>
+              <div className="px-4">
                 <Button variant="outline" size="sm" className="gap-2 bg-transparent">
                   <ExternalLink className="w-4 h-4" />
                   <a href={portfolio.project_url} target="_blank" rel="noopener noreferrer">
@@ -112,18 +114,25 @@ export default async function PortfolioDetailPage({ params }: PageProps) {
         >
           <div className="w-full max-w-4xl mx-auto">
             {portfolio.cover_image && (
-              <div
-                className="w-full h-64 sm:h-80 md:h-96 relative rounded-lg overflow-hidden"
+              <ImageWithModal
+                src={normalizeImagePath(portfolio.cover_image)}
+                alt={portfolio.title}
+                className="w-full"
               >
-                <Image
-                  src={normalizeImagePath(portfolio.cover_image)}
-                  alt={portfolio.title}
-                  fill
-                  className="object-cover w-full h-full"
-                  style={{ objectFit: 'cover' }}
-                  unoptimized={normalizeImagePath(portfolio.cover_image).includes('livingtechcreative.com')}
-                />
-              </div>
+                <div className="relative w-full rounded-lg overflow-hidden bg-gray-100">
+                  <div className="relative aspect-[16/9] w-full">
+                    <Image
+                      src={normalizeImagePath(portfolio.cover_image)}
+                      alt={portfolio.title}
+                      fill
+                      className="object-contain w-full h-full"
+                      style={{ objectFit: 'contain' }}
+                      unoptimized={normalizeImagePath(portfolio.cover_image).includes('livingtechcreative.com')}
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
+                    />
+                  </div>
+                </div>
+              </ImageWithModal>
             )}
           </div>
         </section>
@@ -228,16 +237,27 @@ export default async function PortfolioDetailPage({ params }: PageProps) {
                     <div key={sol.id} className="">
                       {/* Gambar dengan rounded corners - terpisah dari description */}
                       {sol.image ? (
-                        <div className="relative w-full h-64 sm:h-80 mb-6 sm:mb-8 rounded-2xl overflow-hidden bg-gray-100">
-                          <Image
-                            src={normalizeImagePath(sol.image)}
-                            alt={sol.title}
-                            fill
-                            className="object-cover"
-                          />
-                        </div>
+                        <ImageWithModal
+                          src={normalizeImagePath(sol.image)}
+                          alt={sol.title}
+                          className="w-full mb-6 sm:mb-8"
+                        >
+                          <div className="relative w-full rounded-2xl overflow-hidden bg-gray-100">
+                            <div className="relative aspect-[16/9] w-full">
+                              <Image
+                                src={normalizeImagePath(sol.image)}
+                                alt={sol.title}
+                                fill
+                                className="object-contain w-full h-full"
+                                style={{ objectFit: 'contain' }}
+                                unoptimized={normalizeImagePath(sol.image).includes('livingtechcreative.com')}
+                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
+                              />
+                            </div>
+                          </div>
+                        </ImageWithModal>
                       ) : (
-                        <div className="w-full h-64 sm:h-80 mb-6 sm:mb-8 rounded-2xl overflow-hidden bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center">
+                        <div className="w-full aspect-[16/9] mb-6 sm:mb-8 rounded-2xl overflow-hidden bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center">
                           <div className="text-center">
                             <div className="w-20 h-20 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
                               <span className="text-white font-bold text-2xl">{index + 1}</span>
@@ -356,6 +376,7 @@ export default async function PortfolioDetailPage({ params }: PageProps) {
           </div>
         </div>
       </main>
+      <ScrollToTop />
     </div>
   )
 }

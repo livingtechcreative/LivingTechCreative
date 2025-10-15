@@ -6,35 +6,22 @@ import { ArrowLeft, Calendar, Clock, User } from "lucide-react"
 import Link from "next/link"
 import { apiService } from "@/lib/api"
 import { normalizeImagePath } from "@/lib/utils"
-import blogPosts from "@/data/blog-posts.json"
-
-import blogSlugs from '@/data/blog-slugs.json'
+import ScrollToTop from "@/components/scroll-to-top"
 
 export async function generateStaticParams(): Promise<{ slug: string }[]> {
   try {
     console.log('[build] generateStaticParams(blog/page) called')
-    const base = process.env.NEXT_PUBLIC_API_BASE_URL || 'https://dashboard.livingtechcreative.com/api'
-    const baseUrl = base.endsWith('/') ? base : base + '/'
-    const url = new URL('blog-posts', baseUrl).toString()
-    const res = await fetch(url, { next: { revalidate: 0 } })
-    if (!res.ok) throw new Error(`Failed ${res.status}`)
-    const data = await res.json()
-    const posts = Array.isArray(data?.data) ? data.data : Array.isArray(data) ? data : []
-    const slugs = posts.filter((p: any) => p?.is_active && typeof p.slug === 'string').map((p: any) => p.slug)
-    const mapped = slugs.map((slug: string) => ({ slug }))
+    const posts = await apiService.getBlogPosts()
+    const activePosts = posts.filter((p: any) => p?.is_active && typeof p.slug === 'string')
+    const mapped = activePosts.map((p: any) => ({ slug: p.slug }))
     if (mapped.length === 0) {
-      console.log('[build] generateStaticParams(blog/page) no API slugs, using mock fallback')
+      console.log('[build] generateStaticParams(blog/page) no active posts found')
       return []
     }
     return mapped
   } catch (e) {
-    console.log('[build] generateStaticParams(blog/page) falling back to local json')
-    const mapped = (blogSlugs as string[]).map((slug) => ({ slug }))
-    if (mapped.length === 0) {
-      console.log('[build] generateStaticParams(blog/page) local json empty, using mock fallback')
-      return []
-    }
-    return mapped
+    console.log('[build] generateStaticParams(blog/page) API error, returning empty')
+    return []
   }
 }
 // Mengubah ke SSR mode
@@ -43,24 +30,19 @@ export const dynamic = 'force-dynamic'  // Menggunakan SSR
   
   export default async function BlogDetailPage({ params }: { params: Promise<{ slug: string }> }) {
     const { slug } = await params
-    
+
     try {
-    let allBlogPosts = (blogPosts as any[]).filter((p) => p?.is_active)
-    let blogPost = allBlogPosts.find(p => p.slug === slug)
-    let currentIndex = allBlogPosts.findIndex(p => p.slug === slug)
-    // Fallback to live API if not found in local data
+    // Fetch data directly from API
+    const allBlogPosts = await apiService.getBlogPosts()
+    const activeBlogPosts = allBlogPosts.filter((p: any) => p?.is_active)
+    const blogPost = activeBlogPosts.find((p: any) => p.slug === slug)
+    const currentIndex = activeBlogPosts.findIndex((p: any) => p.slug === slug)
+
     if (!blogPost) {
-      const livePosts = await apiService.getBlogPosts()
-      const activeLivePosts = (livePosts || []).filter((p) => p?.is_active)
-      const liveMatch = activeLivePosts.find(p => p.slug === slug)
-      if (liveMatch) {
-        allBlogPosts = activeLivePosts
-        blogPost = liveMatch
-        currentIndex = allBlogPosts.findIndex(p => p.slug === slug)
-      }
+      notFound()
     }
-    const previous = currentIndex > 0 ? allBlogPosts[currentIndex - 1] : null
-    const next = currentIndex < allBlogPosts.length - 1 ? allBlogPosts[currentIndex + 1] : null
+    const previous = currentIndex > 0 ? activeBlogPosts[currentIndex - 1] : null
+    const next = currentIndex < activeBlogPosts.length - 1 ? activeBlogPosts[currentIndex + 1] : null
 
     const handleShare = async () => {
       if (navigator.share && blogPost) {
@@ -95,9 +77,9 @@ export const dynamic = 'force-dynamic'  // Menggunakan SSR
 
     return (
       <div className="min-h-screen bg-white">
-        
+
         {/* Header Section */}
-        <header className="pt-20 pb-8 bg-gradient-to-br from-gray-50 to-white">
+        <header className="pt-32 pb-12 bg-gradient-to-br from-gray-50 to-white">
           <div className="max-w-4xl mx-auto px-4 sm:px-6">
             {/* Navigation */}
             <div className="flex items-center justify-between mb-6">
@@ -146,13 +128,20 @@ export const dynamic = 'force-dynamic'  // Menggunakan SSR
                 </div>
               </div>
 
+              {/* Category Badge */}
+              <div className="flex justify-center mb-4">
+                <span className="bg-purple-100 text-purple-700 px-4 py-2 rounded-full text-sm font-medium">
+                  {blogPost.category || 'Article'}
+                </span>
+              </div>
+
               {/* Title */}
-              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-6 px-4">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-6 px-4 leading-tight">
                 {blogPost.title}
               </h1>
 
               {/* Excerpt/Description */}
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8 leading-relaxed">
                 {blogPost.excerpt}
               </p>
 
@@ -168,22 +157,20 @@ export const dynamic = 'force-dynamic'  // Menggunakan SSR
           </div>
         </header>
 
-        <main className="max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
+        <main className="max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
           {/* Cover Image */}
-          <section className="mb-8 sm:mb-12">
-            <Card className="w-full max-w-4xl mx-auto overflow-hidden">
-              <CardContent className="p-0">
-                <div className="w-full h-64 sm:h-80 md:h-96 relative rounded-lg overflow-hidden">
-                  <Image
-                    src={normalizeImagePath(blogPost.cover_image)}
-                    alt={blogPost.title}
-                    fill
-                    className="object-cover"
-                    unoptimized={normalizeImagePath(blogPost.cover_image).includes('livingtechcreative.com')}
-                  />
-                </div>
-              </CardContent>
-            </Card>
+          <section className="mb-12">
+            <div className="w-full max-w-4xl mx-auto rounded-2xl overflow-hidden shadow-xl">
+              <div className="w-full h-64 sm:h-80 md:h-96 relative bg-gradient-to-br from-purple-50 to-indigo-50">
+                <Image
+                  src={normalizeImagePath(blogPost.cover_image)}
+                  alt={blogPost.title}
+                  fill
+                  className="object-cover"
+                  unoptimized={normalizeImagePath(blogPost.cover_image).includes('livingtechcreative.com')}
+                />
+              </div>
+            </div>
           </section>
 
           {/* Blog Content */}
@@ -193,10 +180,10 @@ export const dynamic = 'force-dynamic'  // Menggunakan SSR
               {/* Introduction */}
               {blogPost.introduction && (
                 <section className="mb-8">
-                  <div className="bg-gray-50 rounded-2xl p-6 border-l-4 border-purple-500">
-                    <h2 className="text-xl font-semibold text-gray-900 mb-3">Introduction</h2>
-                    <div 
-                      className="prose prose-gray max-w-none"
+                  <div className="bg-gradient-to-r from-purple-50 to-indigo-50 rounded-2xl p-8 border-l-4 border-purple-500 shadow-sm">
+                    <h2 className="text-xl font-semibold text-gray-900 mb-4">Introduction</h2>
+                    <div
+                      className="prose prose-gray max-w-none leading-relaxed"
                       dangerouslySetInnerHTML={{ __html: blogPost.introduction }}
                     />
                   </div>
@@ -205,8 +192,8 @@ export const dynamic = 'force-dynamic'  // Menggunakan SSR
 
               {/* Main Content */}
               <section className="mb-8">
-                <div 
-                  className="prose prose-lg prose-gray max-w-none prose-headings:text-gray-900 prose-headings:font-bold prose-p:text-gray-700 prose-p:leading-relaxed prose-a:text-purple-600 prose-a:no-underline hover:prose-a:underline prose-strong:text-gray-900 prose-code:bg-gray-100 prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-code:text-sm"
+                <div
+                  className="prose prose-lg prose-gray max-w-none prose-headings:text-gray-900 prose-headings:font-bold prose-headings:mb-4 prose-headings:mt-8 prose-p:text-gray-700 prose-p:leading-relaxed prose-p:mb-6 prose-a:text-purple-600 prose-a:no-underline hover:prose-a:underline prose-strong:text-gray-900 prose-code:bg-gray-100 prose-code:px-2 prose-code:py-1 prose-code:rounded prose-code:text-sm prose-ul:my-4 prose-li:my-2 prose-blockquote:border-l-purple-500 prose-blockquote:bg-purple-50 prose-blockquote:p-4 prose-blockquote:rounded-lg"
                   dangerouslySetInnerHTML={{ __html: blogPost.content }}
                 />
               </section>
@@ -214,10 +201,10 @@ export const dynamic = 'force-dynamic'  // Menggunakan SSR
               {/* Conclusion */}
               {blogPost.conclution && (
                 <section className="mb-8">
-                  <div className="bg-gradient-to-r from-purple-50 to-blue-50 rounded-2xl p-6 border border-purple-100">
-                    <h2 className="text-xl font-semibold text-gray-900 mb-3">Conclusion</h2>
-                    <div 
-                      className="prose prose-gray max-w-none"
+                  <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-2xl p-8 border border-purple-200 shadow-sm">
+                    <h2 className="text-xl font-semibold text-gray-900 mb-4">Conclusion</h2>
+                    <div
+                      className="prose prose-gray max-w-none leading-relaxed"
                       dangerouslySetInnerHTML={{ __html: blogPost.conclution }}
                     />
                   </div>
@@ -228,34 +215,56 @@ export const dynamic = 'force-dynamic'  // Menggunakan SSR
             {/* Sidebar */}
             <aside className="lg:w-80">
               {/* Author Info */}
-              <div className="bg-white border border-gray-200 rounded-2xl p-6 mb-6 shadow-sm">
-                <h3 className="font-semibold text-gray-900 mb-3">About the Author</h3>
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full flex items-center justify-center text-white font-semibold">
+              <div className="bg-gradient-to-br from-purple-50 to-indigo-50 border border-purple-100 rounded-2xl p-6 mb-6 shadow-sm">
+                <h3 className="font-semibold text-gray-900 mb-4">About the Author</h3>
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-14 h-14 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full flex items-center justify-center text-white font-semibold text-lg">
                     {blogPost.author.charAt(0).toUpperCase()}
                   </div>
                   <div>
-                    <p className="font-medium text-gray-900">{blogPost.author}</p>
+                    <p className="font-medium text-gray-900 text-lg">{blogPost.author}</p>
                     <p className="text-sm text-gray-600">Content Writer</p>
+                  </div>
+                </div>
+                <div className="text-sm text-gray-700 leading-relaxed">
+                  Passionate about sharing insights on technology, design, and digital innovation.
+                </div>
+              </div>
+
+              {/* Article Info */}
+              <div className="bg-white border border-gray-200 rounded-2xl p-6 mb-6 shadow-sm">
+                <h3 className="font-semibold text-gray-900 mb-4">Article Info</h3>
+                <div className="space-y-3">
+                  <div className="flex items-center gap-3">
+                    <Calendar className="w-4 h-4 text-purple-500" />
+                    <span className="text-sm text-gray-600">{formatDate(blogPost.published_at)}</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <Clock className="w-4 h-4 text-purple-500" />
+                    <span className="text-sm text-gray-600">{formatReadTime(blogPost.read_duration)}</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <User className="w-4 h-4 text-purple-500" />
+                    <span className="text-sm text-gray-600">{blogPost.author}</span>
                   </div>
                 </div>
               </div>
 
               {/* Related Posts */}
-              {allBlogPosts.length > 1 && (
+              {activeBlogPosts.length > 1 && (
                 <div className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm">
                   <h3 className="font-semibold text-gray-900 mb-4">Related Posts</h3>
                   <div className="space-y-4">
-                    {allBlogPosts
-                      .filter(post => post.id !== blogPost.id)
+                    {activeBlogPosts
+                      .filter((post: any) => post.id !== blogPost.id)
                       .slice(0, 3)
-                      .map((relatedPost) => (
-                        <Link 
+                      .map((relatedPost: any) => (
+                        <Link
                           key={relatedPost.id}
                           href={`/blog/${relatedPost.slug}`}
                           className="block group"
                         >
-                          <div className="flex gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors">
+                          <div className="flex gap-3 p-3 rounded-lg hover:bg-purple-50 transition-colors duration-200">
                             <div className="w-16 h-16 relative rounded-lg overflow-hidden flex-shrink-0">
                               <Image
                                 src={normalizeImagePath(relatedPost.cover_image)}
@@ -279,11 +288,14 @@ export const dynamic = 'force-dynamic'  // Menggunakan SSR
                     }
                   </div>
                   <div className="mt-4 pt-4 border-t border-gray-100">
-                    <Link 
+                    <Link
                       href="/blog"
-                      className="text-sm text-purple-600 hover:text-purple-700 font-medium"
+                      className="text-sm text-purple-600 hover:text-purple-700 font-medium flex items-center gap-1"
                     >
-                      View all posts →
+                      View all posts
+                      <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
                     </Link>
                   </div>
                 </div>
@@ -325,6 +337,7 @@ export const dynamic = 'force-dynamic'  // Menggunakan SSR
             </div>
           </div>
         </main>
+        <ScrollToTop />
       </div>
     )
   } catch (error) {

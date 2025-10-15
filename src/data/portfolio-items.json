@@ -22,24 +22,24 @@
   },
   {
     "id": 17,
-    "title": "Designing and Developing an Exam Management website for Elementary School",
-    "slug": "designing-and-developing-an-exam-management-website-for-elementary-school",
-    "background": "The Ujianku Web is a user-friendly platform designed to simplify and enhance offline exam preparation and management for elementary schools. It streamlines data management, facilitates collaboration between administrators, teachers, and head master. Empowers informed through exam reports and exam card for students.",
+    "title": "Developing Exam Management Website to Streamline Exam Organization in Elementary Schools",
+    "slug": "developing-exam-management-website-to-streamline-exam-organization-in-elementary-schools",
+    "background": "The Ujianku Web is a user-friendly platform designed to simplify and enhance offline exam preparation and management for elementary schools. It streamlines data management, facilitates collaboration between administrators and teachers. Empowers informed through exam schedule, exam reports and exam cards for students.",
     "client": "SD N 1 Pandowan",
-    "category": "Web Development, UI/UX Design",
+    "category": "Education",
     "start_date": "2023-04-03T00:00:00.000000Z",
     "end_date": "2023-12-11T00:00:00.000000Z",
     "duration_days": 252,
-    "problem": "<p>When I interviewed the school administrator about exam management preparation, she explained how difficult it was to handle everything on her own. Managing all the data manually often leads to human error, and entering information for each student's exam card is particularly challenging. She expressed the need for a single platform that can manage and enhance offline exam preparation.</p>\n<p>How might we centralize and streamline&nbsp;the management of teacher, course,&nbsp;session, and grade data?</p>\n<p>How might we automate the creation and&nbsp;management of student exam cards, schedule, and report to save time and&nbsp;reduce errors</p>",
-    "goal": "Enhance Data Management Efficiency\nCentralize and streamline data entry and\nmanagement for students, teachers, courses,\nsessions, and grades.\n\nAutomate Exam Preparation Processes\n1. Automate the creation and management of\nstudent exam cards.\n2. Automate exam scheduling to ensure\nefficient and conflict-free planning.\n3. Automate the generation of detailed exam\nreports for accurate performance insights.",
-    "conclution": "The website can be used by admin",
-    "cover_image": "portofolio-cover-image/01K6G2QBTTQ9TF2BDSHWBVSV7B.png",
+    "problem": "<p dir=\"ltr\">When I interviewed the school administrator about exam preparation, she explained the difficulty of handling everything on her own. Managing all the data manually often leads to human errors, and generating exam cards for each student is particularly challenging. The process is inefficient because the same student information must be entered repeatedly for every exam, consuming a significant amount of time. So, the problem statements are:</p>\n<ol>\n<li style=\"font-weight: bold;\"><strong>How might we centralize and streamline the management of teacher, course, session, and grade data?</strong></li>\n<li style=\"font-weight: bold;\"><strong>How might we automate the creation and management of student exam cards, schedule, and report to save time and reduce errors ?</strong></li>\n</ol>",
+    "goal": "<p>Designing and developing a system to assist administrators in streamlining and centralizing exam management for elementary schools</p>",
+    "conclution": "Based on the results of the testing, the exam management website has been successfully developed and is equipped with essential features to manage exam-related data. These include managing students, teachers, sessions, sub-sessions, subjects, exam cards, exam schedules, exam scores, and exam reports. Overall, the system is functional and able to support the exam management process effectively.",
+    "cover_image": "portofolio-cover-image/01K7HDFDQMFX0D0J9YD490YE18.png",
     "project_url": null,
     "display_order": 0,
     "is_active": true,
-    "is_featured": false,
+    "is_featured": true,
     "created_at": "2025-10-01T14:27:21.000000Z",
-    "updated_at": "2025-10-02T13:32:36.000000Z"
+    "updated_at": "2025-10-14T13:33:11.000000Z"
   },
   {
     "id": 18,
@@ -54,12 +54,12 @@
     "problem": "<p>The client lacked an online presence that reflected their professional capabilities and creative approach to event management. They needed a website that could effectively communicate their brand values, showcase their successful events portfolio (including Tech Expo 2024), and convert visitors into leads through compelling visual storytelling and clear service offerings.</p>",
     "goal": "<ol>\n<li class=\"whitespace-normal break-words\">Create a visually stunning and responsive company profile website</li>\n<li class=\"whitespace-normal break-words\">Showcase the company's event portfolio with high-quality imagery</li>\n<li class=\"whitespace-normal break-words\">Highlight key services: Trusted Partner, Strategic Partner, Premium Service, Custom Service, and Creative Concepts</li>\n<li class=\"whitespace-normal break-words\">Implement an intuitive navigation system for seamless user experience</li>\n<li class=\"whitespace-normal break-words\">Integrate a contact form to generate qualified leads</li>\n<li class=\"whitespace-normal break-words\">Optimize for mobile devices and ensure fast loading times</li>\n<li class=\"whitespace-normal break-words\">Establish a strong brand identity through consistent design language</li>\n</ol>",
     "conclution": "Successfully delivered a modern, fully responsive company profile website that exceeded client expectations. The website features an eye-catching hero section with event imagery, comprehensive service descriptions, team profiles, and an engaging portfolio showcase. The implementation of smooth animations and intuitive navigation resulted in increased user engagement and a 45% improvement in lead generation within the first month of launch.",
-    "cover_image": "portofolio-cover-image/01K6JSZRW6PCK8QNPCJM0E4RE7.png",
+    "cover_image": "portofolio-cover-image/01K7778XY1MPK120MTCGCBP5B6.png",
     "project_url": "https://companyprofile.anshoria.my.id/",
     "display_order": 0,
     "is_active": true,
     "is_featured": false,
     "created_at": "2025-10-02T15:52:23.000000Z",
-    "updated_at": "2025-10-02T15:53:50.000000Z"
+    "updated_at": "2025-10-10T14:09:23.000000Z"
   }
 ]

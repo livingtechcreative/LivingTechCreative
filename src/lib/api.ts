@@ -54,6 +54,7 @@ const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'https://dashboard.
     is_active: boolean
     created_at: string | null
     updated_at: string | null
+    category?: string | null
   }
   
   export interface BlogPostCategory {

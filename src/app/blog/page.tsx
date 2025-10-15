@@ -75,7 +75,7 @@ export default function BlogPage() {
     <div className="min-h-screen bg-white">
       <IntegratedNavbar />
       
-      <main className="pt-20 pb-16">
+      <main className="pt-32 pb-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header Section */}
           <motion.div 
@@ -135,70 +135,88 @@ export default function BlogPage() {
           </motion.div>
 
           {/* Blog Posts Grid */}
-          <motion.div 
+          <motion.div
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16"
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.5 }}
           >
-            {filteredPosts.map((post) => (
-              <motion.article 
-                key={post.id} 
-                className="group bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden"
-                whileHover={{ y: -5 }}
-                transition={{ duration: 0.3 }}
+            {filteredPosts.map((post, index) => (
+              <motion.article
+                key={post.id}
+                className="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100/50"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
               >
                 {/* Blog Post Image */}
-                <div className="relative overflow-hidden rounded-t-2xl">
+                <div className="relative overflow-hidden rounded-t-2xl bg-gradient-to-br from-purple-50 to-indigo-50">
                   <Image
                     src={normalizeImagePath(post.cover_image)}
                     alt={post.title}
                     width={400}
                     height={240}
-                    className="w-full h-60 object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="w-full h-64 object-cover"
                     unoptimized={normalizeImagePath(post.cover_image).includes('livingtechcreative.com')}
                   />
-                  
-                  {/* Overlay with Read More Button */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center">
-                    <Link 
-                      href={`/blog/${post.slug}`}
-                      className="bg-white text-gray-900 px-6 py-3 rounded-lg font-medium hover:bg-gray-100 transition-colors flex items-center gap-2 shadow-lg"
-                    >
-                      Read More
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                      </svg>
-                    </Link>
+
+                  {/* Category Badge */}
+                  <div className="absolute top-4 left-4">
+                    <span className="bg-white/90 backdrop-blur-sm text-purple-600 px-3 py-1 rounded-full text-xs font-medium shadow-lg">
+                      {post.category || 'Article'}
+                    </span>
                   </div>
-                </div>
+
+                  {/* Reading Time Badge */}
+                  <div className="absolute top-4 right-4">
+                    <span className="bg-black/70 backdrop-blur-sm text-white px-3 py-1 rounded-full text-xs font-medium flex items-center gap-1">
+                      <Clock className="w-3 h-3" />
+                      {formatReadTime(post.read_duration)}
+                    </span>
+                  </div>
+
+                  </div>
 
                 {/* Blog Post Content */}
                 <div className="p-6">
-                  <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-purple-600 transition-colors line-clamp-2">
+                  {/* Author and Date */}
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="flex items-center gap-2">
+                      <div className="w-8 h-8 bg-gradient-to-br from-purple-400 to-indigo-400 rounded-full flex items-center justify-center">
+                        <User className="w-4 h-4 text-white" />
+                      </div>
+                      <div>
+                        <p className="text-sm font-medium text-gray-900">{post.author}</p>
+                        <p className="text-xs text-gray-500">{formatDate(post.published_at)}</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Title */}
+                  <h3 className="text-xl font-bold text-gray-900 mb-3 line-clamp-2 leading-tight">
                     {post.title}
                   </h3>
-                  <p className="text-gray-600 text-sm leading-relaxed mb-4 line-clamp-3">
+
+                  {/* Excerpt */}
+                  <p className="text-gray-600 text-sm leading-relaxed mb-6 line-clamp-3">
                     {post.excerpt}
                   </p>
 
-                  {/* Meta Information */}
-                  <div className="flex items-center justify-between text-xs text-gray-500">
-                    <div className="flex items-center gap-4">
-                      <div className="flex items-center gap-1">
-                        <User className="w-3 h-3" />
-                        <span>{post.author}</span>
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <Calendar className="w-3 h-3" />
-                        <span>{formatDate(post.published_at)}</span>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <Clock className="w-3 h-3" />
-                      <span>{formatReadTime(post.read_duration)}</span>
-                    </div>
-                  </div>
+                  {/* Read More Link */}
+                  <Link
+                    href={`/blog/${post.slug}`}
+                    className="inline-flex items-center gap-2 text-purple-600 hover:text-purple-700 font-medium text-sm"
+                  >
+                    <span>Read Article</span>
+                    <svg
+                      className="w-4 h-4"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </Link>
                 </div>
               </motion.article>
             ))}
