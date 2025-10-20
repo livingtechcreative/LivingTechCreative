@@ -1,31 +1,28 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import Image from "next/image"
-import Link from "next/link"
-import { useMemo } from "react"
-import { Portfolio } from "@/lib/api"
-import { normalizeImagePath } from "@/lib/utils"
-import portfolioItems from "@/data/portfolio-items.json"
+import { motion } from "framer-motion";
+import Image from "next/image";
+import Link from "next/link";
+import { useMemo } from "react";
+import { Portfolio } from "@/lib/api";
+import { normalizeImagePath } from "@/lib/utils";
 
 type Props = {
-  initialPortfolios?: Portfolio[]
-}
+  initialPortfolios?: Portfolio[];
+};
 
 export default function HeroMarqueeSection({ initialPortfolios = [] }: Props) {
   const portfolios = useMemo(() => {
-    const source: any[] = (initialPortfolios && initialPortfolios.length > 0)
-      ? (initialPortfolios as any[])
-      : ((portfolioItems as any[]) || [])
-    
-    const activePortfolios = (source || []).filter((p) => p?.is_active)
-    const featuredFirst = [...activePortfolios].sort((a: any, b: any) => {
-      if (a.is_featured && !b.is_featured) return -1
-      if (!a.is_featured && b.is_featured) return 1
-      return 0
-    })
-    return featuredFirst.slice(0, 6)
-  }, [initialPortfolios])
+    const source = initialPortfolios as Portfolio[];
+
+    const activePortfolios = (source || []).filter((p) => p?.is_active);
+    const featuredFirst = [...activePortfolios].sort((a, b) => {
+      if (a.is_featured && !b.is_featured) return -1;
+      if (!a.is_featured && b.is_featured) return 1;
+      return 0;
+    });
+    return featuredFirst.slice(0, 6);
+  }, [initialPortfolios]);
 
   // Fallback if no portfolios
   if (portfolios.length === 0) {
@@ -40,7 +37,7 @@ export default function HeroMarqueeSection({ initialPortfolios = [] }: Props) {
           <div className="text-gray-500">No portfolio to display</div>
         </div>
       </motion.div>
-    )
+    );
   }
   return (
     <motion.div
@@ -72,19 +69,22 @@ export default function HeroMarqueeSection({ initialPortfolios = [] }: Props) {
             }}
           >
             {portfolios.map((portfolio, index) => (
-              <Link 
+              <Link
                 key={`first-${index}`}
                 href={`/portofolio/${portfolio.slug}`}
                 className="flex-shrink-0 w-80 h-48 sm:w-96 sm:h-56 md:w-[28rem] md:h-72 lg:w-[32rem] lg:h-80 rounded-2xl mx-4 overflow-hidden border-2 border-black/20 hover:border-black/40 transition-all duration-300 group relative cursor-pointer"
               >
                 <Image
-                  src={normalizeImagePath(portfolio.cover_image) || "/placeholder.svg"}
+                  src={
+                    normalizeImagePath(portfolio.cover_image) ||
+                    "/placeholder.svg"
+                  }
                   alt={portfolio.title}
                   fill
                   className="object-fill group-hover:scale-105 transition-transform duration-300"
-                  unoptimized={normalizeImagePath(portfolio.cover_image)?.includes('livingtechcreative.com')}
+                  unoptimized={normalizeImagePath(portfolio.cover_image)?.includes("livingtechcreative.com")}
                 />
-                
+
                 {/* Category Badge */}
                 <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-medium text-gray-700 border border-gray-200">
                   {portfolio.category}
@@ -116,19 +116,22 @@ export default function HeroMarqueeSection({ initialPortfolios = [] }: Props) {
             }}
           >
             {portfolios.map((portfolio, index) => (
-              <Link 
+              <Link
                 key={`second-${index}`}
                 href={`/portofolio/${portfolio.slug}`}
                 className="flex-shrink-0 w-80 h-48 sm:w-96 sm:h-56 md:w-[28rem] md:h-72 lg:w-[32rem] lg:h-80 rounded-2xl mx-4 overflow-hidden border-2 border-black/20 hover:border-black/40 transition-all duration-300 group relative cursor-pointer"
               >
                 <Image
-                  src={normalizeImagePath(portfolio.cover_image) || "/placeholder.svg"}
+                  src={
+                    normalizeImagePath(portfolio.cover_image) ||
+                    "/placeholder.svg"
+                  }
                   alt={portfolio.title}
                   fill
                   className="object-fill group-hover:scale-105 transition-transform duration-300"
-                  unoptimized={normalizeImagePath(portfolio.cover_image)?.includes('livingtechcreative.com')}
+                  unoptimized={normalizeImagePath(portfolio.cover_image)?.includes("livingtechcreative.com")}
                 />
-                
+
                 {/* Category Badge */}
                 <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-medium text-gray-700 border border-gray-200">
                   {portfolio.category}
@@ -146,5 +149,5 @@ export default function HeroMarqueeSection({ initialPortfolios = [] }: Props) {
         </div>
       </div>
     </motion.div>
-  )
+  );
 }

@@ -9,7 +9,8 @@
       "Bash(npx tsc:*)",
       "Bash(timeout:*)",
       "Bash(npx next lint:*)",
-      "Bash(npx next build:*)"
+      "Bash(npx next build:*)",
+      "Bash(npx eslint:*)"
     ],
     "deny": [],
     "ask": []

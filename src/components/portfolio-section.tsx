@@ -1,13 +1,12 @@
-"use client"
-import { motion } from "framer-motion"
-import { ArrowRight } from "lucide-react"
-import { useMemo, useState } from "react"
-import Image from "next/image"
-import Link from "next/link"
-import { Portfolio } from "@/lib/api"
-import { normalizeImagePath } from "@/lib/utils"
-import portfolioItems from "@/data/portfolio-items.json"
-import { useMobileIcon } from "@/hooks/use-mobile-icon"
+"use client";
+import { motion } from "framer-motion";
+import { ArrowRight } from "lucide-react";
+import { useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { Portfolio } from "@/lib/api";
+import { normalizeImagePath } from "@/lib/utils";
+import { useMobileIcon } from "@/hooks/use-mobile-icon";
 
 // BadgeSubtitle component definition (in case it's missing)
 function BadgeSubtitle({ children }: { children: React.ReactNode }) {
@@ -15,7 +14,7 @@ function BadgeSubtitle({ children }: { children: React.ReactNode }) {
     <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-purple-100 text-purple-800">
       {children}
     </span>
-  )
+  );
 }
 
 // Animation variants
@@ -25,130 +24,132 @@ const containerVariants = {
     opacity: 1,
     transition: {
       staggerChildren: 0.1,
-      delayChildren: 0.2
-    }
-  }
-}
+      delayChildren: 0.2,
+    },
+  },
+};
 
 const itemVariants = {
-  hidden: { 
-    opacity: 0, 
-    y: 30 
+  hidden: {
+    opacity: 0,
+    y: 30,
   },
   visible: {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.6
-    }
-  }
-}
+      duration: 0.6,
+    },
+  },
+};
 
 const cardVariants = {
-  hidden: { 
-    opacity: 0, 
+  hidden: {
+    opacity: 0,
     y: 20,
-    scale: 0.95
+    scale: 0.95,
   },
   visible: {
     opacity: 1,
     y: 0,
     scale: 1,
     transition: {
-      duration: 0.5
-    }
+      duration: 0.5,
+    },
   },
   hover: {
     y: -2,
     transition: {
-      duration: 0.3
-    }
-  }
-}
+      duration: 0.3,
+    },
+  },
+};
 
 const imageVariants = {
-  hidden: { 
-    opacity: 0, 
-    scale: 1.1 
+  hidden: {
+    opacity: 0,
+    scale: 1.1,
   },
   visible: {
     opacity: 1,
     scale: 1,
     transition: {
-      duration: 0.6
-    }
+      duration: 0.6,
+    },
   },
   hover: {
     scale: 1.01,
     transition: {
-      duration: 0.3
-    }
-  }
-}
+      duration: 0.3,
+    },
+  },
+};
 
 const textVariants = {
-  hidden: { 
-    opacity: 0, 
-    y: 20 
+  hidden: {
+    opacity: 0,
+    y: 20,
   },
   visible: {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.5
-    }
-  }
-}
+      duration: 0.5,
+    },
+  },
+};
 
 const iconVariants = {
-  hidden: { 
-    opacity: 0, 
-    scale: 0.8 
+  hidden: {
+    opacity: 0,
+    scale: 0.8,
   },
   visible: {
     opacity: 1,
     scale: 1,
     transition: {
-      duration: 0.5
-    }
+      duration: 0.5,
+    },
   },
   hover: {
     scale: 1.1,
     rotate: 5,
     transition: {
-      duration: 0.3
-    }
-  }
-}
+      duration: 0.3,
+    },
+  },
+};
 
-export default function PortfolioSection({ portfolios = [] }: { portfolios: Portfolio[] }) {
-  const [activeFilter, setActiveFilter] = useState('all')
-  const [loading, setLoading] = useState(false)
-  const [hoveredProject, setHoveredProject] = useState<string | null>(null)
-  const { getIconSrc } = useMobileIcon()
+type PortfolioSectionProps = {
+  portfolios: Portfolio[];
+};
 
-  // Build projects from real data (prop portfolios or local JSON fallback)
-  const sourceItems: any[] = (portfolios && portfolios.length > 0)
-    ? (portfolios as any[])
-    : ((portfolioItems as any[]) || [])
+export default function PortfolioSection({
+  portfolios = [],
+}: PortfolioSectionProps) {
+  const [activeFilter, setActiveFilter] = useState("all");
+  const [loading, setLoading] = useState(false);
+  const [hoveredProject, setHoveredProject] = useState<string | null>(null);
+  const { getIconSrc } = useMobileIcon();
 
-  const activeItems = sourceItems.filter((p) => p?.is_active)
+  // Build projects from real data (prop portfolios)
+  const activeItems = (portfolios || []).filter((p) => p?.is_active);
 
   const projects = activeItems.map((item) => ({
     id: String(item.id),
     title: item.title,
-    description: item.background || item.goal || '',
-    category: item.category || 'Project',
+    description: item.background || item.goal || "",
+    category: item.category || "Project",
     image: normalizeImagePath(item.cover_image),
     link: `/portofolio/${item.slug}`,
-    imageHeight: 'h-80',
-  }))
+    imageHeight: "h-80",
+  }));
 
-  const filteredProjects = projects
+  const filteredProjects = projects;
 
   return (
-    <motion.section 
-      id="portofolio" 
+    <motion.section
+      id="portofolio"
       className="bg-white py-32 px-4 sm:px-6 lg:px-8"
       initial="hidden"
       whileInView="visible"
@@ -157,24 +158,18 @@ export default function PortfolioSection({ portfolios = [] }: { portfolios: Port
     >
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <motion.div 
-          className="mb-12"
-          variants={itemVariants}
-        >
-          <motion.div 
-            className="mb-4"
-            variants={textVariants}
-          >
+        <motion.div className="mb-12" variants={itemVariants}>
+          <motion.div className="mb-4" variants={textVariants}>
             <BadgeSubtitle>Portfolio</BadgeSubtitle>
           </motion.div>
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4">
-            <motion.h2 
+            <motion.h2
               className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight"
               variants={textVariants}
             >
               <div className="flex flex-wrap items-center gap-3 md:gap-4">
                 <span>Discover</span>
-                <motion.div 
+                <motion.div
                   className="relative inline-block mx-1"
                   variants={iconVariants}
                   whileHover="hover"
@@ -193,7 +188,7 @@ export default function PortfolioSection({ portfolios = [] }: { portfolios: Port
               </div>
               <div className="flex flex-wrap items-center gap-3 md:gap-4 mt-2">
                 <span>Recent</span>
-                <motion.div 
+                <motion.div
                   className="relative inline-block mx-1"
                   variants={iconVariants}
                   whileHover="hover"
@@ -216,7 +211,10 @@ export default function PortfolioSection({ portfolios = [] }: { portfolios: Port
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              <Link href="/portofolio" className="flex items-center gap-2 text-gray-800 hover:text-purple-600 font-medium transition-colors group">
+              <Link
+                href="/portofolio"
+                className="flex items-center gap-2 text-gray-800 hover:text-purple-600 font-medium transition-colors group"
+              >
                 View all portfolio
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
@@ -226,15 +224,15 @@ export default function PortfolioSection({ portfolios = [] }: { portfolios: Port
 
         {/* Projects Masonry Grid */}
         {loading ? (
-          <motion.div 
+          <motion.div
             className="columns-1 md:columns-2 gap-6 space-y-6"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
           >
             {[1, 2, 3, 4, 5, 6].map((i) => (
-              <motion.div 
-                key={i} 
+              <motion.div
+                key={i}
                 className="break-inside-avoid mb-6"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -249,14 +247,14 @@ export default function PortfolioSection({ portfolios = [] }: { portfolios: Port
             ))}
           </motion.div>
         ) : (
-          <motion.div 
+          <motion.div
             className="columns-1 md:columns-2 gap-6 space-y-6"
             variants={containerVariants}
             initial="hidden"
             animate="visible"
           >
             {filteredProjects.map((project) => (
-              <motion.div 
+              <motion.div
                 key={project.id}
                 className="break-inside-avoid mb-6 group"
                 variants={cardVariants}
@@ -264,7 +262,7 @@ export default function PortfolioSection({ portfolios = [] }: { portfolios: Port
                 onMouseLeave={() => setHoveredProject(null)}
               >
                 <Link href={project.link} className="block">
-                  <motion.div 
+                  <motion.div
                     className={`relative rounded-2xl overflow-hidden aspect-[4/3] md:aspect-[16/10] w-full`}
                     variants={imageVariants}
                   >
@@ -277,7 +275,7 @@ export default function PortfolioSection({ portfolios = [] }: { portfolios: Port
                     />
 
                     {/* Category Badge */}
-                    <motion.div 
+                    <motion.div
                       className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-medium text-gray-700 border border-gray-200"
                       initial={{ opacity: 0, scale: 0.8 }}
                       whileInView={{ opacity: 1, scale: 1 }}
@@ -288,7 +286,7 @@ export default function PortfolioSection({ portfolios = [] }: { portfolios: Port
                     </motion.div>
 
                     {/* Title Overlay - Hidden by default, shown on hover */}
-                    <motion.div 
+                    <motion.div
                       className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-end justify-start p-6"
                       initial={{ opacity: 0 }}
                       whileHover={{ opacity: 1 }}
@@ -311,5 +309,5 @@ export default function PortfolioSection({ portfolios = [] }: { portfolios: Port
         )}
       </div>
     </motion.section>
-  )
+  );
 }

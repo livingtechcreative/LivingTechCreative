@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://livingtechcreative.com/sitemap.xml
+Sitemap: https://www.livingtechcreative.com/sitemap.xml
 
 # Allow specific file types
 Allow: *.css
@@ -13,6 +13,7 @@ Allow: *.jpeg
 Allow: *.gif
 Allow: *.svg
 Allow: *.ico
+Allow: *.webp
 
 # Disallow admin or sensitive directories (if any)
 # Disallow: /admin/
@@ -25,6 +26,9 @@ Crawl-delay: 1
 User-agent: Googlebot
 Allow: /
 
+User-agent: Googlebot-Image
+Allow: /
+
 User-agent: Bingbot
 Allow: /
 
@@ -32,4 +36,7 @@ User-agent: Slurp
 Allow: /
 
 User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Baiduspider
 Allow: /
