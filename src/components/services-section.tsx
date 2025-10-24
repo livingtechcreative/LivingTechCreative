@@ -275,12 +275,12 @@ export default function ServicesSection() {
 
                 {/* Service Content */}
                 <motion.div variants={textVariants} className="text-left">
-                  <h3 className="text-xs sm:text-sm lg:text-base font-bold text-gray-900 mb-2 sm:mb-3 group-hover:bg-gradient-to-r group-hover:from-[#2B35AB] group-hover:via-[#8A38F5] group-hover:to-[#13CBD4] group-hover:bg-clip-text group-hover:text-transparent transition-all duration-300">
+                  <h3 className="text-sm sm:text-base lg:text-lg font-bold text-gray-900 mb-2 sm:mb-3 group-hover:bg-gradient-to-r group-hover:from-[#2B35AB] group-hover:via-[#8A38F5] group-hover:to-[#13CBD4] group-hover:bg-clip-text group-hover:text-transparent transition-all duration-300">
                     {service.title}
                   </h3>
                   {/* Hide description on desktop, show on mobile */}
                   <div className="overflow-hidden">
-                    <p className="text-gray-600 leading-relaxed text-[10px] sm:text-xs lg:text-sm transition-all duration-300 block lg:hidden lg:group-hover:block lg:opacity-0 lg:h-0 lg:group-hover:opacity-100 lg:group-hover:h-auto lg:mt-2">
+                    <p className="text-gray-600 leading-relaxed text-xs sm:text-sm md:text-base transition-all duration-300 block lg:hidden lg:group-hover:block lg:opacity-0 lg:h-0 lg:group-hover:opacity-100 lg:group-hover:h-auto lg:mt-2">
                       {service.description}
                     </p>
                   </div>

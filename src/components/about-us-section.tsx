@@ -178,7 +178,7 @@ export default function AboutUsSection() {
                 whileHover={{ y: -5 }}
                 transition={{ duration: 0.2 }}
               >
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">Why we showed up</h3>
+                <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-4">Why we showed up</h3>
                 <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
                   Founded for you to be friends, accompanying you in every step of your business journey. Through
                   digitals, we also come to empower people through education, creating impact beyond our imagination.
@@ -189,7 +189,7 @@ export default function AboutUsSection() {
                 whileHover={{ y: -5 }}
                 transition={{ duration: 0.2 }}
               >
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">Our Focus and Work</h3>
+                <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-4">Our Focus and Work</h3>
                 <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
                   We specialize in crafting seamless digital experiences that resonate with your audience. We aim
                   businesses to build solutions that not only address your current needs but outcomes.

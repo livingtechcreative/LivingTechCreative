@@ -276,7 +276,7 @@ export default function PortfolioSection({
 
                     {/* Category Badge */}
                     <motion.div
-                      className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-medium text-gray-700 border border-gray-200"
+                      className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs sm:text-sm font-medium text-gray-700 border border-gray-200"
                       initial={{ opacity: 0, scale: 0.8 }}
                       whileInView={{ opacity: 1, scale: 1 }}
                       viewport={{ once: true }}
@@ -293,10 +293,10 @@ export default function PortfolioSection({
                       transition={{ duration: 0.3 }}
                     >
                       <div className="text-white">
-                        <h3 className="text-xl font-bold mb-2">
+                        <h3 className="text-lg sm:text-xl font-bold mb-2">
                           {project.title}
                         </h3>
-                        <p className="text-white/80 text-sm leading-relaxed line-clamp-2">
+                        <p className="text-white/80 text-xs sm:text-sm leading-relaxed line-clamp-2">
                           {project.description}
                         </p>
                       </div>

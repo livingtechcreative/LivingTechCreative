@@ -37,14 +37,12 @@ export default async function PortfolioDetailPage({ params }: PageProps) {
 
   // Fetch solutions - gunakan data real dari API dan filter berdasarkan portfolio ID
   const allSolutions = await apiService.getPortfolioSolutions(Number(portfolio.id))
-  console.log('Raw API solutions response:', allSolutions)
-  
+    
   // Filter solutions yang sesuai dengan portfolio ID saat ini
   const solutions = Array.isArray(allSolutions) 
     ? allSolutions.filter((sol: any) => Number(sol.portofolio_id) === Number(portfolio.id))
     : []
-  console.log(`Filtered solutions for portfolio ${portfolio.id}:`, solutions)
-
+  
   const formatDate = (dateString: string) => {
     const date = new Date(dateString)
     return date.toLocaleDateString('en-US', { 

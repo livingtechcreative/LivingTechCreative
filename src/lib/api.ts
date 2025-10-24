@@ -283,29 +283,23 @@ const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'https://dashboard.
         `/portfolios/${portfolioId}/solutions`
       ]
       
-      console.log(`Attempting to fetch portfolio solutions for ID: ${portfolioId}`)
-      
+        
       for (const endpoint of endpoints) {
         try {
           // Menggunakan fetch langsung untuk menghindari throw error
           const url = `${API_BASE_URL}${endpoint}`
-          console.log(`Trying endpoint: ${url}`)
-          
+            
           const response = await fetch(url, {
             cache: 'no-store',
             headers: { 'Content-Type': 'application/json' }
           })
           
-          console.log(`Response status: ${response.status} for ${url}`)
-          
+            
           if (!response.ok) {
-            // Log error tapi tidak throw error
-            console.log(`API request for portfolio solutions returned ${response.status} for ${url}`)
-            continue
+              continue
           }
           
           const responseData = await response.json()
-          console.log(`Response data:`, responseData)
           
           // Cek berbagai kemungkinan struktur response
           let solutions: PortfolioSolution[] = []
@@ -321,22 +315,17 @@ const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'https://dashboard.
             solutions = responseData.solutions
           }
           
-          console.log(`Found ${solutions.length} solutions`)
-          return solutions
+            return solutions
           
         } catch (error) {
-          // Log error tapi lanjut ke endpoint berikutnya
-          console.log(`Error fetching from ${endpoint}:`, error)
-          continue
+            continue
         }
       }
       
-      console.log(`No solutions found for portfolio ${portfolioId} from any endpoint`)
-      return []
+        return []
       
     } catch (error) {
-      console.log(`Failed to fetch portfolio solutions for ${portfolioId}:`, error)
-      return []
+          return []
     }
   }
 

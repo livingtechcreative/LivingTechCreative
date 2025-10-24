@@ -381,7 +381,7 @@ export default function FAQSection() {
                           <Plus className="w-3 h-3 sm:w-4 sm:h-4 text-gray-600" />
                           )}
                         </motion.div>
-                        <span className="text-sm font-medium text-gray-900 leading-relaxed">{faq.question}</span>
+                        <span className="text-xs sm:text-sm font-medium text-gray-900 leading-relaxed">{faq.question}</span>
                       </motion.button>
 
                       {/* Answer */}
@@ -395,7 +395,7 @@ export default function FAQSection() {
                             className="overflow-hidden"
                           >
                             <div className="bg-blue-500/90 backdrop-blur-sm text-white p-3 rounded-xl ml-7 shadow-sm">
-                              <p className="text-sm leading-relaxed">{faq.answer}</p>
+                              <p className="text-xs sm:text-sm leading-relaxed">{faq.answer}</p>
                             </div>
                           </motion.div>
                         )}

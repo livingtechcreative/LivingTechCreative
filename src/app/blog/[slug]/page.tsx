@@ -10,18 +10,15 @@ import ScrollToTop from "@/components/scroll-to-top"
 
 export async function generateStaticParams(): Promise<{ slug: string }[]> {
   try {
-    console.log('[build] generateStaticParams(blog/page) called')
-    const posts = await apiService.getBlogPosts()
+      const posts = await apiService.getBlogPosts()
     const activePosts = posts.filter((p: any) => p?.is_active && typeof p.slug === 'string')
     const mapped = activePosts.map((p: any) => ({ slug: p.slug }))
     if (mapped.length === 0) {
-      console.log('[build] generateStaticParams(blog/page) no active posts found')
-      return []
+          return []
     }
     return mapped
   } catch (e) {
-    console.log('[build] generateStaticParams(blog/page) API error, returning empty')
-    return []
+        return []
   }
 }
 // Mengubah ke SSR mode

@@ -21,6 +21,7 @@ export default function FloatingWhatsApp({
       setIsVisible(true)
     }, 2000)
 
+    
     return () => clearTimeout(timer)
   }, [])
 

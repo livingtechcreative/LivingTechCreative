@@ -138,20 +138,16 @@ export default function BannerSection() {
                   <div className="lg:hidden flex flex-wrap items-center gap-3 md:gap-4 mt-2">
                     <span className="text-gray-900">Too...</span>
                   </div>
-                  {/* Desktop Layout - Icon and Something Too in new line */}
-                  <div className="hidden lg:block">
-                    <div className="flex items-center gap-3 mt-2">
-                      <span>We Teach</span>
-                    </div>
-                    <div className="flex items-center gap-3 mt-2">
-                      <BannerIcon 
-                        src={getIconSrc("/images/books.svg", "/images/books.png")} 
-                        alt="Books" 
-                        variants={iconVariants}
-                      />
-                      <span className="inline-block bg-gradient-to-r from-[#2B35AB] via-[#8A38F5] to-[#13CBD4] bg-clip-text text-transparent">Something</span>
-                      <span className="text-gray-900">Too...</span>
-                    </div>
+                  {/* Desktop Layout - All text and icon in same line */}
+                  <div className="hidden lg:flex flex-wrap items-center gap-3 md:gap-4">
+                    <span>We Teach</span>
+                    <BannerIcon
+                      src={getIconSrc("/images/books.svg", "/images/books.png")}
+                      alt="Books"
+                      variants={iconVariants}
+                    />
+                    <span className="inline-block bg-gradient-to-r from-[#2B35AB] via-[#8A38F5] to-[#13CBD4] bg-clip-text text-transparent">Something</span>
+                    <span className="text-gray-900">Too...</span>
                   </div>
                 </motion.h2>
               </motion.div>

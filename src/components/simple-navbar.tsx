@@ -140,7 +140,7 @@ export default function SimpleNavbar() {
             transition={{ duration: 0.1, delay: 0.08 }}
           >
             <Button
-              className="bg-transparent text-white hover:bg-gray-800 transition-all duration-300 font-semibold text-sm"
+              className="bg-transparent text-white hover:bg-gray-800 transition-all duration-300 font-semibold text-xs sm:text-sm"
               onClick={() => window.open('https://calendar.app.google/gHQsqDPtkg2MFs519', '_blank')}
             >
               Book a Call

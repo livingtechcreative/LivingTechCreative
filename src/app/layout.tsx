@@ -3,9 +3,11 @@ import { inter, interDisplay } from "./fonts";
 import "./globals.css";
 import "../styles/fonts.css";
 import "../styles/optimized-icons.css";
+import ConsoleEasterEgg from "@/components/console-easter-egg";
 import FloatingWhatsApp from "@/components/floating-whatsapp";
 import ErrorBoundary from "@/components/error-boundary";
 import "@/lib/error-handler";
+import LenisProvider from "@/components/lenis-provider";
 import IntegratedNavbar from "@/components/integrated-navbar";
 import Footer from "@/components/footer";
 
@@ -31,14 +33,12 @@ export const metadata: Metadata = {
   publisher: "LivingTech Creative",
   category: "technology",
 
-  // Icons - lengkap dengan asset baru
   icons: {
     icon: [
-      { url: "/favicon.ico", sizes: "any" },
-      { url: "/favicon/favicon.ico", sizes: "any" },
       { url: "/favicon/favicon-16x16.png", sizes: "16x16", type: "image/png" },
       { url: "/favicon/favicon-32x32.png", sizes: "32x32", type: "image/png" },
       { url: "/favicon/favicon-96x96.png", sizes: "96x96", type: "image/png" },
+      { url: "/favicon/favicon.ico", sizes: "any" },
     ],
     apple: [
       { url: "/favicon/apple-icon.png", sizes: "192x192", type: "image/png" },
@@ -182,9 +182,7 @@ export default function RootLayout({
         <meta name="rating" content="general" />
         <meta httpEquiv="content-language" content="en-us" />
 
-        {/* Favicon - Multiple declarations for better compatibility */}
-        <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link rel="icon" href="/favicon/favicon.ico" sizes="any" />
+        {/* Favicon - Custom Living Tech Creative favicon (existing generated files) */}
         <link
           rel="icon"
           type="image/png"
@@ -203,7 +201,7 @@ export default function RootLayout({
           sizes="96x96"
           href="/favicon/favicon-96x96.png"
         />
-        <link rel="shortcut icon" href="/favicon.ico" />
+        <link rel="shortcut icon" href="/favicon/favicon.ico" />
 
         {/* Apple Touch Icons */}
         <link
@@ -275,10 +273,13 @@ export default function RootLayout({
       </head>
       <body className="min-h-screen bg-white md:pb-0 pb-24">
         <ErrorBoundary>
-          <IntegratedNavbar />
-          {children}
-          <FloatingWhatsApp />
-          <Footer />
+          <LenisProvider>
+            <ConsoleEasterEgg />
+            <IntegratedNavbar />
+            {children}
+            <FloatingWhatsApp />
+            <Footer />
+          </LenisProvider>
         </ErrorBoundary>
       </body>
     </html>

@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react"
 import { ChevronUp } from "lucide-react"
-import { animateScroll as scroll } from "react-scroll"
 
 export default function ScrollToTop() {
   const [isVisible, setIsVisible] = useState(false)
@@ -21,9 +20,9 @@ export default function ScrollToTop() {
   }, [])
 
   const scrollToTop = () => {
-    scroll.scrollToTop({
-      duration: 500,
-      smooth: true
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
     })
   }
 

@@ -286,7 +286,7 @@ export default function ContactSection() {
             }}
           >
             <div className="relative">
-              <h3 className="text-3xl font-bold leading-tight">
+              <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold leading-tight">
                 <p className="m-0">What Will You Get</p>
                 <p className="m-0">in Meeting</p>
               </h3>
@@ -301,10 +301,10 @@ export default function ContactSection() {
                     </div>
                   </div>
                   <div className="flex-1 flex flex-col justify-center py-0 px-3 pb-2 gap-2.5 rounded-r-lg">
-                    <div className="font-medium text-base leading-tight">
+                    <div className="font-medium text-sm sm:text-base leading-tight">
                       {benefit.title}
                     </div>
-                    <div className="text-sm leading-tight opacity-90">
+                    <div className="text-xs sm:text-sm leading-tight opacity-90">
                       {benefit.description}
                     </div>
                   </div>
