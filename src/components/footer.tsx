@@ -23,7 +23,7 @@ export default function Footer() {
     },
     { name: "Twitter", href: "#" },
     { name: "Youtube", href: "#" },
-    { name: "Layers", href: "https://layers.to/livingtechcrtv " },
+    { name: "Layers", href: "https://layers.to/livingtechcrtv" },
     { name: "Behance", href: "https://www.behance.net/livingtechcreative" },
   ];
 
@@ -106,6 +106,8 @@ export default function Footer() {
                         <a
                           href={link.href}
                           className="text-gray-200 hover:text-white transition-colors duration-200"
+                          target="_blank"
+                          rel="noopener noreferrer"
                         >
                           {link.name}
                         </a>
@@ -184,6 +186,8 @@ export default function Footer() {
                         <a
                           href={link.href}
                           className="text-gray-200 hover:text-white transition-colors duration-200"
+                          target="_blank"
+                          rel="noopener noreferrer"
                         >
                           {link.name}
                         </a>
