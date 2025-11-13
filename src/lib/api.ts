@@ -1,9 +1,9 @@
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'https://dashboard.livingtechcreative.com/api'
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'https://dashboard.livingtechcreative.com/api/%7Bpanel%7D'
  
  // Default to the live API base URL if env is not provided
   // The docs URL is not an API endpoint; keep it only for documentation reference
-  // Example override in .env.local: NEXT_PUBLIC_API_BASE_URL=https://dashboard.livingtechcreative.com/api
-  const __API_DEFAULT_CHECK__ = 'https://dashboard.livingtechcreative.com/api'
+ // Example override in .env.local: NEXT_PUBLIC_API_BASE_URL=https://dashboard.livingtechcreative.com/api/%7Bpanel%7D
+ const __API_DEFAULT_CHECK__ = 'https://dashboard.livingtechcreative.com/api/%7Bpanel%7D'
  
   export interface ShowcaseItem {
     id: number
