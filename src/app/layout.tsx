@@ -38,7 +38,7 @@ export const metadata: Metadata = {
       { url: "/favicon/favicon-16x16.png", sizes: "16x16", type: "image/png" },
       { url: "/favicon/favicon-32x32.png", sizes: "32x32", type: "image/png" },
       { url: "/favicon/favicon-96x96.png", sizes: "96x96", type: "image/png" },
-      { url: "/favicon/favicon.ico", sizes: "any" },
+      { url: "/favicon.ico", sizes: "any" },
     ],
     apple: [
       { url: "/favicon/apple-icon.png", sizes: "192x192", type: "image/png" },
@@ -88,7 +88,7 @@ export const metadata: Metadata = {
         type: "image/png",
       },
     ],
-    shortcut: "/favicon/favicon.ico",
+    shortcut: "/favicon.ico",
   },
 
   // Manifest - gunakan manifest.json yang baru
@@ -201,7 +201,7 @@ export default function RootLayout({
           sizes="96x96"
           href="/favicon/favicon-96x96.png"
         />
-        <link rel="shortcut icon" href="/favicon/favicon.ico" />
+        <link rel="shortcut icon" href="/favicon.ico" />
 
         {/* Apple Touch Icons */}
         <link
